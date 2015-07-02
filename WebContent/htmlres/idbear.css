@@ -1,0 +1,188 @@
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,abbr,article,aside,command,details,figcaption,figure,footer,header,hgroup,mark,meter,nav,output,progress,section,summary,time { margin: 0; padding: 0; }
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,strong,th,figcaption { font-size: 1em; font-weight: normal; font-style: normal; }
+fieldset,iframe { border: none; }
+caption,th { text-align: left; }
+html { background-color:#DFDFDF; }
+img { border: 0; }
+body { font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif; background-color: transparent; color: #333; -webkit-font-smoothing: antialiased; }
+ul { list-style: none outside; }
+ol { margin-bottom: 18px; list-style: decimal; margin-left: 2.2em; }
+ul.square,
+ul.circle,
+ul.disc { margin-left: 2em; margin-bottom: 18px; }
+ul.square { list-style: square outside; }
+ul.circle { list-style: circle outside; }
+ul.disc { list-style:disc outside; }
+ul ul.square,
+ul ul.circle,
+ul ul.disc { margin-top: 4px; margin-bottom: 5px; }
+ol.sosumi { margin-left: 0; padding-left: 2em; *padding-left: 2.2em; }
+.hide {display:none;}
+.main{
+	padding:6px;
+}
+.content{
+	border:1px solid rgb(181, 181, 181);
+	background-color:#fff;
+	margin:0 auto;
+}
+.pic-list img{
+	width:100%;
+}
+.text{
+	padding:10px;
+	font-size:15px;
+	line-height:30px;
+}
+.toolbar{
+	background-color: rgb(245, 245, 245);
+	height:36px;
+	border-top:1px solid rgb(181, 181, 181);
+}
+.toolbar div{
+	border-left:1px solid rgb(181, 181, 181);
+	height:100%;
+	width:45px;
+	float:left;
+}
+.toolbar .time{
+	width:117px;
+	padding-left:8px;
+	border:none;
+	line-height:36px;
+	font-size:1.2em;
+}
+.toolbar .zan{
+	float:right;
+	text-align:center;
+}
+.toolbar .comment{
+	float:right;
+}
+.toolbar .zan span,.toolbar .comment span{
+	background: url(img/1.png) no-repeat 0 0;
+	background-size:20px 16px;
+	display:block;
+	width:20px;
+	height:16px;
+	margin:10px 0 0 12px;
+}
+.toolbar .zanA span{
+	background: url(img/1_hove.png) no-repeat 0 0;
+	background-size:20px 16px;
+}
+.toolbar .comment span{
+	background: url(img/2.png) no-repeat 0 0;
+	background-size:20px 16px;
+	margin-top:11px;
+}
+.toolbar .commentA span{
+	background: url(img/2_hove.png) no-repeat 0 0;
+	background-size:20px 16px;
+}
+.tipText{
+	text-align:center;
+	padding:10px 0;
+	color:#ABABAB;
+}
+.download img {
+	width:100%;
+	height:54px;
+}
+.text span{
+	position: absolute;
+	right:15px;
+	top:15px;
+	padding:0px 5px;
+	background-color:#000;
+	opacity: 0.3;
+	border:2px solid #fff;
+	color:#fff;
+	font-size:15px;
+	line-height:normal;
+}
+.toolzan, .toolcomment li {
+	padding:8px;
+	overflow:hidden;
+	border-top:1px solid rgb(181, 181, 181);
+	background-color: rgb(245,245,245);
+}
+.toolzan li {
+	float:left;
+	width:35px;
+	height:35px;
+	margin:0 7px 7px 0;
+}
+.toolzan .faceimg{
+	position:relative;
+}
+.toolzan .faceimg img,
+.toolcomment .leftFace img {
+	border-radius:5px;
+	width:35px;
+	height:35px;
+}
+.toolzan .faceimg span{
+	bottom:0px;
+	left:0px;
+	height:13px;
+	background-color:#000;
+	opacity: 0.4;
+	color:#fff;
+	width:100%;
+	position:absolute;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+	font-size:10px;
+	line-height:12px;
+	text-align:center;
+}
+.user-name {
+	color:#1E78A2;
+	padding:2px 0;
+}
+.user-name span{
+	float:right;
+	font-size:12px;
+}
+.leftFace, .rightTxt {
+	float:left;
+	font-size:15px;
+}
+.leftFace {
+	width:35px;
+	height:100%;
+}
+.rightTxt {
+	margin-left:8px;
+	width:85%;
+	line-height:25px;
+}
+
+
+.scroll_box {
+width: 100%;
+margin: 0 auto;
+max-width: 640px;
+overflow: hidden;
+}
+.scroll_box {
+position: relative;
+width: 100%;
+overflow: hidden;
+}
+.scroll_wrap {
+position: relative;
+left: 0px;
+width: 600%;
+}
+.scroll_box li{
+	float: left;
+	text-align: center;
+}
+.openImgBox {
+	width:100%;
+	height:100%;
+	background-color:#000;
+	opacity: 0.6;
+}
