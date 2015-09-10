@@ -21,7 +21,7 @@
     </encoder>
   </appender>
   
-<logger name="com.sihu.spider" level="DEBUG">
+<logger name="com.naicha.spider" level="DEBUG">
   	<appender-ref ref="STDOUT"/>
   	<appender-ref ref="FILE"/>
   </logger>

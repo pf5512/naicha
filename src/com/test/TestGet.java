@@ -16,7 +16,7 @@ public class TestGet {
 	}
 	public static String doGet()  
 	{  
-	    String uriAPI = "http://192.168.1.114:8080/sihu/register/save.do?phone=13800138001&password=123123&validatecode=1234";  
+	    String uriAPI = "http://192.168.1.114:8080/naicha/register/save.do?phone=13800138001&password=123123&validatecode=1234";  
 	    String result= "";  
 	//  HttpGet httpRequst = new HttpGet(URI uri);  
 	//  HttpGet httpRequst = new HttpGet(String uri);  

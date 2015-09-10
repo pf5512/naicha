@@ -14,7 +14,7 @@ public class Test {
 		// Matcher m = p.matcher(mobiles);
 		// System.out.println(m.matches()+"---");
 		URL url2 = new URL(
-				"http://192.168.1.105:8080/sihu/login/validate.do?phone=13538140693&password=123123");
+				"http://192.168.1.105:8080/naicha/login/validate.do?phone=13538140693&password=123123");
 		InputStreamReader isr = new InputStreamReader(url2.openStream());
 		char[] buffer = new char[1024];
 		StringBuffer sb = new StringBuffer();

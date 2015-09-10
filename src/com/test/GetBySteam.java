@@ -21,7 +21,7 @@ public class GetBySteam{
 	}
     protected static void onCreate() {
         try {
-        	String uriAPI = "http://192.168.1.114:8080/sihu/register/save.do?phone=13800138001&password=123123&validatecode=1234";
+        	String uriAPI = "http://192.168.1.114:8080/naicha/register/save.do?phone=13800138001&password=123123&validatecode=1234";
         	InputStream is=new URL(uriAPI).openStream();
             //读取数据的包装流
             BufferedReader br=new BufferedReader(new InputStreamReader(is));

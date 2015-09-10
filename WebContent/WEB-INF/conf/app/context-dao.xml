@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd"
 	default-lazy-init="true">
 	
-<jpa:repositories base-package="com.sihu.app.dao" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" factory-class="com.sihu.common.orm.MyJpaRepositoryFactoryBean" repository-impl-postfix="Impl">
+<jpa:repositories base-package="com.naicha.app.dao" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" factory-class="com.naicha.common.orm.MyJpaRepositoryFactoryBean" repository-impl-postfix="Impl">
 	 	<!--<repository:exclude-filter type="regex" expression=".*Plus" />-->
 		<!--<repository:exclude-filter type="regex" expression=".*Impl" />-->
 	</jpa:repositories>

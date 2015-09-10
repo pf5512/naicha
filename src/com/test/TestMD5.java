@@ -2,7 +2,7 @@ package com.test;
 
 import java.util.UUID;
 
-import com.sihu.app.utils.ConvertMD5;
+import com.naicha.app.utils.ConvertMD5;
 
 public class TestMD5 {
 	public static void main(String[] args) {
