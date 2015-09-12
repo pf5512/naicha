@@ -1,6 +1,7 @@
 package com.naicha.web;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -19,13 +20,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sun.security.util.Password;
+
 import com.naicha.app.mode.User;
 import com.naicha.app.service.UserService;
 import com.naicha.app.utils.ConvertMD5;
 import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.SMSAPI;
 import com.naicha.app.utils.StringTool;
-import com.naicha.utils.Codes;
+import com.naicha.app.utils.Codes;
 import com.naicha.web.vo.RespUser;
 import com.test.TestSMSAPI;
 
@@ -97,7 +100,7 @@ public class RegisterController {
 	 */
 	@RequestMapping("sendValidateCode.do")
 	@ResponseBody
-	public Map<String, Object> sendValidateCode(String phone,
+	public Map<String, Object> sendValidateCode(String phone,Integer isReset,
 			HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(phone)) {
@@ -105,13 +108,6 @@ public class RegisterController {
 			map.put("msg", "参数不能为空");
 			return map;
 		}
-		// 验证手机号码
-		Boolean isExist = userService.isExistFindByPhone(phone);
-		if (isExist) {
-			map.put("code", Codes.PHONE_NUMBER_IS_EXIST);
-			map.put("msg", "手机号码已存在");
-			return map;
-		} else {
 //			Start 2015-09-09 
 //			String validateCode = getValidateCode();//生成验证码
 //			//发送验证码
@@ -131,7 +127,6 @@ public class RegisterController {
 				map.put("code", Codes.ERROR);
 				return map;
 			}
-		}
 	}
 	//发送验证码
 	private boolean send(String phone, String validateCode) {
@@ -241,13 +236,21 @@ public class RegisterController {
 			map.put("msg", "参数不能为空");
 			return map;
 		}else{
+			// 验证手机号码
+			Boolean isExist = userService.isExistFindByPhone(phone);
+			if (isExist) {
+				map.put("code", Codes.PHONE_NUMBER_IS_EXIST);
+				map.put("msg", "手机号码已存在");
+				return map;
+			}
 		//2、保存数据
 		User user = new User();
 		user.setPhone(phone);
 		ConvertMD5 md5 = new ConvertMD5();
 		password = md5.getMD5ofStr(password);
 		user.setPassword(password);
-		user.setUserType(userType);
+		user.setUserType(Integer.parseInt(userType));
+		user.setRegisterTime(new Date());
 		User userReturn = new User();
 		userReturn = userService.save(user);
 		//将token放进缓存中
@@ -259,6 +262,7 @@ public class RegisterController {
 		try {
 			RespUser respUser =new RespUser();
 			BeanUtils.copyProperties(respUser, userReturn);
+			respUser.setRegitsterTime(userReturn.getRegisterTime());
 			map.put("user", respUser);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
@@ -266,6 +270,54 @@ public class RegisterController {
 			e.printStackTrace();
 		}
 		return map;
+		}
+	}
+	
+	/**
+	 * 重置密码
+	 * @author yangxujia
+	 * @date 2015年9月10日上午10:58:24
+	 */
+	@RequestMapping("reSetPassword.do")
+	@ResponseBody
+	public Map<String, Object> reSetPassword(String phone,String validateCode,String password,
+			HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(phone)||StringTool.isEmpty(validateCode)||StringTool.isEmpty(password)) {
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
+			map.put("msg", "参数不能为空");
+			return map;
+		}
+		//检查手机号码是否存在
+		Boolean isExist = userService.isExistFindByPhone(phone);
+		if (!isExist) {
+			map.put("code", Codes.PHONE_NUMBER_IS_NOT_EXIST);
+			map.put("msg", "手机不存在,请重新输入");
+			return map;
+		}
+		// 验证码校验
+		HttpSession session = request.getSession();
+		String code2 = (String) session.getAttribute("validateCode"+phone);
+		System.out.println("------------------code2------" + code2);
+		System.out.println("------------------validateCode------"+ validateCode);
+		// session.removeAttribute("code");//取完后去掉session
+		if (!code2.equals(validateCode)) {
+			map.put("message", "验证码不正确");
+			map.put("code", Codes.ERROR);
+			return map;
+		} else {
+			//重置密码
+			ConvertMD5 md5 = new ConvertMD5();
+			password = md5.getMD5ofStr(password);
+			Integer retCode = userService.updatePassword(phone,password);
+			if (retCode==1) {
+				map.put("code", Codes.SUCCESS);
+				return map;
+			}else {
+				map.put("code", "重置失败");
+				map.put("code", Codes.ERROR);
+				return map;
+			}
 		}
 	}
 }

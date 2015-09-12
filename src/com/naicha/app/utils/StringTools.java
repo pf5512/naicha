@@ -1,4 +1,4 @@
-package com.naicha.utils;
+package com.naicha.app.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

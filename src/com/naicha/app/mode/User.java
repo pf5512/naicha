@@ -19,41 +19,45 @@ public class User implements Serializable {
 	 * @date 2015-9-8上午11:01:23
 	 */
 	private static final long serialVersionUID = 5926828635366965613L;
-	private int id;
-	private String picturePath;
+	private Integer id;
+	private String headPicture;
 	private String name;
 	private String password;
-	private int age;
+	private Integer age;
 	private String profession;
 	private String address;
 	private String coordinate;
 	private String phone;
-	private String userType;
+	private Integer userType;
 	private Date registerTime;
 	private Boolean isActivate;
-	private int rank;
+	private Integer rank;
 	private String naichaNo;
 	private String perSignature;
+	private String weiXinNo;
+	private Integer sex;
+	private Date birthday;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Column(name = "picturePath", nullable = false)
-	public String getPicturePath() {
-		return picturePath;
+	@Column(name = "headPicture", nullable = false)
+	public String getHeadPicture() {
+		return headPicture;
 	}
 
-	public void setPicturePath(String picturePath) {
-		this.picturePath = picturePath;
+	public void setHeadPicture(String headPicture) {
+		this.headPicture = headPicture;
 	}
+
 
 	@Column(name = "name", nullable = false)
 	public String getName() {
@@ -65,11 +69,11 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "age", nullable = false)
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
@@ -110,11 +114,11 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "userType", nullable = false)
-	public String getUserType() {
+	public Integer getUserType() {
 		return userType;
 	}
 
-	public void setUserType(String userType) {
+	public void setUserType(Integer userType) {
 		this.userType = userType;
 	}
 
@@ -137,11 +141,11 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "rank", nullable = false)
-	public int getRank() {
+	public Integer getRank() {
 		return rank;
 	}
 
-	public void setRank(int rank) {
+	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
 
@@ -171,5 +175,33 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Column(name = "sex", nullable = false)
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	@Column(name = "birthday", nullable = false)
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	@Column(name = "weiChatNo", nullable = false)
+	public String getWeiXinNo() {
+		return weiXinNo;
+	}
+
+	public void setWeiXinNo(String weiXinNo) {
+		this.weiXinNo = weiXinNo;
+	}
+
 
 }

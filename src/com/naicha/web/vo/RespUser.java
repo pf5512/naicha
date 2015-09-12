@@ -1,25 +1,33 @@
 package com.naicha.web.vo;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.naicha.app.utils.JsonDateSerializer;
+
 public class RespUser {
-	private String picturePath;
+	private String headPicture;
 	private String name;
 	private String age;
 	private String profession;
 	private String address;
 	private String phone;
 	private String userType;
-	private String regitsterTime;
+	private Date regitsterTime;
 	private String naichaNo;
 	private String perSignature;
-
-	public String getPicturePath() {
-		return picturePath;
+	private String weixinNo;
+	private Integer sex;
+	private Date birthday;
+	
+	public String getHeadPicture() {
+		return headPicture;
 	}
-
-	public void setPicturePath(String picturePath) {
-		this.picturePath = picturePath;
+	
+	public void setHeadPicture(String headPicture) {
+		this.headPicture = headPicture;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -68,14 +76,6 @@ public class RespUser {
 		this.userType = userType;
 	}
 
-	public String getRegitsterTime() {
-		return regitsterTime;
-	}
-
-	public void setRegitsterTime(String regitsterTime) {
-		this.regitsterTime = regitsterTime;
-	}
-
 	public String getNaichaNo() {
 		return naichaNo;
 	}
@@ -91,4 +91,38 @@ public class RespUser {
 	public void setPerSignature(String perSignature) {
 		this.perSignature = perSignature;
 	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	@JsonSerialize(using=JsonDateSerializer.class) 
+	public Date getRegitsterTime() {
+		return regitsterTime;
+	}
+
+	public void setRegitsterTime(Date regitsterTime) {
+		this.regitsterTime = regitsterTime;
+	}
+
+	public String getWeixinNo() {
+		return weixinNo;
+	}
+
+	public void setWeixinNo(String weixinNo) {
+		this.weixinNo = weixinNo;
+	}
+
 }

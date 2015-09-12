@@ -9,9 +9,10 @@
 <body>
 <h2>文件上传实例</h2>
 
-<form action="User/updateHeadPicture.do" method="post" enctype="multipart/form-data">
-	选择文件:<input type="file" name="files">
-	<input type="text" name="idstr">
+<form action="setup/updateHeadPicture.do" method="post" enctype="multipart/form-data">
+	选择文件:<input type="file" name="files"><br>
+	Token:<input type="text" name="token"><br>
+	Phone:<input type="text" name="phone"><br>
 	<input type="submit" value="提交"> 
 </form>
 

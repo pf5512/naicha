@@ -18,7 +18,7 @@ import com.naicha.app.service.UserService;
 import com.naicha.app.utils.ConvertMD5;
 import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.StringTool;
-import com.naicha.utils.Codes;
+import com.naicha.app.utils.Codes;
 import com.naicha.web.vo.RespUser;
 /**
  * 登录功能
@@ -51,6 +51,7 @@ public class LoginController {
 		if(phoneOrNaicha.length()==11&&phoneOrNaicha.startsWith("1")){//判断是属于手机号还是奶茶号,如果为11位并且开头为1的认定为手机
 			User user = userService.findByPhone(phoneOrNaicha);
 			if(user==null){
+				map.put("msg", "手机号码不存在");
 				map.put("code", Codes.ERROR);
 				return map;
 			}else {
@@ -68,6 +69,8 @@ public class LoginController {
 					try {
 						RespUser respUser =new RespUser();
 						BeanUtils.copyProperties(respUser, user);
+						respUser.setRegitsterTime(user.getRegisterTime());
+						System.out.println(respUser.getRegitsterTime());
 						map.put("user", respUser);
 					} catch (IllegalAccessException e) {
 						e.printStackTrace();
