@@ -26,7 +26,7 @@ public class User implements Serializable {
 	private Integer age;
 	private String profession;
 	private String address;
-	private String coordinate;
+	private String jinwei;
 	private String phone;
 	private Integer userType;
 	private Date registerTime;
@@ -95,14 +95,6 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "coordinate", nullable = false)
-	public String getCoordinate() {
-		return coordinate;
-	}
-
-	public void setCoordinate(String coordinate) {
-		this.coordinate = coordinate;
-	}
 
 	@Column(name = "phone", nullable = false)
 	public String getPhone() {
@@ -201,6 +193,15 @@ public class User implements Serializable {
 
 	public void setWeiXinNo(String weiXinNo) {
 		this.weiXinNo = weiXinNo;
+	}
+
+	@Column(name = "jinwei", nullable = false)
+	public String getJinwei() {
+		return jinwei;
+	}
+
+	public void setJinwei(String jinwei) {
+		this.jinwei = jinwei;
 	}
 
 

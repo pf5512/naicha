@@ -10,10 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.print.attribute.standard.Sides;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.codec.language.bm.Rule.Phoneme;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -318,5 +316,4 @@ public class SetupController {
 		map.put("codes", Codes.SUCCESS);
 		return map;
 	}
-	
 }

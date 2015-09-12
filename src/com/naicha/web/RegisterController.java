@@ -20,15 +20,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sun.security.util.Password;
-
 import com.naicha.app.mode.User;
 import com.naicha.app.service.UserService;
+import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.ConvertMD5;
 import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.SMSAPI;
 import com.naicha.app.utils.StringTool;
-import com.naicha.app.utils.Codes;
 import com.naicha.web.vo.RespUser;
 import com.test.TestSMSAPI;
 
