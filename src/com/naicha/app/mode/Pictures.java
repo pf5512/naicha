@@ -1,6 +1,7 @@
 package com.naicha.app.mode;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ public class Pictures implements Serializable {
 	private Integer friendCricleId;
 	private int hight;
 	private int width;
+	private Date time;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,8 +52,8 @@ public class Pictures implements Serializable {
 		return friendCricleId;
 	}
 
-	public void setFriendCricleId(Integer friendCricleId) {
-		this.friendCricleId = friendCricleId;
+	public void setFriendCricleId(Integer friendCircleId) {
+		this.friendCricleId = friendCircleId;
 	}
 
 	@Column(name = "hight", nullable = false)
@@ -70,6 +72,15 @@ public class Pictures implements Serializable {
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+	@Column(name = "time", nullable = false)
+	public void setTime(Date time) {
+		this.time=time;
+	}
+
+	public Date getTime() {
+		return time;
 	}
 
 }

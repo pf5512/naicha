@@ -34,21 +34,29 @@ public class SetupController {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * 更新头像
+	 * @author yangxujia
+	 * @date 2015年9月14日上午11:06:40
+	 */
 	@RequestMapping("/updateHeadPicture.do")
 	@ResponseBody
 	public Map<String, Object> findIndividual(@RequestParam("files") MultipartFile[] files,
-			String phone, String token, HttpServletRequest request){
+			String userIdStr, String token, HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数的验证
-		if (StringTool.isEmpty(token)||StringTool.isEmpty(phone)||files==null||files.length==0) {
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(userIdStr)||files==null||files.length==0) {
+			map.put("msg", "参数为空！");
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		Integer updateOrNot = null;
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
+			map.put("msg", "token过期！");
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
@@ -89,7 +97,7 @@ public class SetupController {
 				 } catch (IOException e) {
 				 	 e.printStackTrace();
 				 }
-				 updateOrNot = userService.updateHeadPicture("head/" + pictureName,phone);
+				 updateOrNot = userService.updateHeadPicture("head/" + pictureName,userId);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -105,20 +113,21 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateName.do")
 	@ResponseBody
-	public Map<String, Object> updateUname(String name,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updateUname(String name,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(token)||StringTool.isEmpty(phone)) {
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(userIdStr)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		Integer updateOrNot = userService.updateName(name, phone);
+		Integer updateOrNot = userService.updateName(name, userId);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
@@ -131,20 +140,21 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateNaichaNo.do")
 	@ResponseBody
-	public Map<String, Object> updateNaichaNo(String naichaNo,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updateNaichaNo(String naichaNo,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(token)||StringTool.isEmpty(naichaNo)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		Integer updateOrNot = userService.updateNaichaNo(naichaNo, phone);
+		Integer updateOrNot = userService.updateNaichaNo(naichaNo, userId);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
@@ -157,20 +167,21 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateSex.do")
 	@ResponseBody
-	public Map<String, Object> updateSex(String sex,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updateSex(String sex,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(token)||StringTool.isEmpty(sex)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		Integer updateOrNot = userService.updateSex(Integer.parseInt(sex), phone);
+		Integer updateOrNot = userService.updateSex(Integer.parseInt(sex), userId);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
@@ -183,15 +194,16 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateBirthday.do")
 	@ResponseBody
-	public Map<String, Object> updateBirthday(String birthday,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updateBirthday(String birthday,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(token)||StringTool.isEmpty(birthday)) {
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(birthday)||StringTool.isEmpty(userIdStr)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("msg", "token 过期");
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
@@ -205,7 +217,7 @@ public class SetupController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		Integer updateOrNot = userService.updateBirthday(birthdaydDate, phone);
+		Integer updateOrNot = userService.updateBirthday(birthdaydDate, userId);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
@@ -218,20 +230,21 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateProfession.do")
 	@ResponseBody
-	public Map<String, Object> updateProfession(String profession,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updateProfession(String profession,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(token)||StringTool.isEmpty(profession)) {
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(profession)||StringTool.isEmpty(userIdStr)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		Integer updateOrNot = userService.updateProfession(profession, phone);
+		Integer updateOrNot = userService.updateProfession(profession, userId);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
@@ -245,20 +258,21 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateAddress.do")
 	@ResponseBody
-	public Map<String, Object> updateAddress(String address,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updateAddress(String address,String jinwei,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(token)||StringTool.isEmpty(address)) {
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(address)||StringTool.isEmpty(userIdStr)||StringTool.isEmpty(jinwei)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		Integer updateOrNot = userService.updateAddress(phone, address);
+		Integer updateOrNot = userService.updateAddress(userId, address,jinwei);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
@@ -272,20 +286,21 @@ public class SetupController {
 	 */
 	@RequestMapping("/updatePerSignature.do")
 	@ResponseBody
-	public Map<String, Object> updatePerSignature(String perSignature,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updatePerSignature(String perSignature,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(token)||StringTool.isEmpty(perSignature)) {
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(perSignature)||StringTool.isEmpty(userIdStr)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		Integer updateOrNot = userService.updatePerSignature(phone, perSignature);
+		Integer updateOrNot = userService.updatePerSignature(userId, perSignature);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
@@ -298,20 +313,21 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateWeixinNo.do")
 	@ResponseBody
-	public Map<String, Object> updateWeixinNo(String weixinNo,String phone, String token,HttpServletRequest request) {
+	public Map<String, Object> updateWeixinNo(String weixinNo,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(token)||StringTool.isEmpty(weixinNo)) {
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(weixinNo)||StringTool.isEmpty(userIdStr)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//校验token
 		MemCached cached =  MemCached.getInstance();
-		String tokenOld = (String)cached.get(phone);
+		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		Integer updateOrNot = userService.updateWeixinNo(phone, weixinNo);
+		Integer updateOrNot = userService.updateWeixinNo(userId, weixinNo);
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;

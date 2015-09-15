@@ -61,9 +61,9 @@ public class LoginController {
 				if (password.equals(passwordOld)) {//如果密码正确成功生成token
 					String tokenString = UUID.randomUUID().toString().replaceAll("-", "");
 					MemCached cached =  MemCached.getInstance();
-					String phone = user.getPhone();
-					cached.add(phone, tokenString);
-					cached.replace(phone, tokenString);
+					String id = user.getId().toString();
+					cached.add(id, tokenString);
+					cached.replace(id, tokenString);
 					map.put("token", tokenString);
 					map.put("code", Codes.SUCCESS);
 					try {

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.naicha.app.utils.JsonDateSerializer;
 
 public class RespUser {
+	private Integer id;
 	private String headPicture;
 	private String name;
 	private String age;
@@ -125,4 +126,11 @@ public class RespUser {
 		this.weixinNo = weixinNo;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

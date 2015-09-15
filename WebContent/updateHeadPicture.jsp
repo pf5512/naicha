@@ -11,8 +11,8 @@
 
 <form action="setup/updateHeadPicture.do" method="post" enctype="multipart/form-data">
 	选择文件:<input type="file" name="files"><br>
-	Token:<input type="text" name="token"><br>
-	Phone:<input type="text" name="phone"><br>
+	token:<input type="text" name="token"><br>
+	userIdStr:<input type="text" name="userIdStr"><br>
 	<input type="submit" value="提交"> 
 </form>
 

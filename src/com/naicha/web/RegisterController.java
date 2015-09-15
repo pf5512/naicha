@@ -204,12 +204,12 @@ public class RegisterController {
 			return map;
 		}
 		// 验证码校验
-		HttpSession session = request.getSession();
+ 		HttpSession session = request.getSession();
 		String code2 = (String) session.getAttribute("validateCode"+phone);
 		System.out.println("------------------code2------" + code2);
 		System.out.println("------------------validateCode------"+ validateCode);
 		// session.removeAttribute("code");//取完后去掉session
-		if (!code2.equals(validateCode)) {
+		if (code2==null||!code2.equals(validateCode)) {
 			map.put("message", "验证码不正确");
 			map.put("code", Codes.ERROR);
 			return map;
@@ -278,14 +278,15 @@ public class RegisterController {
 	 */
 	@RequestMapping("reSetPassword.do")
 	@ResponseBody
-	public Map<String, Object> reSetPassword(String phone,String validateCode,String password,
+	public Map<String, Object> reSetPassword(String userIdStr,String phone,String validateCode,String password,
 			HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(phone)||StringTool.isEmpty(validateCode)||StringTool.isEmpty(password)) {
+		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(phone)||StringTool.isEmpty(validateCode)||StringTool.isEmpty(password)) {
 			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			map.put("msg", "参数不能为空");
 			return map;
 		}
+		Integer userId = Integer.parseInt(userIdStr);
 		//检查手机号码是否存在
 		Boolean isExist = userService.isExistFindByPhone(phone);
 		if (!isExist) {
@@ -299,7 +300,7 @@ public class RegisterController {
 		System.out.println("------------------code2------" + code2);
 		System.out.println("------------------validateCode------"+ validateCode);
 		// session.removeAttribute("code");//取完后去掉session
-		if (!code2.equals(validateCode)) {
+		if (code2==null||!code2.equals(validateCode)) {
 			map.put("message", "验证码不正确");
 			map.put("code", Codes.ERROR);
 			return map;
@@ -307,7 +308,7 @@ public class RegisterController {
 			//重置密码
 			ConvertMD5 md5 = new ConvertMD5();
 			password = md5.getMD5ofStr(password);
-			Integer retCode = userService.updatePassword(phone,password);
+			Integer retCode = userService.updatePassword(userId,password);
 			if (retCode==1) {
 				map.put("code", Codes.SUCCESS);
 				return map;

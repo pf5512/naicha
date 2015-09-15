@@ -29,35 +29,35 @@ public interface UserService {
 	 * @author yangxujia
 	 * @date 2015年9月11日上午11:55:25
 	 */
-	public Integer updateHeadPicture(String headPicture, String phone);
+	public Integer updateHeadPicture(String headPicture, Integer userId);
 	
 	/**
 	 * 更新姓名
 	 * @author yangxujia
 	 * @date 2015年9月11日下午4:11:20
 	 */
-	public Integer updateName(String name, String phone);
+	public Integer updateName(String name, Integer userId);
 
 	/**
 	 * 更新奶茶号
 	 * @author yangxujia
 	 * @date 2015年9月11日下午4:52:59
 	 */
-	public Integer updateNaichaNo(String naichaNo, String phone);
+	public Integer updateNaichaNo(String naichaNo, Integer userId);
 	
 	/**
 	 * 更改性别
 	 * @author yangxujia
 	 * @date 2015年9月11日下午5:02:45
 	 */
-	public Integer updateSex(Integer sex, String phone);
+	public Integer updateSex(Integer sex, Integer userId);
 	
 	/**
 	 * 更新出生年月
 	 * @author yangxujia
 	 * @date 2015年9月11日下午5:11:48
 	 */
-	public Integer updateBirthday(Date birthday,String phone);
+	public Integer updateBirthday(Date birthday,Integer userId);
 	
 	public Integer updateHometown(String hometown, int id);
 
@@ -73,14 +73,14 @@ public interface UserService {
 
 	public User findByNaichaNo(String phoneOrNaicha);
 
-	public Integer updatePassword(String phone,String password);
+	public Integer updatePassword(Integer userId,String password);
 
-	public Integer updateProfession(String profession, String phone);
+	public Integer updateProfession(String profession, Integer userId);
 
-	public Integer updateAddress(String phone, String address);
+	public Integer updateAddress(Integer userId, String address, String jinwei);
 	
-	public Integer updatePerSignature(String phone, String perSignature);
+	public Integer updatePerSignature(Integer userId, String perSignature);
 	
-	public Integer updateWeixinNo(String phone, String weixinNo);
+	public Integer updateWeixinNo(Integer userId, String weixinNo);
 
 }

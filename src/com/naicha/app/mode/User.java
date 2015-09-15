@@ -27,6 +27,7 @@ public class User implements Serializable {
 	private String profession;
 	private String address;
 	private String jinwei;
+	private String geohashCode;
 	private String phone;
 	private Integer userType;
 	private Date registerTime;
@@ -186,7 +187,7 @@ public class User implements Serializable {
 		this.birthday = birthday;
 	}
 
-	@Column(name = "weiChatNo", nullable = false)
+	@Column(name = "weiXinNo", nullable = false)
 	public String getWeiXinNo() {
 		return weiXinNo;
 	}
@@ -203,6 +204,14 @@ public class User implements Serializable {
 	public void setJinwei(String jinwei) {
 		this.jinwei = jinwei;
 	}
+	
+	@Column(name = "geohashCode", nullable = false)
+	public String getGeohashCode() {
+		return geohashCode;
+	}
 
+	public void setGeohashCode(String geohashCode) {
+		this.geohashCode = geohashCode;
+	}
 
 }

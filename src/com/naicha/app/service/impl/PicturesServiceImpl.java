@@ -4,19 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.naicha.app.dao.FriendCircleDao;
+import com.naicha.app.dao.PicturesDao;
 import com.naicha.app.mode.FriendCircle;
-import com.naicha.app.service.FriendCircleService;
+import com.naicha.app.mode.Pictures;
+import com.naicha.app.service.PicturesService;
 
 @Service
 @Transactional
-public class PicturesServiceImpl implements FriendCircleService {
+public class PicturesServiceImpl implements PicturesService {
 
 	@Autowired
-	private FriendCircleDao friendCircleDao;
-	
+	private PicturesDao picturesDao;
+
 	@Override
-	public FriendCircle save(FriendCircle friendCircle) {
-		return friendCircleDao.save(friendCircle);
+	public Pictures save(Pictures pictures) {
+		return picturesDao.save(pictures);
 	}
+	
 }

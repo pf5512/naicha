@@ -12,7 +12,7 @@
 <form action="setup/updateProfession.do" method="post" >
 	profession:<input type="text" name="profession"><br>
 	token:<input type="text" name="token"><br>
-	phone:<input type="text" name="phone"><br>
+	userIdStr:<input type="text" name="userIdStr"><br>
 	<input type="submit" value="提交"> 
 </form>
 

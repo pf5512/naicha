@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.naicha.app.dao.UserDao;
 import com.naicha.app.mode.User;
 import com.naicha.app.service.UserService;
+import com.naicha.app.utils.Geohash;
 
 @Service
 @Transactional
@@ -23,8 +24,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer updateHeadPicture(String headPicture, String phone) {
-		return userDao.updateHeadPicture(headPicture,phone);
+	public Integer updateHeadPicture(String headPicture, Integer userId) {
+		return userDao.updateHeadPicture(headPicture,userId);
 	}
 	
 	@Override
@@ -38,13 +39,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer updateName(String name, String phone) {
-		return userDao.updateName(name, phone);
+	public Integer updateName(String name, Integer userId) {
+		return userDao.updateName(name, userId);
 	}
 	
 	@Override
-	public Integer updateNaichaNo(String naichaNo, String phone) {
-		return userDao.updateNaichaNo(naichaNo, phone);
+	public Integer updateNaichaNo(String naichaNo, Integer userId) {
+		return userDao.updateNaichaNo(naichaNo, userId);
 	}
 
 	@Override
@@ -53,8 +54,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer updateSex(Integer sex, String phone) {
-		return userDao.updateSex(sex, phone);
+	public Integer updateSex(Integer sex, Integer userId) {
+		return userDao.updateSex(sex, userId);
 	}
 
 	@Override
@@ -98,6 +99,7 @@ public class UserServiceImpl implements UserService {
 		user.setNaichaNo((String) objects[8]);
 		user.setPerSignature((String) objects[9]);
 		user.setPassword((String) objects[10]);
+		user.setId((Integer)objects[11]);
 		return user;
 	}
 	
@@ -126,38 +128,39 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer updatePassword(String phone,String password) {
-		Integer retCode = userDao.updatePassword(phone,password);
+	public Integer updatePassword(Integer userId,String password) {
+		Integer retCode = userDao.updatePassword(userId,password);
 		return retCode;
 	}
 
 	@Override
-	public Integer updateBirthday(Date birthday, String phone) {
-		Integer retCode =userDao.updateBirthday(birthday,phone);
+	public Integer updateBirthday(Date birthday, Integer userId) {
+		Integer retCode =userDao.updateBirthday(birthday,userId);
 		return retCode;
 	}
 
 	@Override
-	public Integer updateProfession(String profession, String phone) {
-		Integer retCode = userDao.updateProfession(phone,profession);
+	public Integer updateProfession(String profession, Integer userId) {
+		Integer retCode = userDao.updateProfession(userId,profession);
 		return retCode;
 	}
 
 	@Override
-	public Integer updateAddress(String phone, String address) {
-		Integer retCode = userDao.updateAddress(phone,address);
+	public Integer updateAddress(Integer userId, String address,String jinwei) {
+		String geohashCode = new Geohash().getGeohashCode(jinwei);
+		Integer retCode = userDao.updateAddress(userId,address,jinwei,geohashCode);
 		return retCode;
 	}
 
 	@Override
-	public Integer updatePerSignature(String phone, String perSignature) {
-		Integer retCode = userDao.updatePerSignature(phone,perSignature);
+	public Integer updatePerSignature(Integer userId, String perSignature) {
+		Integer retCode = userDao.updatePerSignature(userId,perSignature);
 		return retCode;
 	}
 
 	@Override
-	public Integer updateWeixinNo(String phone, String weixinNo) {
-		Integer retCode = userDao.updateWeixinNo(phone,weixinNo);
+	public Integer updateWeixinNo(Integer userId, String weixinNo) {
+		Integer retCode = userDao.updateWeixinNo(userId,weixinNo);
 		return retCode;
 	}
 }
