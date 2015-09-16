@@ -22,7 +22,7 @@ public class Pictures implements Serializable {
 	private static final long serialVersionUID = 3341407542832386863L;
 	private Integer id;
 	private String path;
-	private Integer friendCricleId;
+	private Integer friendCircleId;
 	private int hight;
 	private int width;
 	private Date time;
@@ -47,13 +47,13 @@ public class Pictures implements Serializable {
 		this.path = path;
 	}
 
-	@Column(name = "friendCricleId", nullable = false)
-	public Integer getFriendCricleId() {
-		return friendCricleId;
+	@Column(name = "friendCircleId", nullable = false)
+	public Integer getFriendCircleId() {
+		return friendCircleId;
 	}
 
-	public void setFriendCricleId(Integer friendCircleId) {
-		this.friendCricleId = friendCircleId;
+	public void setFriendCircleId(Integer friendCircleId) {
+		this.friendCircleId = friendCircleId;
 	}
 
 	@Column(name = "hight", nullable = false)

@@ -3,6 +3,7 @@ package com.naicha.app.service;
 import java.util.List;
 
 import com.naicha.app.mode.FriendCircle;
+import com.naicha.web.vo.RespFriendCircle;
 
 
 
@@ -17,5 +18,5 @@ public interface FriendCircleService {
 	/**
 	 * 朋友圈查询
 	 */
-	public List<FriendCircle> findNearbyOrderByDistance(String jinwei);
+	public List<RespFriendCircle> findNearbyOrderByDistance(String jinwei);
 }

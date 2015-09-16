@@ -29,6 +29,7 @@ import com.naicha.app.utils.ConvertMD5;
 import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.Resize;
 import com.naicha.app.utils.StringTool;
+import com.naicha.web.vo.RespFriendCircle;
 
 @Controller
 @RequestMapping("/friendCircle")
@@ -122,7 +123,7 @@ public class FriendCircleController {
 				 	 e.printStackTrace();
 				 }
 	         	Pictures pictures =  new Pictures();
-	    		pictures.setFriendCricleId(friendCircleId);
+	    		pictures.setFriendCircleId(friendCircleId);
 	    		pictures.setHight(image.getHeight());
 	    		pictures.setWidth(image.getWidth());
 	    		pictures.setPath("friendCircle/"+file_ture_name);
@@ -136,8 +137,22 @@ public class FriendCircleController {
  	@ResponseBody
  	public Map<String, Object> find(HttpServletRequest request,String jinwei){
  		Map<String, Object> map = new HashMap<String, Object>();
- 		List<FriendCircle> friendCircleList =  new ArrayList<FriendCircle>();
+ 		List<RespFriendCircle> friendCircleList =  new ArrayList<RespFriendCircle>();
  		friendCircleList = friendCircleService.findNearbyOrderByDistance(jinwei);
+ 		map.put("list", friendCircleList);
+ 		map.put("codes", Codes.SUCCESS);
+ 		return map;
+ 	}
+ 	@RequestMapping("/findPicture.do")
+ 	@ResponseBody
+ 	public Map<String, Object> findPicture(HttpServletRequest request,String jinwei){
+ 		Map<String, Object> map = new HashMap<String, Object>();
+ 		List<Integer> idList = new ArrayList<Integer>();
+ 		idList.add(4);
+ 		idList.add(5);
+ 		idList.add(6);
+ 		List<Pictures> picList = picturesService.findByFriendCircleId(idList);
+ 		map.put("picList", picList);
  		map.put("codes", Codes.SUCCESS);
  		return map;
  	}
