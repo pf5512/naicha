@@ -50,7 +50,7 @@ public class ContactsController {
 		//查看是否已经存在
 		BigInteger isExistBigInteger = contactsService.isExist(userAId, userBId);
 		if (isExistBigInteger.intValue()==1) {
-			//delete;
+			//delete; 
 		}
 		Contacts contacts = new Contacts();
 		contacts.setUserAId(userAId);
