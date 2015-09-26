@@ -24,4 +24,11 @@ public interface PicturesDao extends Repository<Pictures, Integer> {
 	 */
 	@Query(nativeQuery=true,value="select id,path, friendCircleId,hight,width,time from pictures where friendCircleId in (?1) ")
 	public List<Object[]> findByFriendCircleId(Collection<Integer> condition);
+	
+	/**
+	 * 根据用户图片查找,最多9张
+	 */
+	@Query(nativeQuery=true,value="select id,path, friendCircleId,hight,width,time from pictures where userId = ?1 limit 9 ")
+	public List<Object[]> findByUserId(int userId);
+
 }

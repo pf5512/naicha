@@ -1,8 +1,10 @@
 package com.naicha.web.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.naicha.app.mode.Pictures;
 import com.naicha.app.utils.JsonDateSerializer;
 
 public class RespUser {
@@ -20,6 +22,12 @@ public class RespUser {
 	private String weixinNo;
 	private Integer sex;
 	private Date birthday;
+	private String rank;
+	private Integer serviceType;
+	private List<Pictures> picList;
+	private Integer commentCount;
+	private Integer isActive;
+	private String	distance;
 	
 	public String getHeadPicture() {
 		return headPicture;
@@ -132,5 +140,53 @@ public class RespUser {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+	public Integer getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(Integer serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	public List<Pictures> getPicList() {
+		return picList;
+	}
+
+	public void setPicList(List<Pictures> picList) {
+		this.picList = picList;
+	}
+
+	public Integer getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public Integer getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
 	}
 }

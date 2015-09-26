@@ -1,15 +1,24 @@
 package com.naicha.app.service.impl;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.naicha.app.dao.CommentNaichaDao;
 import com.naicha.app.dao.UserDao;
+import com.naicha.app.mode.CommentNaicha;
+import com.naicha.app.mode.Pictures;
+import com.naicha.app.mode.Task;
 import com.naicha.app.mode.User;
+import com.naicha.app.service.PicturesService;
 import com.naicha.app.service.UserService;
 import com.naicha.app.utils.Geohash;
+import com.naicha.web.vo.RespUser;
 
 @Service
 @Transactional
@@ -17,6 +26,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private CommentNaichaDao	commentNaichaDao;
+	@Autowired
+	private PicturesService picturesService;
 
 	@Override
 	public User save(User user) {
@@ -149,6 +162,8 @@ public class UserServiceImpl implements UserService {
 	public Integer updateAddress(Integer userId, String address,String jinwei) {
 		String geohashCode = new Geohash().getGeohashCode(jinwei);
 		Integer retCode = userDao.updateAddress(userId,address,jinwei,geohashCode);
+		//更新到mongodb中
+//		String 
 		return retCode;
 	}
 
@@ -163,4 +178,93 @@ public class UserServiceImpl implements UserService {
 		Integer retCode = userDao.updateWeixinNo(userId,weixinNo);
 		return retCode;
 	}
+
+	@Override
+	public RespUser findTADetail(String userIdStr,String jinwei) {
+		RespUser user = new RespUser();
+		Integer userId = Integer.parseInt(userIdStr);
+		Object [] obj = userDao.findTADetail(userId);
+		//id,headPicture,name,sex,birthday,rank,address,profession,serviceType
+		// 1    2         3   4      5      6      7      8          9
+		user.setId((Integer) obj[0]);
+		user.setHeadPicture((String) obj[1]);//头像
+		user.setName((String) obj[2]);//名称
+		user.setSex((Integer) obj[3]);//性别
+		user.setAge(getAge((Date)obj[4]).toString());//年龄
+		user.setRank((String) obj[5]);//等级
+		user.setAddress((String) obj[6]);//位置
+		user.setProfession((String) obj[7]);//职业
+		user.setServiceType((Integer) obj[8]);//服务类型
+		user.setDistance(getDistance(jinwei,(String) obj[9]));//距离
+		user.setIsActive((Integer)obj[10]);//认证标签
+		user.setCommentCount(commentNaichaDao.getCommentCountByUserId(Integer.parseInt(userIdStr)).intValue());
+		List<Pictures> picList = picturesService.findByUserId(userId);
+		user.setPicList(picList);
+		return user;
+	}
+	/**
+	 * 雇主详情
+	 */
+	@Override
+	public RespUser findGuzhuDetail(String userIdStr,String jinwei) {
+		RespUser user = new RespUser();
+		Integer userId = Integer.parseInt(userIdStr);
+		Object [] obj = userDao.findTADetail(userId);
+		//id,headPicture,name,sex,birthday,rank,address,profession,serviceType
+		// 1    2         3   4      5      6      7      8          9
+		user.setId((Integer) obj[0]);
+		user.setHeadPicture((String) obj[1]);//头像
+		user.setName((String) obj[2]);//名称
+		user.setSex((Integer) obj[3]);//性别
+		user.setAge(getAge((Date)obj[4]).toString());//年龄
+		user.setRank((String) obj[5]);//等级
+		user.setAddress((String) obj[6]);//位置
+		user.setProfession((String) obj[7]);//职业
+		user.setServiceType((Integer) obj[8]);//服务类型
+		user.setDistance(getDistance(jinwei,(String) obj[9]));//距离
+		user.setIsActive((Integer)obj[10]);//认证标签
+		List<Pictures> picList = picturesService.findByUserId(userId);
+		user.setPicList(picList);
+		return user;
+	}
+	
+	private Integer getAge(Date mydate){
+		  Date date=new Date();     
+		  long day=(date.getTime()-mydate.getTime())/(24*60*60*1000) + 1;
+		  Integer year=(int) (day/365);
+		return year;
+		}
+	
+	private String getDistance(String jinwei, String friendCircleJinwei) {
+		double PI = 3.14159265358979323; // 圆周率
+		double R = 6371229; // 地球的半径
+		String str[]=jinwei.split(",");
+		double longt1= Double.parseDouble(str[0]);
+		double lat1 = Double.parseDouble(str[1]);
+		String str2[] = friendCircleJinwei.split(",");
+		double longt2=Double.parseDouble(str2[0]);
+		double lat2=Double.parseDouble(str2[1]);
+		double x, y, distance;
+		x = (longt2 - longt1) * PI * R
+				* Math.cos(((lat1 + lat2) / 2) * PI / 180) / 180;
+		y = (lat2 - lat1) * PI * R / 180;
+		distance = Math.hypot(x, y)/1000;
+		BigDecimal bg = new BigDecimal(distance);
+		String j = bg.setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		return j+"km";
+	}
+
+	@Override
+	public Integer oralIdentify(String profession, String rank, Integer userId,
+			String pics,String weixinNo,String phone) {
+		return userDao.udateOralIdentify(profession,Integer.parseInt(rank),userId,pics,weixinNo,phone);
+	}
+
+	@Override
+	public Integer updatePhone(Integer userId, String phone) {
+		return userDao.updatePhone(userId,phone);
+	}
+
+
+
 }

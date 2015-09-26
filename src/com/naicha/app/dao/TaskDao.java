@@ -9,17 +9,93 @@ import com.naicha.app.mode.Task;
 
 public interface TaskDao extends Repository<Task, Integer> {
 	public Task save(Task task);
-	//order by service time;
-	@Query(nativeQuery=true,value="select id,userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location "
-			+ "from task where servicesTime>=now() order by servicesTime asc;")
-	public List<Object[]>findByTime();
+	/**
+	 * 按截止时间查找全部
+	 * @author yangxujia
+	 * @date 2015年9月22日上午10:01:55
+	 */
+	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	 		+ "task t  left join user u on t.userId=u.id  			"
+	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
+	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now() 	 "
+	 		+ "order by servicesTime asc;")
+	public List<Object[]>findByTime(Integer userId);
 	
 	/**
+	 * 按截止时间查找全部
 	 * 上拉获取更多
 	 * @author yangxujia
 	 * @date 2015年9月17日下午3:07:15
 	 */
-	@Query(nativeQuery=true,value="select id,userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location "
-			+ "from task where servicesTime>=?1 order by servicesTime asc;")
-	public List<Object[]>findByTimeSlipeUp(String servicesTime);
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	 		+ "task t  left join user u on t.userId=u.id  			"
+	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
+	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?2  GROUP BY taskId) c on c.taskId=t.id where servicesTime > ?1 	 "
+	 		+ "order by servicesTime asc;")
+	public List<Object[]>findByTimeSlipeUp(String servicesTime,Integer userId);
+	
+	/**
+	 * 单条详情
+	 * @author yangxujia
+	 * @date 2015年9月22日上午10:04:41
+	 */
+	@Query(nativeQuery=true,value="select t.id,taskType,reward,servicesTime,timeLength, notes,t.userId,u.headPicture,u.name,u.sex,u.birthday,tu.counts as signupCount from task t "
+			+ "left join user u on t.userId=u.id  "
+			+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id "
+			+ "where t.id = ?1 ")
+	public Object[] findDetail(Integer id);
+	
+	/**
+	 * 按截止时间查找男生
+	 * @author yangxujia
+	 * @date 2015年9月22日上午10:04:55
+	 */
+	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+		 		+ "task t  left join user u on t.userId=u.id  			"
+		 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
+		 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now()  and u.sex=1	 "
+		 		+ "order by servicesTime asc;")
+	public List<Object[]> findByTimeByBoy(Integer userId);
+
+	/**
+	 * 按截止时间查找男生
+	 * 上拉查找更多
+	 * @author yangxujia
+	 * @date 2015年9月22日上午10:04:55
+	 */
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	 		+ "task t  left join user u on t.userId=u.id  			"
+	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
+	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?2  GROUP BY taskId) c on c.taskId=t.id where servicesTime > ?1 and sex=1	 "
+	 		+ "order by servicesTime asc;")
+	public List<Object[]>findByTimeByBoySlipeUp(String servicesTime,Integer userId);
+	/**
+	 * 按截止时间查找女生
+	 * @author yangxujia
+	 * @date 2015年9月22日上午10:05:33
+	 */
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	 		+ "task t  left join user u on t.userId=u.id  			"
+	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
+	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now()  and u.sex=0	 "
+	 		+ "order by servicesTime asc;")
+	public List<Object[]> findByTimeByGirl(int userId);
+	
+	/**
+	 * 按截止时间查找女生sex=0为女生
+	 * 上拉查找更多
+	 * @author yangxujia
+	 * @date 2015年9月22日上午10:04:55
+	 */
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	 		+ "task t  left join user u on t.userId=u.id  			"
+	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
+	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?2  GROUP BY taskId) c on c.taskId=t.id where servicesTime > ?1 and u.sex=0 "
+	 		+ "order by servicesTime asc;")
+	public List<Object[]>findByTimeByGirlSlipeUp(String servicesTime,Integer userId);
+	
+	@Query(nativeQuery=true,value="SELECT t.id, t.userId, servicesTime, taskType, timeLength, reward, tu.counts AS signupCount, status "
+			+ "FROM task t LEFT JOIN ( SELECT taskId, count(userId) counts FROM apply GROUP BY taskId ) tu ON tu.taskId = t.id "
+			+ "WHERE userId = ?1 ORDER BY servicesTime ASC ")
+	public List<Object[]> findTaskByUserId(String userIdStr);
 }

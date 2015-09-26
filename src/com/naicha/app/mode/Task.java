@@ -1,6 +1,7 @@
 package com.naicha.app.mode;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -31,8 +32,15 @@ public class Task implements Serializable {
 	private Date publicTime;
 	private String notes;
 	private String location;
+	private Integer status;
 	private String relativeToCurrentTime;
 	private String relativeToClosingTime;
+	private String headPicture;
+	private BigInteger signupCount ;
+	private BigInteger isCollect;
+	private String name;
+	private Integer sex;
+	private Integer age;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -112,7 +120,7 @@ public class Task implements Serializable {
 
 	@Column(name = "location")
 	public String getLocation() {
-		return location;
+		return location==null?"":location;
 	}
 
 	public void setLocation(String location) {
@@ -135,5 +143,68 @@ public class Task implements Serializable {
 
 	public void setRelativeToClosingTime(String relativeToClosingTime) {
 		this.relativeToClosingTime = relativeToClosingTime;
+	}
+
+	@Transient
+	public String getHeadPicture() {
+		return headPicture;
+	}
+
+	public void setHeadPicture(String headPicture) {
+		this.headPicture = headPicture;
+	}
+
+	@Transient
+	public Number getSignupCount() {
+		return signupCount==null ?0 :signupCount;
+	}
+
+	public void setSignupCount(BigInteger signupCount) {
+		this.signupCount = signupCount;
+	}
+
+	@Transient
+	public String getName() {
+		return name==null?"":name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Transient
+	public Integer getSex() {
+		return sex==null?-1:sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	@Transient
+	public Integer getAge() {
+		return age==null?0:age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	@Transient
+	public Number getIsCollect() {
+		return isCollect==null?0:isCollect;
+	}
+
+	public void setIsCollect(BigInteger isCollect) {
+		this.isCollect = isCollect;
+	}
+
+
+	@Column(name = "status", nullable = false)
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

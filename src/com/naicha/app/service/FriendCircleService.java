@@ -19,4 +19,8 @@ public interface FriendCircleService {
 	 * 朋友圈查询
 	 */
 	public List<RespFriendCircle> findNearbyOrderByDistance(String jinwei);
+
+	public List<RespFriendCircle> findNearbyOrderByDistanceMonGo(String jinwei);
+
+	public List<RespFriendCircle> findByUserId(String userIdStr);
 }

@@ -33,6 +33,7 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 		return friendCircleDao.save(friendCircle);
 	}
 
+	//使用mysql Geohash方法，该方法确实在分页上存在缺陷
 	@Override
 	public List<RespFriendCircle> findNearbyOrderByDistance(String jinwei) {
 		String geohash = new Geohash().getGeohashCode(jinwei);
@@ -40,6 +41,9 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 		List<RespFriendCircle> respFriendCircleList= new ArrayList<RespFriendCircle>();
 		geohashCode = geohash.substring(0,4)+"%";//4,代表20公里内
 		List<Object[]>  objectsList = friendCircleDao.findNearbyOrderByDistance(geohashCode);
+		if (objectsList.size()==0) {
+			return respFriendCircleList;
+		}
 		List<Integer> friendIdList =  new ArrayList<Integer>();
 		for (Object[] obj : objectsList) {
 			friendIdList.add((Integer)obj[0]);//收集朋友圈id
@@ -82,6 +86,59 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 		return respListNew;
 	}
 	
+	
+	@Override
+	public List<RespFriendCircle> findNearbyOrderByDistanceMonGo(String jinwei) {
+		String geohash = new Geohash().getGeohashCode(jinwei);
+		String geohashCode="";
+		List<RespFriendCircle> respFriendCircleList= new ArrayList<RespFriendCircle>();
+		geohashCode = geohash.substring(0,4)+"%";//4,代表20公里内
+		List<Object[]>  objectsList = friendCircleDao.findNearbyOrderByDistance(geohashCode);
+		if (objectsList.size()==0) {
+			return respFriendCircleList;
+		}
+		List<Integer> friendIdList =  new ArrayList<Integer>();
+		for (Object[] obj : objectsList) {
+			friendIdList.add((Integer)obj[0]);//收集朋友圈id
+			RespFriendCircle respFriendCircle =  new RespFriendCircle();
+			respFriendCircle.setId((Integer)obj[0]);
+			respFriendCircle.setUserId((Integer) obj[1]);
+			respFriendCircle.setContent((String)obj[2]);
+			Date dateTime = (Date)obj[3];
+			String time = calcDate(dateTime);
+			respFriendCircle.setTime(time);//
+			respFriendCircle.setHeadPicture((String)obj[4]);
+			respFriendCircle.setName((String)obj[5]);
+			respFriendCircle.setSex((Integer)obj[6]);
+			respFriendCircle.setAddress((String)obj[7]);
+			String friendCircleJinwei = (String)obj[8];
+			//通过经纬度计算距离
+			Double distance =  getDistance(jinwei,friendCircleJinwei);
+			respFriendCircle.setDistance(distance);
+			respFriendCircleList.add(respFriendCircle);
+		}
+		//2、获取朋友圈图片
+		List<Pictures> picList =  picturesService.findByFriendCircleId(friendIdList);
+		//3、获取朋友圈评论
+		//4、获取朋友圈赞
+		//5、拼上图片
+		List<RespFriendCircle> respListNew = new ArrayList<RespFriendCircle>();
+		for (RespFriendCircle respFriendCircle : respFriendCircleList){
+			Integer friendCircleId = respFriendCircle.getId();
+			List<Pictures> picList2 =  new AppUtils<Pictures>().findByContentId(friendCircleId, picList);
+			respFriendCircle.setPictursList(picList2);
+			respListNew.add(respFriendCircle);
+		}
+		//排序
+		Comparator<RespFriendCircle> comparator = new Comparator<RespFriendCircle>() {
+			public int compare(RespFriendCircle s1, RespFriendCircle s2) {
+				return (int) (s1.getDistance() - s2.getDistance());
+			}
+		};
+		Collections.sort(respListNew,comparator);
+		return respListNew;
+	}
+	
 	private Double getDistance(String jinwei, String friendCircleJinwei) {
 		double PI = 3.14159265358979323; // 圆周率
 		double R = 6371229; // 地球的半径
@@ -91,13 +148,12 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 		String str2[] = friendCircleJinwei.split(",");
 		double longt2=Double.parseDouble(str2[0]);
 		double lat2=Double.parseDouble(str2[1]);
-        double x, y, distance;
-        x = (longt2 - longt1) * PI * R
-                * Math.cos(((lat1 + lat2) / 2) * PI / 180) / 180;
-        y = (lat2 - lat1) * PI * R / 180;
-        distance = Math.hypot(x, y);
-        return distance;
-    
+		double x, y, distance;
+		x = (longt2 - longt1) * PI * R
+				* Math.cos(((lat1 + lat2) / 2) * PI / 180) / 180;
+		y = (lat2 - lat1) * PI * R / 180;
+		distance = Math.hypot(x, y);
+		return distance;
 	}
 
 	/**
@@ -126,5 +182,39 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 		  }else{
 			 return "刚刚"; 
 		  }
+	}
+
+	@Override
+	public List<RespFriendCircle> findByUserId(String userIdStr) {
+		Integer userId = Integer.parseInt(userIdStr);
+		List<Integer> friendIdList =  new ArrayList<Integer>();
+		List <RespFriendCircle> respFriendCircleList = new ArrayList<RespFriendCircle>();
+		List<Object[]> objList = friendCircleDao.findByUserId(userId);
+		for (Object[] obj : objList) {
+			//id,userId,content,time 
+			friendIdList.add((Integer)obj[0]);//收集朋友圈id
+			RespFriendCircle respFriendCircle =  new RespFriendCircle();
+			respFriendCircle.setId((Integer)obj[0]);
+			respFriendCircle.setUserId((Integer) obj[1]);
+			respFriendCircle.setContent((String)obj[2]);
+			Date dateTime = (Date)obj[3];
+			String time = calcDate(dateTime);
+			respFriendCircle.setTime(time);//
+			respFriendCircleList.add(respFriendCircle);
+		}
+		//2、获取朋友圈图片
+		List<Pictures> picList =  picturesService.findByFriendCircleId(friendIdList);
+		//3、获取朋友圈评论
+		//4、获取朋友圈赞
+		//5、拼上图片
+		List<RespFriendCircle> respListNew = new ArrayList<RespFriendCircle>();
+		for (RespFriendCircle respFriendCircle : respFriendCircleList){
+			Integer friendCircleId = respFriendCircle.getId();
+			List<Pictures> picList2 =  new AppUtils<Pictures>().findByContentId(friendCircleId, picList);
+			respFriendCircle.setPictursList(picList2);
+			respFriendCircle.setPicNum(picList.size());
+			respListNew.add(respFriendCircle);
+		}
+		return respListNew;
 	}
 }

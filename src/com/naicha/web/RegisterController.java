@@ -28,6 +28,7 @@ import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.SMSAPI;
 import com.naicha.app.utils.StringTool;
 import com.naicha.web.vo.RespUser;
+import com.test.MonDB;
 import com.test.TestSMSAPI;
 
 @Controller
@@ -251,6 +252,9 @@ public class RegisterController {
 		user.setRegisterTime(new Date());
 		User userReturn = new User();
 		userReturn = userService.save(user);
+		//将用户类别存到mongodb中
+		Integer _id = userReturn.getId();
+		MonDB.setUsertype(_id,Integer.parseInt(userType)); 
 		//将token放进缓存中
 		String token = UUID.randomUUID().toString().replaceAll("-","").toLowerCase();
 		MemCached cache = MemCached.getInstance();

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.naicha.app.mode.User;
 import com.naicha.app.service.UserService;
 import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.ConvertMD5;
@@ -41,7 +42,7 @@ public class SetupController {
 	 */
 	@RequestMapping("/updateHeadPicture.do")
 	@ResponseBody
-	public Map<String, Object> findIndividual(@RequestParam("files") MultipartFile[] files,
+	public Map<String, Object> updateHeadPicture(@RequestParam("files") MultipartFile[] files,
 			String userIdStr, String token, HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数的验证
@@ -331,5 +332,101 @@ public class SetupController {
 		map.put("updateOrNot", updateOrNot);
 		map.put("codes", Codes.SUCCESS);
 		return map;
+	}
+	
+	/**
+	 * 提交口语水平认证接口
+	 * @author yangxujia
+	 * @date 2015年9月24日下午3:29:36
+	 */
+	@RequestMapping("/oralIdentify.do")
+	@ResponseBody
+	public Map<String, Object> oralIdentify(String profession,String rankStr, String weixinNo,String phone,
+			@RequestParam("files") MultipartFile[] files,String userIdStr,String token,HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(profession)||StringTool.isEmpty(rankStr)||StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		Integer userId = Integer.parseInt(userIdStr);
+		//校验token
+		MemCached cached =  MemCached.getInstance();
+		String tokenOld = (String)cached.get(userIdStr);
+		if(!token.equals(tokenOld)){
+			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		String pics="";
+		//图片处理
+		for (int i = 0; i < files.length; i++) {
+			try {
+				MultipartFile file = files[i];
+				ConvertMD5 md5 = new ConvertMD5();
+				String picPath = request.getSession().getServletContext().getRealPath("/resource/identify");
+				/* 从当时时间MD5强制重命名图片 */
+				String picTime = String.valueOf(System.currentTimeMillis());
+				String picType = file.getContentType();
+				String pictureName = md5.getMD5ofStr(picTime);
+				if (picType.equals("image/jpeg")) {
+					pictureName = pictureName.concat(".jpg");
+				} else if (picType.equals("image/png")) {
+					pictureName = pictureName.concat(".png");
+				} else if (picType.equals("image/bmp")) {
+					pictureName = pictureName.concat(".bmp");
+				} else if (picType.equals("image/gif")) {
+					pictureName = pictureName.concat(".gif");
+				} else{
+					pictureName = pictureName.concat(".jpg");
+				}
+				/* 保存文件 */
+				FileUtils.copyInputStreamToFile(file.getInputStream(),	new File(picPath, pictureName));
+				BufferedImage image = ImageIO.read(file.getInputStream());
+				pictureName = "identify/"+pictureName;
+				if(pics==""){
+					pics=pictureName;
+				}else{
+				pics = pics + "," +pictureName;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		Integer updateOrNot = userService.oralIdentify(profession,rankStr,userId,pics, weixinNo,phone);
+		map.put("updateOrNot", updateOrNot);
+		map.put("codes", Codes.SUCCESS);
+		return map;
+	}
+	
+	@RequestMapping("/updatePhone.do")
+	@ResponseBody
+	public Map<String, Object> updatePhone(String phone,String userIdStr, String token,HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(phone)||StringTool.isEmpty(userIdStr)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		Integer userId = Integer.parseInt(userIdStr);
+		//校验token
+		MemCached cached =  MemCached.getInstance();
+		String tokenOld = (String)cached.get(userIdStr);
+		if(!token.equals(tokenOld)){
+			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		// 2、验证手机号
+		boolean isExist = userService.isExistFindByPhone(phone);
+		if (isExist) {
+			map.put("code", Codes.PHONE_NUMBER_IS_EXIST);
+			map.put("msg", "手机号码已存在");
+			return map;
+		}
+		Integer updateOrNot = userService.updatePhone(userId, phone);
+		if (updateOrNot==1) {
+			map.put("codes", Codes.SUCCESS);
+			return map;
+		}else {
+			map.put("codes", Codes.ERROR);
+			return map;
+		}
 	}
 }

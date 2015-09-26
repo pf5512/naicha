@@ -137,6 +137,10 @@ public class FriendCircleController {
  	@ResponseBody
  	public Map<String, Object> find(HttpServletRequest request,String jinwei){
  		Map<String, Object> map = new HashMap<String, Object>();
+ 		if (StringTool.isEmpty(jinwei)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
  		List<RespFriendCircle> friendCircleList =  new ArrayList<RespFriendCircle>();
  		friendCircleList = friendCircleService.findNearbyOrderByDistance(jinwei);
  		map.put("list", friendCircleList);
@@ -153,6 +157,26 @@ public class FriendCircleController {
  		idList.add(6);
  		List<Pictures> picList = picturesService.findByFriendCircleId(idList);
  		map.put("picList", picList);
+ 		map.put("codes", Codes.SUCCESS);
+ 		return map;
+ 	}
+ 	
+ 	/**
+ 	 * 根据id查找个人朋友圈内容
+ 	 * @author yangxujia
+ 	 * @date 2015年9月26日上午10:42:18
+ 	 */
+ 	@RequestMapping("/findByUserId.do")
+ 	@ResponseBody
+ 	public Map<String, Object> findByUserId(HttpServletRequest request,String userIdStr){
+ 		Map<String, Object> map = new HashMap<String, Object>();
+ 		if(StringTool.isEmpty(userIdStr)){
+ 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+ 			return map;
+ 		}
+		List<RespFriendCircle> friendCircleList =  new ArrayList<RespFriendCircle>();
+ 		friendCircleList = friendCircleService.findByUserId(userIdStr);
+ 		map.put("friendCircleList", friendCircleList);
  		map.put("codes", Codes.SUCCESS);
  		return map;
  	}

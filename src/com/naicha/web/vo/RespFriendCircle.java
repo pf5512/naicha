@@ -18,6 +18,7 @@ public class RespFriendCircle {
 	private String time;
 	private Integer userId;
 	private List<Pictures> pictursList;
+	private Integer picNum;
 	private List<Praise> praiseList;
 	private List<CommentFriendCircle> commentFriendCircleList;
 	public String getHeadPicture() {
@@ -92,5 +93,11 @@ public class RespFriendCircle {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Integer getPicNum() {
+		return picNum==null?0: picNum;
+	}
+	public void setPicNum(Integer picNum) {
+		this.picNum = picNum;
 	}
 }

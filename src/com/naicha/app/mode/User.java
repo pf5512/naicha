@@ -32,12 +32,13 @@ public class User implements Serializable {
 	private Integer userType;
 	private Date registerTime;
 	private Boolean isActivate;
-	private Integer rank;
+	private String rank;
 	private String naichaNo;
 	private String perSignature;
 	private String weiXinNo;
 	private Integer sex;
 	private Date birthday;
+	private Integer serviceType;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -134,11 +135,11 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "rank", nullable = false)
-	public Integer getRank() {
+	public String getRank() {
 		return rank;
 	}
 
-	public void setRank(Integer rank) {
+	public void setRank(String rank) {
 		this.rank = rank;
 	}
 
@@ -212,6 +213,15 @@ public class User implements Serializable {
 
 	public void setGeohashCode(String geohashCode) {
 		this.geohashCode = geohashCode;
+	}
+
+	@Column(name = "serviceType", nullable = false)
+	public Integer getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(Integer serviceType) {
+		this.serviceType = serviceType;
 	}
 
 }

@@ -1,10 +1,12 @@
 package com.naicha.app.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import com.naicha.app.mode.Task;
 import com.naicha.app.mode.User;
 import com.naicha.web.vo.RespUser;
 
@@ -83,4 +85,11 @@ public interface UserService {
 	
 	public Integer updateWeixinNo(Integer userId, String weixinNo);
 
+	public RespUser findTADetail(String userIdStr , String jinwei);
+
+	public Integer oralIdentify(String profession, String rank, Integer userId,	String pics, String weixinNo, String phone);
+
+	public RespUser findGuzhuDetail(String userIdStr, String jinwei);
+
+	public Integer updatePhone(Integer userId, String phone);
 }

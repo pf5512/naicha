@@ -1,6 +1,8 @@
 package com.naicha.app.dao;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -111,4 +113,21 @@ public interface UserDao extends Repository<User, Integer> {
 	@Modifying
 	@Query(nativeQuery=true,value="update user set weixinNo=?2 where id=?1")
 	public Integer updateWeixinNo(int userId, String weixinNo);
+	
+	@Query(nativeQuery=true,value="select id,headPicture,name,sex,birthday,rank,address,profession,serviceType from user where id IN(?1) and isActivate=1 ")
+	public List<Object[]> findTA(Collection<Integer> condition);
+	
+	@Query(nativeQuery=true,value="select id,headPicture,name,sex,birthday,rank,address,profession,serviceType from user where userType=0 and isActivate=1 ORDER BY rank DESC limit ?1 , ?2 ")
+	public List<Object[]> findTAByRank(int a,int b);
+	
+	@Query(nativeQuery=true,value="select id,headPicture,name,sex,birthday,rank,address,profession,serviceType,jinwei,isActivate from user where id = ?1 ")
+	public Object[] findTADetail(int a);
+
+	@Modifying
+	@Query(nativeQuery=true,value="update user set profession=?1,rank=?2,certificatePicture=?4,weixinNo=?5,phoneForCertificate=?6 where id=?3")
+	public Integer udateOralIdentify(String profession, int rank,Integer userId, String pics,String weixinNo,String phoneForCertificate);
+
+	@Modifying
+	@Query(nativeQuery=true,value="update user set phone =?2 where id =?1")
+	public Integer updatePhone(Integer userId, String phone);
 }

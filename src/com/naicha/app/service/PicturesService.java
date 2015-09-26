@@ -16,4 +16,6 @@ public interface PicturesService {
 	public Pictures save(Pictures pictures);
 	
 	public List<Pictures> findByFriendCircleId(List<Integer> condition);
+
+	public List<Pictures> findByUserId(Integer userId);
 }

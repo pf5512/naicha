@@ -21,7 +21,10 @@ public interface FriendCircleDao extends Repository<FriendCircle, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月15日下午6:24:40
 	 */
-	@Query(nativeQuery=true,value="select f.id,f.userId,f.content,f.time,u.headPicture,u.name,u.sex,u.address,u.jinwei from friendCircle f left join user u on u.id=f.userId where geohashCode like ?1 limit 20 ")
+	@Query(nativeQuery=true,value="select f.id,f.userId,f.content,f.time,u.headPicture,u.name,u.sex,u.address,u.jinwei from friendCircle f left join user u on u.id=f.userId where geohashCode like ?1 limit 200 ")
 	public List<Object[]> findNearbyOrderByDistance(String geohashCode);
-
+	
+	
+	@Query(nativeQuery=true,value="select id,userId,content,time from friendCircle where userId = ?1 ORDER BY time DESC LIMIT 10; ")
+	public List<Object[]> findByUserId(int userId);
 }
