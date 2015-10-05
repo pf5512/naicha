@@ -265,6 +265,27 @@ public class UserServiceImpl implements UserService {
 		return userDao.updatePhone(userId,phone);
 	}
 
+	@Override
+	public User findById(int userId) {
+		Object[] objects = userDao.findById(userId);
+		if(objects==null){
+			return null;
+		}
+		User user = new User();
+		user.setHeadPicture((String) objects[0]);
+		user.setName((String) objects[1]);
+		user.setAge((Integer) objects[2]);
+		user.setProfession((String) objects[3]);
+		user.setAddress((String) objects[4]);
+		user.setPhone((String) objects[5]);
+		user.setUserType((Integer) objects[6]);
+		user.setRegisterTime((Date) objects[7]);
+		user.setNaichaNo((String) objects[8]);
+		user.setPerSignature((String) objects[9]);
+		user.setPassword((String) objects[10]);
+		return user;
+	}
+
 
 
 }

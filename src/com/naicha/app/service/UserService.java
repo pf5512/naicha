@@ -92,4 +92,6 @@ public interface UserService {
 	public RespUser findGuzhuDetail(String userIdStr, String jinwei);
 
 	public Integer updatePhone(Integer userId, String phone);
+
+	public User findById(int userId);
 }

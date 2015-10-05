@@ -11,4 +11,6 @@ public class Codes {
 	public static final Integer FRIEND_NO = 0;
 	public static final Integer FRIEND_B_IS_A_BLOCKED= -1;//-1B是A的黑名单，
 	public static final Integer FRIEND_A_IS_B_BLOCKED= -2;//-2A是B的黑名单
+	public static final String MESSAGE_APPLY_TASK = "1";//报名的消息
+	public static final String MESSAGE_COMMENT_PAY = "2";//评论和付款
 }
