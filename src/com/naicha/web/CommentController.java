@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +20,10 @@ import com.naicha.app.service.CommentNaichaService;
 import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.StringTool;
+import com.naicha.web.vo.RespComment2Naicha;
 import com.naicha.web.vo.RespCommentNaicha;
+import com.naicha.web.vo.RespRankCount;
+import com.test.PushExample;
 
 
 @Controller
@@ -27,6 +32,7 @@ public class CommentController {
 	@Autowired
 	private CommentNaichaService  commentNaichaService;
 
+	protected static final Logger LOG = LoggerFactory.getLogger(CommentController.class);
 	/**
 	 * 奶茶评论
 	 * @author yangxujia
@@ -68,7 +74,7 @@ public class CommentController {
 	 */
 	@RequestMapping("/getCommentNaicha.do")
 	@ResponseBody
-	public Map<String, Object> save(String userIdStr,HttpServletRequest request) {
+	public Map<String, Object> getCommentNaicha(String userIdStr,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(userIdStr)) {
 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
@@ -76,12 +82,32 @@ public class CommentController {
 		}
 		Integer userId =  Integer.parseInt(userIdStr);
 		List<RespCommentNaicha> commentNaichaList = commentNaichaService.findCommentById(userId);
-		List<BigInteger> countList =  commentNaichaService.findRankCount(userId);
+		List<RespRankCount> countList =  commentNaichaService.findRankCount(userId);
 		map.put("commentNaichaList", commentNaichaList);
 		map.put("countList", countList);
-		map.put("good", countList.get(0));
-		map.put("mid", countList.get(1));
-		map.put("bad", countList.get(2));
+		map.put("codes", Codes.SUCCESS);
+		return map;
+	}
+	/**
+	 * 获取当天1 ,本周2 ，本月3 的的评价 
+	 * @author yangxujia
+	 * @date 2015年10月7日下午2:32:23
+	 */
+	@RequestMapping("/getCommentNaichaByTimeType.do")
+	@ResponseBody
+	public Map<String, Object> getCommentNaichaByTimeType(String timeType,String currentPage,String pageSize,HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		LOG.info("timeType: "+timeType);
+		if (StringTool.isEmpty(timeType)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//获取评价列表
+		List<RespComment2Naicha> commentNaichaList = commentNaichaService.getCommentNaichaByTimeType(timeType,currentPage,pageSize);
+		//获取评论个数
+		List<RespRankCount> countList =  commentNaichaService.findRankCountByTimeType(timeType);
+		map.put("commentNaichaList", commentNaichaList);
+		map.put("countList", countList);
 		map.put("codes", Codes.SUCCESS);
 		return map;
 	}

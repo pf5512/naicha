@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+
+<meta charset="utf-8">
+<script type="text/javascript" src="htmlres/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="htmlres/main.js"></script>
+<title>管理后台</title>
+<link href="images/favicon.ico" rel="Shortcut Icon">
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="htmlres/layout_head2880f5.css">
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="htmlres/base284ee4.css">
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="htmlres/lib22f1a9.css">
+<link onerror="wx_loaderror(this)" rel="stylesheet" href="htmlres/page_index25404f.css">
+
+
+    <link href="htmlres/pagination218878.css" rel="stylesheet" charset="utf-8"><style></style></head>
+    <body class="zh_CN screen_small">
+        <div class="head" id="header">
+<div class="head_box">
+    <div class="inner wrp">
+        <h1 class="logo"><a href="javascript:void(0)" title="口语奶茶"></a></h1>
+                                <div class="account">
+                        <div class="account_meta account_info account_meta_primary">
+                                <a href="javascript:void(0)" class="nickname">杨旭佳</a>
+                                <span class="type_wrp">
+                                        <a href="javascript:void(0)" class="type icon_subscribe_label">订阅号</a>
+                                        
+                                        <a href="javascript:void(0)" class="type icon_verify_label fail">未认证</a>
+                                        
+                </span>
+                                <a href="javascript:void(0)"><img src="htmlres/getheadimg" class="avatar"></a>
+                            </div>
+            <div id="accountArea" class="account_meta account_inbox account_meta_primary">
+                                <a href="javascript:void(0)" class="account_inbox_switch">
+                                        <i class="icon_inbox">通知</i>&nbsp;
+                                    </a>
+                            </div>
+                <div class="account_meta account_logout account_meta_primary"><a id="logout" href="adminLogin.htm">退出</a></div>
+                                </div>
+                    </div>
+</div>
+
+        </div>
+        <div id="body" class="body page_index">
+            <div id="js_container_box" class="container_box cell_layout side_l">
+                
+                                <div class="col_side">
+                    <div class="menu_box" id="menuBar">
+<dl class="menu no_extra">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        images/icon_menu_function.png
+        ) no-repeat;">
+    </i>任务管理
+    </dt> 
+
+				    <dd class="menu_item "><a data-id="10005" href="javascript:void(0)">任务统计             </a></dd>
+					<dd class="menu_item "><a data-id="10006" href="javascript:void(0)">任务列表             </a></dd>
+					<dd class="menu_item "><a id="setTaskReward" data-id="10007" href="javascript:void(0)">发布任务金额设置     </a></dd>
+					<dd class="menu_item "><a id="commentList" data-id="10008" href="javascript:void(0)">评价统计和列表       </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        images/icon_menu_management.png
+        ) no-repeat;">
+    </i>消息管理
+    </dt> 
+
+				<dd class="menu_item "><a data-id="10012" href="javascript:void(0)">消息统计        </a></dd>
+					<dd class="menu_item "><a data-id="10013" href="javascript:void(0)">消息监控列表        </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        images/icon_menu_ad.png
+        ) no-repeat;">
+    </i>英语角
+    </dt> 
+
+				<dd class="menu_item "><a data-id="10026" href="javascript:void(0)">英语角消息统计        </a></dd>
+                <dd class="menu_item "><a data-id="10027" href="javascript:void(0)">英语角类别管理        </a></dd>
+                <dd class="menu_item "><a data-id="10028" href="javascript:void(0)">英语角房间管理        </a></dd>
+                <dd class="menu_item "><a data-id="10029" href="javascript:void(0)">申请审核和发布消息    </a></dd>
+                <dd class="menu_item "><a data-id="10030" href="javascript:void(0)">消息监控列表          </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+       images/icon_menu_statistics.png
+        ) no-repeat;">
+    </i>用户
+    </dt> 
+
+				    <dd class="menu_item "><a data-id="10015" href="javascript:void(0)">用户统计        </a></dd>
+					<dd class="menu_item "><a data-id="10016" href="javascript:void(0)">注册用户管理        </a></dd>
+					<dd class="menu_item "><a data-id="10017" href="javascript:void(0)">奶茶认证申请受理        </a></dd>
+					<dd class="menu_item "><a data-id="10018" href="javascript:void(0)">奶茶认证级别调整        </a></dd>
+					<dd class="menu_item "><a data-id="10018" href="javascript:void(0)">级别认证和单价赏金上限  </a></dd>
+					<dd class="menu_item "><a data-id="10018" href="javascript:void(0)">标签管理        </a></dd>
+					<dd class="menu_item "><a data-id="10018" href="javascript:void(0)">添加话题        </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        images/icon_menu_setup.png
+        ) no-repeat;">
+    </i>账户管理
+    </dt> 
+
+				<dd class="menu_item "><a data-id="10019" href="javascript:void(0)">交易及佣金统计        </a></dd>
+					<dd class="menu_item "><a data-id="10020" href="javascript:void(0)">提现管理          </a></dd>
+					<dd class="menu_item "><a data-id="10022" href="javascript:void(0)">充值管理          </a></dd>
+					<dd class="menu_item "><a data-id="10045" href="javascript:void(0)">充值赠送比例设置  </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        images/pengyouquan.png
+        ) no-repeat;">
+    </i>朋友圈
+    </dt> 
+
+				<dd class="menu_item "><a data-id="10019" href="javascript:void(0)">朋友圈发布统计        </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        images/icon_menu_setup.png
+        ) no-repeat;">
+    </i>授权
+    </dt>
+
+				<dd class="menu_item "><a data-id="10019" href="javascript:void(0)">朋友圈发布统计        </a></dd>
+		</dl>
+
+</div>
+
+
+                </div>
+                                
+                <div class="col_main">
+				</div>
+            </div>
+            
+                                    <div class="faq">
+                <ul class="links">
+                                        <li class="links_item"><a href="javascript:void(0)" target="_blank">客服中心</a></li>
+                    <li class="links_item"><a href="javascript:void(0)" target="_blank">侵权投诉</a></li>
+                </ul>
+                <p class="tail">反馈官号口语奶茶</p>
+            </div>
+                                    
+        </div>
+        <div class="foot" id="footer">
+	<ul class="links ft">
+					<li class="links_item no_extra"><a  target="_blank">关于凯撒科技</a></li>
+			<li class="links_item"><a  target="_blank">服务协议</a></li>
+			<li class="links_item"><a target="_blank">运营规范</a></li>
+			<li class="links_item"><a target="_blank">辟谣中心</a></li>
+			<li class="links_item"><a  target="_blank">客服中心</a></li>
+                        			<li class="links_item"><a href="mailto:yangxujia@qq.com" target="_blank">联系邮箱</a></li>
+            				<li class="links_item"><p class="copyright">Copyright © 2015 Oralhub. All Rights Reserved.</p> </li>
+	</ul>
+    
+	
+</div>
+
+
+
+
+    
+
+
+<div class="scale_tips" id="zoom_tips" style="display:none;">
+<div class="scale_tips_inner">
+<i class="icon_scale_tips"></i>
+<p class="scale_tips_content"><span id="zoom_msg"></span><a href="javascript:;" id="zoom_prompt">不再提示</a></p>
+</div>
+</div>
+<div class="JS_TIPS page_tips error" id="errorInput" style="opacity: 0.8;display:none"><div class="inner">请输入正确的页码</div></div>
+</body></html>

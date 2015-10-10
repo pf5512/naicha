@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="htmlres/jquery-1.js"></script>
+    <script type="text/javascript" src="htmlres/jquery.loadJSON.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+                $.post("http://localhost:8080/naicha/comment/getCommentNaichaByTimeType.do",
+                        {
+                            timeType:"4"
+                        },
+                        function(data){  
+                        	$.each(data.countList, function(idx, obj) {
+                        		alert("rank"+obj.rank+"  count"+obj.count);
+                        	});
+                            var last=JSON.stringify(data); //将JSON对象转化为JSON字符
+                            alert(last);
+                        });
+        })
+    </script>
+</head>
+<body>
+<form id="count" name="fm" action="">
+    <input name="UserName" type="text" value="UserName1"/>
+	<input name="UserId" id="UserId" type="text" value="UserId1"/>
+</form>
+</body>
+</html>

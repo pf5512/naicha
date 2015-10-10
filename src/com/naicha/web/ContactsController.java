@@ -3,6 +3,7 @@ package com.naicha.web;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.naicha.app.service.ContactsService;
 import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.StringTool;
+import com.naicha.web.vo.Blocked;
 
 
 @Controller
@@ -63,7 +65,7 @@ public class ContactsController {
 	}
 	
 	/**
-	 * 加入黑名单
+	 * 把 friend加入黑名单
 	 * @author yangxujia
 	 * @date 2015年9月26日下午5:39:46
 	 */
@@ -96,6 +98,33 @@ public class ContactsController {
 			contacts.setTime(new Date());
 			contactsService.save(contacts);
 		}
+		map.put("codes", Codes.SUCCESS);
+		return map;
+	}
+	
+	/**
+	 * 把 friend加入黑名单
+	 * @author yangxujia
+	 * @date 2015年9月26日下午5:39:46
+	 */
+	@RequestMapping("/getBlockedList.do")
+	@ResponseBody
+	public Map<String, Object> getBlockedList(String userIdStr, String token,HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(token)||StringTool.isEmpty(userIdStr)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		Integer userAId = Integer.parseInt(userIdStr);
+		//校验token
+		MemCached cached =  MemCached.getInstance();
+		String tokenOld = (String)cached.get(userIdStr);
+		if(!token.equals(tokenOld)){
+			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		//获取黑名单列表，名字，头像，userId
+		List<Blocked> blockeds = contactsService.getBlockedList(userAId);
 		map.put("codes", Codes.SUCCESS);
 		return map;
 	}

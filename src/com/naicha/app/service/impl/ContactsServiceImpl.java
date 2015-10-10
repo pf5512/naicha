@@ -1,6 +1,7 @@
 package com.naicha.app.service.impl;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.naicha.app.dao.ContactsDao;
 import com.naicha.app.mode.Contacts;
 import com.naicha.app.service.ContactsService;
+import com.naicha.web.vo.Blocked;
 
 @Service
 @Transactional
@@ -28,7 +30,13 @@ public class ContactsServiceImpl implements ContactsService {
 	}
 
 	@Override
-	public BigInteger updateIsFriend(Integer userAId, Integer userBId) {
+	public Integer updateIsFriend(Integer userAId, Integer userBId) {
 		return contactsDao.updateIsFriend(userAId, userBId);
+	}
+
+	@Override
+	public List<Blocked> getBlockedList(Integer userAId) {
+		List<Object[]> objList =  contactsDao.getBlockedList(userAId);
+		return null;
 	}
 }

@@ -1,8 +1,10 @@
 package com.naicha.app.service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import com.naicha.app.mode.Contacts;
+import com.naicha.web.vo.Blocked;
 
 
 
@@ -12,5 +14,7 @@ public interface ContactsService {
 	
 	public BigInteger isExist(int userAId,int userBId);
 
-	public BigInteger updateIsFriend(Integer userAId, Integer userBId);
+	public Integer updateIsFriend(Integer userAId, Integer userBId);
+
+	public List<Blocked> getBlockedList(Integer userAId);
 }
