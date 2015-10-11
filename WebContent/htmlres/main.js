@@ -152,6 +152,7 @@ function queryForPages(){
 
 
 function getHtmlData(path){
+	
 	$.ajax({
 		 type:'GET',
 		 url: path,

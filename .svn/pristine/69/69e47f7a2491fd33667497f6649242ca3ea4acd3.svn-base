@@ -1,0 +1,5 @@
+entityManagerFactory.packagesToScan.app=com.naicha.app.mode
+
+
+
+

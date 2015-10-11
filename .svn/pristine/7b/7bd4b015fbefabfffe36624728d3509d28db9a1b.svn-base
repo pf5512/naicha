@@ -1,0 +1,175 @@
+package com.naicha.web.vo;
+
+import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.naicha.app.mode.CommentNaicha;
+import com.naicha.app.mode.Pictures;
+import com.naicha.app.utils.JsonDateSerializer;
+
+public class RespUser {
+	private Integer id;
+	private String headPicture;
+	private String name;
+	private String age;
+	private String profession;
+	private String address;
+	private String phone;
+	private String userType;
+	private Date regitsterTime;
+	private String naichaNo;
+	private String perSignature;
+	private String weixinNo;
+	private Integer sex;
+	private Date birthday;
+	private String rank;
+	private Integer serviceType;
+	private List<Pictures> picList;
+	private List<CommentNaicha> commentList;
+	
+	public String getHeadPicture() {
+		return headPicture;
+	}
+	
+	public void setHeadPicture(String headPicture) {
+		this.headPicture = headPicture;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getProfession() {
+		return profession;
+	}
+
+	public void setProfession(String profession) {
+		this.profession = profession;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getNaichaNo() {
+		return naichaNo;
+	}
+
+	public void setNaichaNo(String naichaNo) {
+		this.naichaNo = naichaNo;
+	}
+
+	public String getPerSignature() {
+		return perSignature;
+	}
+
+	public void setPerSignature(String perSignature) {
+		this.perSignature = perSignature;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	@JsonSerialize(using=JsonDateSerializer.class) 
+	public Date getRegitsterTime() {
+		return regitsterTime;
+	}
+
+	public void setRegitsterTime(Date regitsterTime) {
+		this.regitsterTime = regitsterTime;
+	}
+
+	public String getWeixinNo() {
+		return weixinNo;
+	}
+
+	public void setWeixinNo(String weixinNo) {
+		this.weixinNo = weixinNo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+	public Integer getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(Integer serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	public List<Pictures> getPicList() {
+		return picList;
+	}
+
+	public void setPicList(List<Pictures> picList) {
+		this.picList = picList;
+	}
+
+	public List<CommentNaicha> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<CommentNaicha> commentList) {
+		this.commentList = commentList;
+	}
+}

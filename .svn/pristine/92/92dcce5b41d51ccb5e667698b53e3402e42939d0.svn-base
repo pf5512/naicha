@@ -1,0 +1,285 @@
+package com.naicha.app.service.impl;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.naicha.app.dao.TaskDao;
+import com.naicha.app.dao.UserDao;
+import com.naicha.app.mode.Task;
+import com.naicha.app.mode.User;
+import com.naicha.app.service.TaskService;
+import com.naicha.web.vo.UserMongo;
+import com.test.MonDB;
+
+@Service
+@Transactional
+public class TaskServiceImpl implements TaskService {
+
+	@Autowired
+	private TaskDao taskDao;
+	@Autowired
+	private UserDao userDao;
+	
+	@Override
+	public Task save(Task task) {
+		return taskDao.save(task);
+	}
+
+	@Override
+	public List<Task> findByTime(Integer userId) {
+		
+		List<Object[]> objList = taskDao.findByTime(userId);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] obj : objList) {
+			Task task  = convert(obj);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+
+	@Override
+	public List<Task> findByTimeSlipeUp(String servicesTime,Integer userId) {
+		
+		List<Object[]> objList = taskDao.findByTimeSlipeUp(servicesTime,userId);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] obj : objList) {
+			Task task  = convert(obj);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+
+	private Task convert(Object[] obj){
+		Task task = new Task();
+		//t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as collectionCount
+//		    0       1      2       3        4            5           6        7       8       9            10                               11                                    
+		task.setId((Integer) obj[0]);
+		task.setUserId((Integer) obj[1]);
+		task.setTaskType((Integer) obj[2]);
+		task.setReward((Integer) obj[3]);
+		task.setServicesTime((Date) obj[4]);
+		task.setTimeLength((Integer) obj[5]);
+		task.setPublicTime((Date) obj[6]);
+		task.setNotes((String) obj[7]);
+		task.setLocation((String) obj[8]);
+		task.setHeadPicture((String) obj[9]);
+		task.setSignupCount((BigInteger) obj[10]);
+		task.setIsCollect((BigInteger) obj[11]);
+		
+		//时间的另外一种展示方法
+		String relativeToCurrentTime = getDayString((Date) obj[4]);
+		task.setRelativeToCurrentTime(relativeToCurrentTime);
+		//距离报名截止时间
+		String toClosingTime = calcDateTime((Date) obj[4]);
+		task.setRelativeToClosingTime(toClosingTime);
+		return task;
+	}
+	@SuppressWarnings("deprecation")
+	private  String getDayString(Date startDate){
+		int month = startDate.getMonth();
+		int date = startDate.getDate();
+		int hour = startDate.getHours();
+		int offSet = Calendar.getInstance().getTimeZone().getRawOffset();
+		long today = (System.currentTimeMillis()+offSet)/86400000;
+		long start = (startDate.getTime()+offSet)/86400000;
+		switch ((int)(start-today)) {
+		case -2:
+			return  "前天  "+hour+"点" ;
+		case -1:
+			return "昨天  "+hour+"点";
+		case 0:
+			return  "今天  "+hour+"点";
+		case 1:
+			return  "明天  "+hour+"点";
+		case 2:
+			return "后天  "+hour+"点";
+		default:
+			 return month+"月"+date+"日  "+hour+"点";
+		}
+	}
+	
+	private String calcDateTime(Date d) {
+		Long t = d.getTime();
+		Long now = new Date().getTime();
+		long ss = (t-now) / (1000); // 共计秒数
+		int hh = (int) ss / 3600; // 共计小时数
+		int day =hh/24;
+		int hour =hh%24;
+		if (hh > 24) {
+			return day + "天"+hour+"小时";
+		} else {
+			return hh + "小时";
+		} 
+	}
+
+	/**
+	 * 任务详情
+	 */
+	@Override
+	public Task findDetail(Integer id) {
+		Object[] obj = taskDao.findDetail(id);
+		if(obj==null){
+			return null;
+		}else{
+			Task task = convert2(obj);
+			return task;
+		}
+	}
+	
+	private Task convert2(Object[] obj){
+		Task task = new Task();
+//t.id,taskType,reward,servicesTime,timeLength, notes,t.userId,u.headPicture,u.name,u.sex,u.birthday,tu.counts as signupCount
+//	0     1       2      3            4           5      6         7           8      9       10                        11               	
+		task.setId((Integer) obj[0]);
+		task.setTaskType((Integer) obj[1]);
+		task.setReward((Integer) obj[2]);
+		task.setServicesTime((Date) obj[3]);
+		task.setTimeLength((Integer) obj[4]);
+		task.setNotes((String) obj[5]);
+		task.setUserId((Integer) obj[6]);
+		task.setHeadPicture((String) obj[7]);
+		task.setName((String) obj[8]);
+		task.setSex((Integer) obj[9]);
+		task.setAge(getAge((Date) obj[10]));
+		task.setSignupCount((BigInteger) obj[11]);
+		//时间的另外一种展示方法
+		String relativeToCurrentTime = getDayString((Date) obj[3]);
+		task.setRelativeToCurrentTime(relativeToCurrentTime);
+		//距离报名截止时间
+		String toClosingTime = calcDateTime((Date) obj[3]);
+		task.setRelativeToClosingTime(toClosingTime);
+		return task;
+	}
+	private Integer getAge(Date mydate){
+		  Date date=new Date();     
+		  long day=(date.getTime()-mydate.getTime())/(24*60*60*1000) + 1;
+		  Integer year=(int) (day/365);
+		return year;
+		}
+
+	//查找附近的奶茶（英语老师）先查找20条出来
+	@Override
+	public List<User> findTA(String jinwei) {
+		//通过mongodb查找相关
+		List<UserMongo> userMongoList =  new ArrayList<UserMongo>();
+		Integer userType = 0;//奶茶为0
+		Integer start = 0;
+		Integer end =20;
+		userMongoList = MonDB.getUserDistanceList(jinwei, userType, start, end);
+		List<Integer> userIdlist = new ArrayList<Integer>();
+		for (UserMongo userMongo : userMongoList) {
+			userIdlist.add(userMongo.get_id());
+		}
+		List<Object[]> objList = userDao.findTA(userIdlist);
+		List<User> userList = new ArrayList<User>();
+
+		userList = convert3(objList);
+		return userList;
+	}
+
+	//查找附近的奶茶（英语老师）先查找20条出来
+	@Override
+	public List<User> findTABySex(String jinwei,String sex) {
+		//通过mongodb查找相关
+		List<UserMongo> userMongoList =  new ArrayList<UserMongo>();
+		Integer userType = 0;//奶茶为0
+		Integer start = 0;
+		Integer end =20;
+		userMongoList = MonDB.getUserDistanceListBySex(jinwei, userType, Integer.parseInt(sex), start, end);
+		List<Integer> userIdlist = new ArrayList<Integer>();
+		for (UserMongo userMongo : userMongoList) {
+			userIdlist.add(userMongo.get_id());
+		}
+		List<Object[]> objList = userDao.findTA(userIdlist);
+		List<User> userList = new ArrayList<User>();
+
+		userList = convert3(objList);
+		
+		return userList;
+	}
+	
+	private List<User> convert3(List<Object[]> objList) {
+		List<User> userList = new ArrayList<User>();
+		for (Object[] obj : objList) {
+			//id,headPicture,name,sex,birthday,rank,address,profession 
+			// 0   1          2    3    4       5     6       7
+			User user =  new User();
+			user.setId((Integer) obj[0]);
+			user.setHeadPicture((String) obj[1]);
+			user.setName((String) obj[2]);
+			user.setSex((Integer) obj[3]);
+			user.setAge(getAge((Date)obj[4]));
+			user.setRank((String) obj[5]);
+			user.setAddress((String) obj[6]);
+			user.setProfession((String) obj[7]);
+			user.setServiceType((Integer) obj[8]);
+			userList.add(user);
+		}
+		return userList;
+	}
+
+	public List<User> findTAByRank(String jinwei,Integer page) {
+		//通过mongodb查找相关
+		List<UserMongo> userMongoList =  new ArrayList<UserMongo>();
+		Integer userType = 0;//奶茶为0
+		Integer pageSize = 2;
+		Integer a = (page-1)*pageSize;
+		List<Object[]> objList = userDao.findTAByRank(a,pageSize);
+		List<User> userList = new ArrayList<User>();
+
+		userList = convert3(objList);
+		return userList;
+	}
+	@Override
+	public List<Task> findByTimeByBoy(int userId) {
+		List<Object[]> objList = taskDao.findByTimeByBoy(userId);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] obj : objList) {
+			Task task  = convert(obj);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+
+	@Override
+	public List<Task> findByTimeByBoySlipeUp(String servicesTime,Integer userId) {
+		
+		List<Object[]> objList = taskDao.findByTimeByBoySlipeUp(servicesTime,userId);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] obj : objList) {
+			Task task  = convert(obj);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+	
+	@Override
+	public List<Task> findByTimeByGirl(int userId) {
+		List<Object[]> objList = taskDao.findByTimeByGirl(userId);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] obj : objList) {
+			Task task  = convert(obj);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+	
+	@Override
+	public List<Task> findByTimeByGirlSlipeUp(String servicesTime,Integer userId) {
+		
+		List<Object[]> objList = taskDao.findByTimeByGirlSlipeUp(servicesTime,userId);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] obj : objList) {
+			Task task  = convert(obj);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+}
