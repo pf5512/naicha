@@ -16,15 +16,20 @@ $(function(){
 
 	//发布任务金额设置
 	$('#setTaskReward').click(function(){
-		getHtmlData("htmlres/setTaskReward.htm");
+		getHtmlData("setTaskReward");
 		});
 	//1.4评价统计和列表
 	$('#commentList').click(function(){
-		getHtmlData("htmlres/commentList.htm");
+		getHtmlData("commentList");
 		timeType = "1";
 		currentPage = "1";
 		queryForPages();
 	});
+});
+
+//评价统计和列表
+function commentList (){
+	console.log("in commentList()");
 	//1.4.1评价统计和列表_当天
 	$('#today').click(function(){
 		timeType = "1";
@@ -96,8 +101,7 @@ $(function(){
 			$(".page_next").hide();
 		}
 	});
-
-});
+}
 
 //通过AJAX请求数据
 function queryForPages(){
@@ -150,21 +154,20 @@ function queryForPages(){
 		});
 }
 
-
-function getHtmlData(path){
-	
+//加载自定义DIV
+function getHtmlData(action) {
+	var path = "htmlres/" + action + ".htm";
+	var myfun = action + "()";//自定义函数
 	$.ajax({
-		
-		 type:'GET',
-		 url: path,
-		 ansync:false,
-	      success:function(data)		              {
-	    	  $(".col_main").html(data);
-	    	  
-	    	  $("#today").on({
-	  			click: function(){
-	  				console.log("in on click");
-	  			}
-	  			}, "a");
-		        }});
+		type : 'GET',
+		url : path,
+		success : function(data) {
+			$(".col_main").html(data);
+			eval(myfun);
+		}
+	});
+}
+
+function setTaskReward(){
+	
 }
