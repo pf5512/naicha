@@ -14,10 +14,15 @@ $(function(){
 		$(this).addClass('selected');
 	});
 
+	//任务列表
+	$('#taskList').click(function(){
+		getHtmlData("taskList");
+	});
+	
 	//发布任务金额设置
 	$('#setTaskReward').click(function(){
 		getHtmlData("setTaskReward");
-		});
+	});
 	//1.4评价统计和列表
 	$('#commentList').click(function(){
 		getHtmlData("commentList");
@@ -65,7 +70,7 @@ function commentList (){
 	//下一页
 	$(".page_next").click(function(){
 		if(totalPage==1){
-			return;
+			return false;
 		}
 		if(currentPage<totalPage){
 			currentPage++ ;
@@ -85,7 +90,7 @@ function commentList (){
 		if(currentPage>totalPage){
 			$("#errorInput").show();
 			setTimeout('$("#errorInput").hide()',3000);
-			return;
+			return false;
 		}
 		queryForPages();
 		if(currentPage==1){
@@ -169,5 +174,69 @@ function getHtmlData(action) {
 }
 
 function setTaskReward(){
-	
+	$.post("reward/getRewardList.do",
+		function(data){
+			var childhtml = '';
+			$.each(data.rewardList, function(idx, obj) {
+				var reward = obj.reward;
+				childhtml += '<tr>';
+				childhtml += '<td class="table_cell " id ="reward" style="text-align:right">'+reward+'</td>';
+				childhtml += '<td class="table_cell "><a class="btn rewardDelete" >删除</a>	</td>';
+				childhtml += '</tr>';
+			});
+			$('#rewardGroup').html(childhtml);
+			//删除
+			$('.rewardDelete').click(function(){
+				var rew = $(this).parent().prev().text();
+				 deleteByReward(rew);
+			});
+			//增加
+			$('#rewardGroupAdd').click(function(){
+				var rew = $('#rewardInput').val();
+				console.log("rewardInput : "+rew);
+				
+				addReward(rew);
+				$('#rewardInput').val('');
+			});
+		});
+}
+
+//删除奖金
+function deleteByReward(rew){
+	$.post("reward/deleteByReward.do",
+			{
+				rewardStr:rew
+			},
+			function(data){
+				console.log(JSON.stringify(data));
+				setTaskReward();
+	});
+}
+
+//增加奖金
+function addReward(rew){
+	$.post("reward/save.do",
+			{
+		rewardString:rew
+			},
+			function(data){
+				console.log(data.codes);
+				if(data.codes == -3){
+					$("#errorInput").children().text("该奖金档位已经存在");
+					$("#errorInput").show();
+					setTimeout('$("#errorInput").hide()',3000);
+					return  false;
+				}
+				
+				setTaskReward();
+			});
+}
+
+
+//任务列表
+function taskList(){
+	$('#dayselect').click(function(){
+		$('#dayselect').addClass('open');
+		$('.jsDropdownList').css({display:'block'});
+	});
 }

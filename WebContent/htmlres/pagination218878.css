@@ -223,6 +223,36 @@
     margin-right: 4px
 }
 
+.dropdown_switch label {
+    display: block;
+    cursor: pointer;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    word-wrap: normal;
+    word-break: normal;
+    margin-left: 10px;
+    margin-right: 25px;
+}
+
+.dropdown_switch .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -2.5px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: dashed;
+    border-color: transparent;
+    border-bottom-width: 0;
+    border-top-color: #c6c6c6;
+    border-top-style: solid;
+}
+
 .pagination .btn {
     min-width: 0
 }

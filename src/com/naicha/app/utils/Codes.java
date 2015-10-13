@@ -14,4 +14,5 @@ public class Codes {
 	public static final String MESSAGE_APPLY_TASK = "1";//报名的消息
 	public static final String MESSAGE_COMMENT_PAY = "2";//评论和付款
 	public static final String HOST = "http://127.0.0.1:8080/";
+	public static final String REWARD_IS_EXIST = "-3";
 }

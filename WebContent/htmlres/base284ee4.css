@@ -1,3 +1,7 @@
+.selectItem{
+	width:135px
+}
+
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
@@ -545,7 +549,7 @@ body.scaled {
 }
 
 .icon_radio {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 0 no-repeat;
+    background: url("../images/base_z284ee4.png") 0 0 no-repeat;
     width: 16px;
     height: 16px;
     vertical-align: middle;
@@ -555,15 +559,15 @@ body.scaled {
 }
 
 .icon_radio.selected, .selected .icon_radio {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -26px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -26px no-repeat
 }
 
 .icon_radio.selected.disabled, .selected.disabled .icon_radio {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -52px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -52px no-repeat
 }
 
 .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -78px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -78px no-repeat;
     width: 16px;
     height: 16px;
     vertical-align: middle;
@@ -573,15 +577,15 @@ body.scaled {
 }
 
 .icon_checkbox.selected, .selected .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -104px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -104px no-repeat
 }
 
 .icon_checkbox.disabled, .disabled .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -130px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -130px no-repeat
 }
 
 .icon_checkbox.selected.disabled, .selected.disabled .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -156px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -156px no-repeat
 }
 
 .frm_tab {
@@ -880,7 +884,8 @@ body.scaled {
 .frm_input {
     height: 22px;
     *line-height: 22px;
-    margin: 4px 0
+    margin: 4px 0;
+    float:left
 }
 
 .frm_textarea {
@@ -1230,7 +1235,7 @@ body.scaled {
 }
 
 .icon_radio {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -182px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -182px no-repeat;
     width: 16px;
     height: 16px;
     vertical-align: middle;
@@ -1238,19 +1243,19 @@ body.scaled {
 }
 
 .icon_radio.selected, .selected .icon_radio {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -208px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -208px no-repeat
 }
 
 .icon_radio.disabled, .disabled .icon_radio {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -234px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -234px no-repeat
 }
 
 .icon_radio.selected.disabled, .selected.disabled .icon_radio {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -260px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -260px no-repeat
 }
 
 .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -286px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -286px no-repeat;
     width: 16px;
     height: 16px;
     vertical-align: middle;
@@ -1258,20 +1263,20 @@ body.scaled {
 }
 
 .icon_checkbox.selected, .selected .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -312px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -312px no-repeat
 }
 
 .icon_checkbox.disabled, .disabled .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -338px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -338px no-repeat
 }
 
 .icon_checkbox.selected.disabled, .selected.disabled .icon_checkbox {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -364px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -364px no-repeat
 }
 
 .icon_search_del {
     cursor: pointer;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -390px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -390px no-repeat;
     width: 14px;
     height: 14px;
     vertical-align: middle;
@@ -1279,7 +1284,7 @@ body.scaled {
 }
 
 .icon_search_del:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -414px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -414px no-repeat
 }
 
 .frm_legend.default {
@@ -1647,6 +1652,13 @@ body.scaled {
     float: left
 }
 
+.myLi{
+	float:left
+}
+
+.global_info{
+	margin:5px
+}
 .global_mod.gap_top .gap_top_item {
     margin-top: 5px
 }
@@ -1914,7 +1926,7 @@ body.scaled {
 }
 
 .highlight_box.icon_wrap .icon.lock {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -438px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -438px no-repeat;
     width: 48px;
     height: 48px;
     vertical-align: middle;
@@ -1922,7 +1934,7 @@ body.scaled {
 }
 
 .highlight_box.icon_wrap .icon.unlock {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -496px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -496px no-repeat;
     width: 48px;
     height: 48px;
     vertical-align: middle;
@@ -2473,11 +2485,11 @@ button.btn {
 }
 
 .btn.btn_add .add_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -554px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -554px no-repeat
 }
 
 .btn.btn_disabled .add_white {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -578px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -578px no-repeat
 }
 
 .btn.btn_small {
@@ -2545,23 +2557,23 @@ button.btn {
 }
 
 .icon_msg.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -602px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -602px no-repeat
 }
 
 .icon_msg.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -668px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -668px no-repeat
 }
 
 .icon_msg.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -734px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -734px no-repeat
 }
 
 .icon_msg.mail {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -800px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -800px no-repeat
 }
 
 .icon_msg.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -866px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -866px no-repeat
 }
 
 .icon_msg.ask {
@@ -2569,7 +2581,7 @@ button.btn {
 }
 
 .icon_msg.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -932px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -932px no-repeat
 }
 
 .icon_msg_mini {
@@ -2580,23 +2592,23 @@ button.btn {
 }
 
 .icon_msg_mini.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -998px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -998px no-repeat
 }
 
 .icon_msg_mini.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1024px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1024px no-repeat
 }
 
 .icon_msg_mini.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1050px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1050px no-repeat
 }
 
 .icon_msg_mini.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1076px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1076px no-repeat
 }
 
 .icon_msg_mini.ask {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1102px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1102px no-repeat
 }
 
 .icon_msg_small {
@@ -2607,23 +2619,23 @@ button.btn {
 }
 
 .icon_msg_small.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1128px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1128px no-repeat
 }
 
 .icon_msg_small.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1170px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1170px no-repeat
 }
 
 .icon_msg_small.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1212px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1212px no-repeat
 }
 
 .icon_msg_small.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1254px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1254px no-repeat
 }
 
 .icon_msg_small.ask {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1296px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1296px no-repeat
 }
 
 .icon37_msg {
@@ -2634,27 +2646,27 @@ button.btn {
 }
 
 .icon37_msg.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1338px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1338px no-repeat
 }
 
 .icon37_msg.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1385px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1385px no-repeat
 }
 
 .icon37_msg.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1432px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1432px no-repeat
 }
 
 .icon37_msg.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1479px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1479px no-repeat
 }
 
 .icon37_msg.mail {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1526px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1526px no-repeat
 }
 
 .icon37_msg.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1573px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1573px no-repeat
 }
 
 .icon20_msg {
@@ -2665,19 +2677,19 @@ button.btn {
 }
 
 .icon20_msg.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1620px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1620px no-repeat
 }
 
 .icon20_msg.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1650px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1650px no-repeat
 }
 
 .icon20_msg.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1680px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1680px no-repeat
 }
 
 .icon20_msg.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1710px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1710px no-repeat
 }
 
 .icon18_msg {
@@ -2688,27 +2700,27 @@ button.btn {
 }
 
 .icon18_msg.ask {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1740px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1740px no-repeat
 }
 
 .icon18_msg.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1768px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1768px no-repeat
 }
 
 .icon18_msg.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1796px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1796px no-repeat
 }
 
 .icon18_msg.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1824px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1824px no-repeat
 }
 
 .icon18_msg.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1852px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1852px no-repeat
 }
 
 .icon18_msg.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1880px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1880px no-repeat
 }
 
 .page_msg .inner {
@@ -2815,27 +2827,27 @@ button.btn {
 }
 
 .icon_msg.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1908px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1908px no-repeat
 }
 
 .icon_msg.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -1964px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -1964px no-repeat
 }
 
 .icon_msg.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2020px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2020px no-repeat
 }
 
 .icon_msg.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2076px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2076px no-repeat
 }
 
 .icon_msg.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2132px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2132px no-repeat
 }
 
 .icon_msg.mail {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2188px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2188px no-repeat
 }
 
 .icon_msg_primary {
@@ -2846,23 +2858,23 @@ button.btn {
 }
 
 .icon_msg_primary.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2244px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2244px no-repeat
 }
 
 .icon_msg_primary.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2300px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2300px no-repeat
 }
 
 .icon_msg_primary.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2356px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2356px no-repeat
 }
 
 .icon_msg_primary.info {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2412px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2412px no-repeat
 }
 
 .icon_msg_primary.mail {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2468px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2468px no-repeat
 }
 
 .page_msg.mini p {
@@ -2892,11 +2904,11 @@ button.btn {
     position: absolute;
     right: 10px;
     top: 22px;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2524px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2524px no-repeat
 }
 
 .popover_close:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2550px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2550px no-repeat
 }
 
 .popover {
@@ -3081,7 +3093,7 @@ button.btn {
 }
 
 .icon_goback {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2576px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -2576px no-repeat;
     width: 26px;
     height: 26px;
     vertical-align: middle;
@@ -3091,7 +3103,7 @@ button.btn {
 }
 
 .icon_goback:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2612px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2612px no-repeat
 }
 
 .page_nav {
@@ -3133,7 +3145,7 @@ button.btn {
 }
 
 .gototop_tips {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2648px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -2648px no-repeat;
     width: 47px;
     height: 47px;
     vertical-align: middle;
@@ -3222,11 +3234,16 @@ button.btn {
     border-spacing: 0
 }
 
+.tablehalf{
+	width: 64%;
+}
+
 .table_cell {
     padding: 0;
     font-weight: 400;
     font-style: normal
 }
+
 
 .thead {
     background-color: #f4f5f9
@@ -3397,11 +3414,11 @@ button.btn {
 }
 
 .pop_closed {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2705px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2705px no-repeat
 }
 
 .pop_closed:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2731px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2731px no-repeat
 }
 
 .dialog_wrp {
@@ -3562,11 +3579,11 @@ button.btn {
 }
 
 .pop_closed {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2757px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2757px no-repeat
 }
 
 .pop_closed:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2783px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2783px no-repeat
 }
 
 .ml1e {
@@ -3872,7 +3889,7 @@ button.btn {
 }
 
 .icon20_common.add_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2809px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2809px no-repeat
 }
 
 .icon36_common {
@@ -3885,7 +3902,7 @@ button.btn {
 }
 
 .icon36_common.add_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2839px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2839px no-repeat
 }
 
 .create_access {
@@ -3957,15 +3974,15 @@ button.btn {
 }
 
 .create_access_primary:hover .icon20_common {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2885px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2885px no-repeat
 }
 
 .create_access_primary:hover .icon36_common {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2915px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2915px no-repeat
 }
 
 .create_access_primary:hover .icon42_common {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -2961px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -2961px no-repeat
 }
 
 .scale_tips {
@@ -3983,7 +4000,7 @@ button.btn {
 }
 
 .icon_scale_tips {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3013px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -3013px no-repeat;
     width: 20px;
     height: 20px;
     vertical-align: middle;
@@ -4175,7 +4192,7 @@ button.btn {
 }
 
 .icon_menu.service {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3043px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3043px no-repeat
 }
 
 .icon_menu.setting {
@@ -4235,7 +4252,7 @@ button.btn {
 }
 
 .icon_menu_switch {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3071px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -3071px no-repeat;
     width: 16px;
     height: 16px;
     vertical-align: middle;
@@ -4243,11 +4260,11 @@ button.btn {
 }
 
 .closed .icon_menu_switch {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3097px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3097px no-repeat
 }
 
 .closed.selected .icon_menu_switch {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3123px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3123px no-repeat
 }
 
 .menu_box {
@@ -4392,14 +4409,14 @@ button.btn {
     padding-left: 41px;
     width: 121px;
     margin: 0 auto;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3149px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -3149px no-repeat;
     cursor: pointer
 }
 
 .menu_plugins .btn_plugins_add:hover {
     text-decoration: none;
     color: #222;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3193px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3193px no-repeat
 }
 
 .menu_plugins .btn_plugins_add i {
@@ -4630,7 +4647,7 @@ button.btn {
 
 .icon_common.new {
     margin-left: 6px;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3237px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -3237px no-repeat;
     width: 18px;
     height: 12px;
     vertical-align: middle;
@@ -4642,7 +4659,7 @@ button.btn {
 .icon_common.beta {
     margin-top: -5px;
     margin-left: 3px;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3256px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -3256px no-repeat;
     width: 25px;
     height: 12px;
     vertical-align: middle;
@@ -4675,79 +4692,79 @@ button.btn {
 
 .icon14_common.rank_gray {
     cursor: pointer;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3279px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3279px no-repeat
 }
 
 .icon14_common.rank_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3303px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3303px no-repeat
 }
 
 .single_up .icon14_common.rank_gray, .icon14_common.rank_gray.single_up {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3327px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3327px no-repeat
 }
 
 .single_up .icon14_common.rank_gray:hover, .icon14_common.rank_gray.single_up:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3351px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3351px no-repeat
 }
 
 .single_down .icon14_common.rank_gray, .icon14_common.rank_gray.single_down {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3375px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3375px no-repeat
 }
 
 .single_down .icon14_common.rank_gray:hover, .icon14_common.rank_gray.single_down:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3399px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3399px no-repeat
 }
 
 .icon14_common.add_white {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3423px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3423px no-repeat
 }
 
 .icon14_common.add_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3447px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3447px no-repeat
 }
 
 .icon14_common.add_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3471px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3471px no-repeat
 }
 
 .icon14_common.edit_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3495px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3495px no-repeat
 }
 
 .icon14_common.edit_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3519px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3519px no-repeat
 }
 
 .icon14_common.del_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3543px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3543px no-repeat
 }
 
 .icon14_common.del_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3567px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3567px no-repeat
 }
 
 .icon14_common.sort_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3591px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3591px no-repeat
 }
 
 .icon14_common.sort_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3615px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3615px no-repeat
 }
 
 .icon14_common.add_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3639px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3639px no-repeat
 }
 
 .icon14_common.switch_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3663px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3663px no-repeat
 }
 
 .icon14_common.switch_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3687px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3687px no-repeat
 }
 
 a:hover .icon14_common.switch_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3711px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3711px no-repeat
 }
 
 .icon16_common {
@@ -4760,31 +4777,31 @@ a:hover .icon14_common.switch_gray {
 }
 
 .icon16_common.close {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3735px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3735px no-repeat
 }
 
 .icon16_common.close:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3761px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3761px no-repeat
 }
 
 .icon16_common.close_flat {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3787px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3787px no-repeat
 }
 
 .icon16_common.close_flat:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3813px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3813px no-repeat
 }
 
 .icon16_common.edit_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3839px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3839px no-repeat
 }
 
 .icon16_common.del_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3865px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3865px no-repeat
 }
 
 .icon16_common.enter_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3891px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3891px no-repeat
 }
 
 .icon16_common.enter_gray.frm_input_append {
@@ -4792,47 +4809,47 @@ a:hover .icon14_common.switch_gray {
 }
 
 .icon16_common.star_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3917px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3917px no-repeat
 }
 
 .icon16_common.star_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3942px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3942px no-repeat
 }
 
 .icon16_common.star_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3968px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3968px no-repeat
 }
 
 .icon16_common.star_orange {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -3994px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -3994px no-repeat
 }
 
 .icon16_common.star_orange:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4022px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4022px no-repeat
 }
 
 .icon16_common.woman_orange {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4048px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4048px no-repeat
 }
 
 .icon16_common.man_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4074px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4074px no-repeat
 }
 
 .icon16_common.reply_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4100px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4100px no-repeat
 }
 
 .icon16_common.reply_blue:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4126px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4126px no-repeat
 }
 
 .icon16_common.del_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4152px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4152px no-repeat
 }
 
 .icon16_common.del_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4178px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4178px no-repeat
 }
 
 .icon16_common.reply_gray {
@@ -4844,31 +4861,31 @@ a:hover .icon14_common.switch_gray {
 }
 
 .icon16_common.search_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4204px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4204px no-repeat
 }
 
 .icon16_common.sort_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4230px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4230px no-repeat
 }
 
 .icon16_common.sort_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4256px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4256px no-repeat
 }
 
 .icon16_common.add_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4282px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4282px no-repeat
 }
 
 .icon16_common.add_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4308px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4308px no-repeat
 }
 
 .icon16_common.save_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4334px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4334px no-repeat
 }
 
 .icon16_common.save_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4360px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4360px no-repeat
 }
 
 .icon18_common {
@@ -4881,163 +4898,163 @@ a:hover .icon14_common.switch_gray {
 }
 
 .icon18_common.woman_orange {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4386px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4386px no-repeat
 }
 
 .icon18_common.man_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4414px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4414px no-repeat
 }
 
 .icon18_common.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4442px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4442px no-repeat
 }
 
 .icon18_common.add_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4470px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4470px no-repeat
 }
 
 .selected .icon18_common.add_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4498px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4498px no-repeat
 }
 
 .icon18_common.add_white {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4526px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4526px no-repeat
 }
 
 .icon18_common.del_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4554px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4554px no-repeat
 }
 
 .icon18_common.del_blue:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4582px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4582px no-repeat
 }
 
 .icon18_common.del_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4610px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4610px no-repeat
 }
 
 a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4638px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4638px no-repeat
 }
 
 .icon18_common.link_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4666px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4666px no-repeat
 }
 
 .icon18_common.link_gray:hover, .hover .icon18_common.link_gray, a:hover .icon18_common.link_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4694px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4694px no-repeat
 }
 
 .icon18_common.download_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4722px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4722px no-repeat
 }
 
 .icon18_common.download_blue:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4750px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4750px no-repeat
 }
 
 .icon18_common.upload_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4778px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4778px no-repeat
 }
 
 .icon18_common.upload_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4806px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4806px no-repeat
 }
 
 .icon18_common.download_simple_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4834px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4834px no-repeat
 }
 
 .icon18_common.download_simple_gray:hover, a:hover .icon18_common.download_simple_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4862px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4862px no-repeat
 }
 
 .icon18_common.download_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4890px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4890px no-repeat
 }
 
 .icon18_common.download_gray:hover, a:hover .icon18_common.download_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4918px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4918px no-repeat
 }
 
 .icon18_common.move_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4946px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4946px no-repeat
 }
 
 .icon18_common.move_gray:hover, a:hover .icon18_common.move_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -4974px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -4974px no-repeat
 }
 
 .icon18_common.reply_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5002px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5002px no-repeat
 }
 
 .icon18_common.reply_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5030px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5030px no-repeat
 }
 
 .icon18_common.star_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5058px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5058px no-repeat
 }
 
 .icon18_common.star_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5086px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5086px no-repeat
 }
 
 .icon18_common.save_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5114px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5114px no-repeat
 }
 
 .icon18_common.save_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5142px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5142px no-repeat
 }
 
 .icon18_common.edit_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5170px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5170px no-repeat
 }
 
 .icon18_common.edit_blue:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5198px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5198px no-repeat
 }
 
 .selected .icon18_common.edit_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5226px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5226px no-repeat
 }
 
 .icon18_common.zoomout_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5254px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5254px no-repeat
 }
 
 .icon18_common.zoomout_gray:hover, a:hover .icon18_common.zoomout_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5282px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5282px no-repeat
 }
 
 .icon18_common.edit_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5310px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5310px no-repeat
 }
 
 .icon18_common.edit_gray:hover, a:hover .icon18_common.edit_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5338px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5338px no-repeat
 }
 
 .icon18_common.star_orange {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5366px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5366px no-repeat
 }
 
 .icon18_common.save_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5394px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5394px no-repeat
 }
 
 .icon18_common.save_blue:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5422px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5422px no-repeat
 }
 
 .icon18_common.qrcode_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5450px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5450px no-repeat
 }
 
 .icon18_common.qrcode_gray:hover, a:hover .icon18_common.qrcode_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5478px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5478px no-repeat
 }
 
 .icon20_common {
@@ -5050,15 +5067,15 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 }
 
 .icon20_common.reply_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5506px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5506px no-repeat
 }
 
 .icon20_common.reply_gray:hover {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5536px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5536px no-repeat
 }
 
 .icon20_common.speaker {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5566px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5566px no-repeat
 }
 
 .icon21_common {
@@ -5071,15 +5088,15 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 }
 
 .icon21_common.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5592px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5592px no-repeat
 }
 
 .icon21_common.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5623px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5623px no-repeat
 }
 
 .icon21_common.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5654px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5654px no-repeat
 }
 
 .icon22_common {
@@ -5092,19 +5109,19 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 }
 
 .icon22_common.checked {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5685px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5685px no-repeat
 }
 
 .icon22_common.error {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5717px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5717px no-repeat
 }
 
 .icon22_common.success {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5749px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5749px no-repeat
 }
 
 .icon22_common.fail {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5781px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5781px no-repeat
 }
 
 .icon24_common {
@@ -5117,7 +5134,7 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 }
 
 .icon24_common.add_gray {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5813px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5813px no-repeat
 }
 
 .icon28_common {
@@ -5130,7 +5147,7 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 }
 
 .icon28_common.upload_blue {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5847px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5847px no-repeat
 }
 
 .icon_dot {
@@ -5196,11 +5213,11 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 }
 
 .icon_mini_tips.document_link {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5885px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5885px no-repeat
 }
 
 .icon_mini_tips.ask_white {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5911px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5911px no-repeat
 }
 
 .icon_verify {
@@ -5211,15 +5228,15 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 }
 
 .icon_verify.waiting {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5937px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5937px no-repeat
 }
 
 .icon_verify.fail {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -5977px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -5977px no-repeat
 }
 
 .icon_verify_checked {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -6017px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -6017px no-repeat;
     width: 16px;
     height: 16px;
     vertical-align: middle;
@@ -5234,17 +5251,17 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 .icon_wxverify_status.name_waiting {
     width: 86px;
     height: 24px;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -6043px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -6043px no-repeat
 }
 
 .icon_wxverify_status.file_success {
     width: 96px;
     height: 24px;
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -6077px no-repeat
+    background: url("../images/base_z284ee4.png") 0 -6077px no-repeat
 }
 
 .icon_card_selected {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z284ee4.png") 0 -6111px no-repeat;
+    background: url("../images/base_z284ee4.png") 0 -6111px no-repeat;
     width: 46px;
     height: 46px;
     vertical-align: middle;
@@ -5265,4 +5282,23 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover {
 body {
     min-width: 1200px;
     background: #e7e8eb
+}
+
+.btn.dropdown_switch:hover .arrow {
+    border-top-color: #a0a0a0;
+}
+.dropdown_switch .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -2.5px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: dashed;
+    border-color: transparent;
+    border-bottom-width: 0;
+    border-top-color: #c6c6c6;
+    border-top-style: solid;
 }

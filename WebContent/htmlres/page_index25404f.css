@@ -46,20 +46,20 @@ a.icon_mpkind_label {
 }
 
 .added_message .icon_index_tap {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 0 no-repeat;
+    background: url("images/page_index_z25b76d.png") 0 0 no-repeat;
     margin-top: 8px
 }
 
 .added_fans .icon_index_tap {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 -44px no-repeat
+    background: url("images/page_index_z25b76d.png") 0 -44px no-repeat
 }
 
 .total_fans .icon_index_tap {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 -88px no-repeat
+    background: url("images/page_index_z25b76d.png") 0 -88px no-repeat
 }
 
 .total_money .icon_index_tap {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 -132px no-repeat
+    background: url("images/page_index_z25b76d.png") 0 -132px no-repeat
 }
 
 .qrcode_scan {
@@ -142,11 +142,11 @@ a.icon_mpkind_label {
 }
 
 .qrcode_scan_light .icon_qrcode_scan.succ {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 -176px no-repeat
+    background: url("images/page_index_z25b76d.png") 0 -176px no-repeat
 }
 
 .qrcode_scan_light .icon_qrcode_scan.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 -224px no-repeat
+    background: url("images/page_index_z25b76d.png") 0 -224px no-repeat
 }
 
 .qrcode_scan_dark {
@@ -174,11 +174,11 @@ a.icon_mpkind_label {
 }
 
 .qrcode_scan_dark .icon_qrcode_scan.succ {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 -272px no-repeat
+    background: url("images/page_index_z25b76d.png") 0 -272px no-repeat
 }
 
 .qrcode_scan_dark .icon_qrcode_scan.warn {
-    background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/page_index_z25b76d.png") 0 -320px no-repeat
+    background: url("images/page_index_z25b76d.png") 0 -320px no-repeat
 }
 
 .mini_tips {
