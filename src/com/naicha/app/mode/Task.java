@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.naicha.app.utils.JsonDateSerializer;
+import com.naicha.app.utils.JsonDateSerializerMMDDHHmm;
 
 @Entity
 @Table(name = "task")
@@ -55,7 +56,7 @@ public class Task implements Serializable {
 
 	@Column(name = "userId", nullable = false)
 	public Integer getUserId() {
-		return userId;
+		return userId==null? 0 : userId;
 	}
 
 	public void setUserId(Integer userId) {
@@ -64,7 +65,7 @@ public class Task implements Serializable {
 
 	@Column(name = "taskType", nullable = false)
 	public Integer getTaskType() {
-		return taskType;
+		return taskType==null? 0 : taskType;
 	}
 
 	public void setTaskType(Integer taskType) {
@@ -80,7 +81,7 @@ public class Task implements Serializable {
 		this.reward = reward;
 	}
 
-	@JsonSerialize(using=JsonDateSerializer.class) 
+	@JsonSerialize(using=JsonDateSerializerMMDDHHmm.class) 
 	@Column(name = "servicesTime", nullable = false)
 	public Date getServicesTime() {
 		return servicesTime;
@@ -99,7 +100,7 @@ public class Task implements Serializable {
 		this.timeLength = timeLength;
 	}
 
-	@JsonSerialize(using=JsonDateSerializer.class) 
+	@JsonSerialize(using=JsonDateSerializerMMDDHHmm.class) 
 	@Column(name = "publicTime", nullable = false)
 	public Date getPublicTime() {
 		return publicTime;
@@ -111,7 +112,7 @@ public class Task implements Serializable {
 
 	@Column(name = "notes")
 	public String getNotes() {
-		return notes;
+		return notes==null?"":notes;
 	}
 
 	public void setNotes(String notes) {

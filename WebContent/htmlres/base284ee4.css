@@ -1653,7 +1653,8 @@ body.scaled {
 }
 
 .myLi{
-	float:left
+	float:left;
+	margin:5px
 }
 
 .global_info{

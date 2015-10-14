@@ -309,4 +309,43 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return taskList;
 	}
+
+	@Override
+	public List<Task> findByTimeType(String timeType, String currentPage,
+			String pageSize) {
+		//分页处理
+		Integer start = (Integer.parseInt(currentPage)-1)*Integer.parseInt(pageSize);
+		Integer size = Integer.parseInt(pageSize);
+		List<Object[]> objList = taskDao.findByTimeType(timeType,start,size);
+		List<Task> taskList = new ArrayList<Task>();
+		for (Object[] objects : objList) {
+			Task task =  convert3(objects);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+	
+	private Task convert3(Object[] obj) {
+		Task task =  new Task();
+		task.setPublicTime((Date) obj[0]);//发布时间
+		task.setId((Integer) obj[1]);//任务编号
+		task.setName((String) obj[2]);//雇主名称
+		task.setServicesTime((Date) obj[3]);//服务时间
+		task.setTimeLength((Integer) obj[4]);//时长
+		task.setNotes((String) obj[5]);//备注
+		task.setStatus((Integer) obj[6]);//状态
+		task.setSignupCount((BigInteger) obj[7]);//报名人数
+		task.setReward((Integer) obj[8]);//赏金
+		return task;
+	}
+
+	@Override
+	public BigInteger findByTimeTypeCount(String timeType) {
+		return taskDao.findByTimeTypeCount(timeType);
+	}
+
+	@Override
+	public Integer toTop(String totop,String id) {
+		return taskDao.toTop(totop,id);
+	}
 }

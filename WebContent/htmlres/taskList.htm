@@ -9,19 +9,18 @@
 <div class="btn-group" style="margin:0px 20px"> 
    <button type="button" class="btn btn-default dropdown-toggle btn-sm" 
       data-toggle="dropdown" >
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp; 当天  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+        	按时间搜索 
          <span class="caret"></span>
    </button>
    <ul class="selectItem dropdown-menu" role="menu">
-      <li><a href="#">7 天之内</a></li>
+      <li><a href="javascript:void(0);" id="today">当天</a></li>
       <li class="divider"></li>
-      <li><a href="#">30天之内</a></li>
+      <li><a href="javascript:void(0);" id="thisWeek">一周之内</a></li>
       <li class="divider"></li>
-      <li><a href="#">30天以前</a></li>
+      <li><a href="javascript:void(0);" id="thisMonth">一个月之内</a></li>
    </ul>
 </div>
+
 				</li>
 				<li  class="myLi">
 				<div class="search_wrapper" id="js_search_title">
@@ -38,75 +37,92 @@
 					<span class="frm_input_box search append"> <a
 						href="javascript:void(0);" class="frm_input_append"> <i
 							class="icon16_common search_gray">搜索 </i> &nbsp;
-					</a> <input type="text" placeholder="按名称sous" value=""
+					</a> <input type="text" placeholder="按雇主名称搜索" value=""
 						class="frm_input js_search">
 					</span>
 				</div>
 				</li>
+				
 			</ul>
 		</div>
 	</div>
 	<div class="main_bd ">
 
-
-		<div class="global_info">
-
-			<span class="frm_input_box search with_del append "> <input
-				type="text" value="" class="frm_input jsSearchInput"
-				placeholder="请输入查询时间" id="rewardInput">
-			</span> <a href="javascript:;" data-y="3" class="btn btn_primary btn_add"
-				id="rewardGroupAdd"> <i class="icon14_common "></i>查询
-			</a>
-		</div>
+		<div class="table_wrp">
+		    <table class="table" id="js_single_table" cellspacing="0">
+		        <thead class="thead">
+		        <tr>
+		            <th class="table_cell rank_area tl" data-type="date">
+		                发布时间                                        <span class="icon_rank rank_area">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area" data-type="new_user">
+		                任务编号                                       <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area " data-type="cancel_user">
+		                雇主名称                                        <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area " data-type="cancel_user">
+		                赏金                                        <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area " data-type="netgain_user">
+		                服务时间                                        <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area last_child no_extra" data-type="cumulate_user">
+		                时长                                       <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area last_child no_extra" data-type="cumulate_user">
+		                备注                                      <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area last_child no_extra" data-type="cumulate_user">
+		                状态                                       <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area last_child no_extra" data-type="cumulate_user">
+		                报名人数                                      <span class="icon_rank">
+		                                        </span>
+		            </th>
+		            <th class="table_cell rank_area last_child no_extra" data-type="cumulate_user">
+		               操作                                      <span class="icon_rank">
+		                                        </span>
+		            </th>
+		        </tr>
+		        </thead>
+		        <tbody class="tbody" id="js_detail">
 		
-		<div class="global_info">
-
-			<span class="frm_input_box search with_del append "> <input
-				type="text" value="" class="frm_input jsSearchInput"
-				placeholder="请输入查询时间" id="rewardInput">
-			</span> <a href="javascript:;" data-y="3" class="btn btn_primary btn_add"
-				id="rewardGroupAdd"> <i class="icon14_common "></i>查询
-			</a>
-		</div>
-
-		<div class="search_wrapper" id="js_search_title">
-		     <span class="frm_input_box search append">
-		         <a href="javascript:void(0);" class="frm_input_append"> 
-		             <i class="icon16_common search_gray">搜索 </i> &nbsp; 
-		         </a>
-		         <input type="text" placeholder="按标题搜索" value="" class="frm_input js_search">
-		     </span>
-		 </div>
-
-
-
-		<div class="inner_container_box side_r cell_layout ">
-			<div class="inner_main">
-				<div class="bd">
-
-					<div class="table_wrp user_list">
-						<table class="table tablehalf" >
-							<tbody class="tbody" id="rewardGroup">
-								<tr>
-									<td class="table_cell " id ="reward" style="text-align:right">
-										45
-									</td>
-									<td class="table_cell ">
-										<a class="btn rewardDelete">删除</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
-				</div>
-			</div>
-
-		</div>
 		
+		        </tbody>
+		    </table>
+		  
   
-  
+<div class="turn_page tr" id="js_pagebar"><div id="wxPagebar_1443772284986" class="pagination">
+    <span class="page_nav_area">
+        <a style="display: none;" href="javascript:void(0);" class="btn page_first"></a>
+        <a style="display: none;" href="javascript:void(0);" class="btn page_prev"><i class="arrow"></i></a>
 
+            <span class="page_num">
+                <label id="currentPage">1</label>
+                <span class="num_gap">/</span>
+                <label id="totalPage">0</label>
+            </span>
+
+        <a href="javascript:void(0);" class="btn page_next"><i class="arrow"></i></a>
+        <a style="display: none;" href="javascript:void(0);" class="btn page_last"></a>
+    </span>
+
+    <span class="goto_area">
+        <input type="text">
+        <a href="javascript:void(0);" class="btn page_go">跳转</a>
+    </span>
+
+</div>
+</div>
   
 
 	</div>

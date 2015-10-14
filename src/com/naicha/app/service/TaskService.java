@@ -1,5 +1,6 @@
 package com.naicha.app.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import com.naicha.app.mode.Task;
@@ -19,4 +20,8 @@ public interface TaskService {
 	public List<User> findTABySex(String jinwei, String sex);
 	public List<User> findTAByRank(String jinwei, Integer page);
 	public List<Task> findTaskByUserId(String userIdStr);
+	public List<Task> findByTimeType(String timeType, String currentPage,
+			String pageSize);
+	public BigInteger findByTimeTypeCount(String timeType);
+	public Integer toTop(String totop, String id);
 }

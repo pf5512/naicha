@@ -1,5 +1,6 @@
 package com.naicha.web;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -392,6 +393,57 @@ public class TaskController {
 		List<Task> userList = taskservice.findTaskByUserId(userIdStr);
 			map.put("userList", userList);
 			map.put("codes", Codes.SUCCESS);
+			return map;
+	}
+	
+	/**
+	 * 管理后台
+	 * 查找当天的任务
+	 * @param timeType 1 为当天，7为一周之内，30 为一个月之内
+	 * @author yangxujia
+	 * @date 2015年10月14日上午11:13:13
+	 */
+	@RequestMapping("/findByTimeType.do")
+	@ResponseBody
+	public Map<String, Object> findByTimeType(String timeType, String currentPage, String pageSize,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(timeType)||StringTool.isEmpty(currentPage)||StringTool.isEmpty(pageSize)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//获取总条数
+		BigInteger total = taskservice.findByTimeTypeCount(timeType);
+		List<Task> taskList = taskservice.findByTimeType(timeType,currentPage,pageSize);
+		if (taskList==null||taskList.isEmpty()) {
+			map.put("codes", Codes.ERROR);
+			return map;	
+		}else{
+			map.put("total", total);
+			map.put("taskList", taskList);
+			map.put("codes", Codes.SUCCESS);
+			return map;
+		}
+	}
+	
+	/**
+	 * 置顶功能top =3
+	 * 刷新 totop =2
+	 * 显示 totop =1
+	 * 隐藏 totop =0
+	 * @author yangxujia
+	 * @date 2015年10月14日下午5:35:03
+	 */
+	@RequestMapping("/toTop.do")
+	@ResponseBody
+	public Map<String, Object> toTop(String id,String totop, HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(id)||StringTool.isEmpty(totop)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//获取总条数
+		Integer rtnCode = taskservice.toTop(totop,id);
+			map.put("codes", rtnCode);
 			return map;
 	}
 }

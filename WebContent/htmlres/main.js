@@ -2,6 +2,8 @@ var pagesi = "5";//每页行数
 var totalPage = "0";//总页数
 var currentPage = "1";//当前页
 var timeType = "1" //默认为
+	
+	//主方法
 $(function(){
 	//menu样式切换
 	$('.menu_item').click(function () {
@@ -17,6 +19,9 @@ $(function(){
 	//任务列表
 	$('#taskList').click(function(){
 		getHtmlData("taskList");
+		timeType = "1";
+		currentPage = "1";
+		getTaskList(1);
 	});
 	
 	//发布任务金额设置
@@ -34,7 +39,7 @@ $(function(){
 
 //评价统计和列表
 function commentList (){
-	console.log("in commentList()");
+	//console.log("in commentList()");
 	//1.4.1评价统计和列表_当天
 	$('#today').click(function(){
 		timeType = "1";
@@ -108,7 +113,7 @@ function commentList (){
 	});
 }
 
-//通过AJAX请求数据
+//获取评论数据
 function queryForPages(){
 	$.post("comment/getCommentNaichaByTimeType.do",
 		{
@@ -193,7 +198,7 @@ function setTaskReward(){
 			//增加
 			$('#rewardGroupAdd').click(function(){
 				var rew = $('#rewardInput').val();
-				console.log("rewardInput : "+rew);
+				//console.log("rewardInput : "+rew);
 				
 				addReward(rew);
 				$('#rewardInput').val('');
@@ -208,7 +213,7 @@ function deleteByReward(rew){
 				rewardStr:rew
 			},
 			function(data){
-				console.log(JSON.stringify(data));
+				//console.log(JSON.stringify(data));
 				setTaskReward();
 	});
 }
@@ -220,7 +225,7 @@ function addReward(rew){
 		rewardString:rew
 			},
 			function(data){
-				console.log(data.codes);
+				//console.log(data.codes);
 				if(data.codes == -3){
 					$("#errorInput").children().text("该奖金档位已经存在");
 					$("#errorInput").show();
@@ -235,8 +240,166 @@ function addReward(rew){
 
 //任务列表
 function taskList(){
-	$('#dayselect').click(function(){
-		$('#dayselect').addClass('open');
-		$('.jsDropdownList').css({display:'block'});
+	console.log("in taskList()");
+	//1.2任务统计_当天
+	$('#toTop').click(function(){
+		alert();
+		top = "3";
+		var id = $(this).parent().find('.id').text();
+		alert(id);
+		totop(top,id);
+	});
+	//1.2刷新
+	$('#refresh').click(function(){
+		timeType = "1";
+		currentPage = "1";
+		getTaskList(timeType);
+	});
+	//1.2隐藏
+	$('#hide').click(function(){
+		timeType = "1";
+		currentPage = "1";
+		getTaskList(timeType);
+	});
+	//1.2展示
+	$('#show').click(function(){
+		timeType = "1";
+		currentPage = "1";
+		getTaskList(timeType);
+	});
+	//1.2任务统计_当天
+	$('#today').click(function(){
+		timeType = "1";
+		currentPage = "1";
+		getTaskList(timeType);
+	});
+	//1.2任务统计_本周
+	$('#thisWeek').click(function(){
+		timeType = "7";
+		currentPage = "1";
+		getTaskList(timeType);
+	});
+	//1.4.1评价统计和列表_本月
+	$('#thisMonth').click(function(){
+		timeType = "30";
+		currentPage = "1";
+		getTaskList(timeType);
+	});
+	//上一页
+	$(".page_prev").click(function(){
+		if(currentPage>1){
+			currentPage-- ;
+			$(".page_prev").css({display:"inline-block"});
+			getTaskList(timeType);
+		}
+		if(currentPage==1){
+			$(".page_prev").hide();
+		}
+		if(currentPage<totalPage){
+			$(".page_next").css({display:"inline-block"});
+		}
+	});
+	//下一页
+	$(".page_next").click(function(){
+		if(totalPage==1){
+			return false;
+		}
+		if(currentPage<totalPage){
+			currentPage++ ;
+			$(".page_next").css({display:"inline-block"});
+			getTaskList(timeType);
+		}
+		if(currentPage>1){
+			$(".page_prev").css({display:"inline-block"});
+		}
+		if(currentPage==totalPage){
+			$(".page_next").hide();
+		}
+	});
+	//跳页
+	$('.page_go').click(function(){
+		currentPage = $('.goto_area').find('input').val();
+		if(currentPage>totalPage){
+			$("#errorInput").show();
+			setTimeout('$("#errorInput").hide()',3000);
+			return false;
+		}
+		getTaskList(timeType);
+		if(currentPage==1){
+			$(".page_prev").hide();
+		}
+		if(currentPage>1){
+			$(".page_prev").css({display:"inline-block"});
+		}
+		if(currentPage<totalPage){
+			$(".page_next").css({display:"inline-block"});
+		}
+		if(currentPage==totalPage){
+			$(".page_next").hide();
+		}
 	});
 }
+
+//1.2获取任务列表
+function getTaskList(timeType){
+
+	$.post("task/findByTimeType.do",
+		{
+		timeType:timeType,
+			currentPage: currentPage,
+			pageSize: pagesi
+		},
+		function(data){
+			//console.log(JSON.stringify(data));
+			var total = data.total;
+			
+			totalPage = Math.ceil(total/pagesi);//总也数
+			$('#currentPage').text(currentPage);
+			$('#totalPage').text(totalPage);
+			var childhtml = '';
+			$.each(data.taskList, function(idx, obj) {
+				var publicTime = obj.publicTime;//发布时间
+				var id =  obj.id;//任务编号
+				var name = obj.name;//雇主名称
+				var servicesTime = obj.servicesTime//服务时间
+				var timeLength = obj.timeLength;//时长
+				var notes =  obj.notes;//备注
+				var status =  obj.status;//状态
+				var signupCount = obj.signupCount;//报名人数
+				var reward = obj.reward;//报名人数
+				childhtml += '<tr>';
+				childhtml += '<td class="table_cell publicTime">'+publicTime+'</td>';
+				childhtml += '<td class="table_cell id">'+id+'</td>';
+				childhtml += '<td class="table_cell name">'+name+'</td>';
+				childhtml += '<td class="table_cell reward">'+reward+'</td>';
+				childhtml += '<td class="table_cell servicesTime">'+servicesTime+'</td>';
+				childhtml += '<td class="table_cell timeLength">'+timeLength+'</td>';
+				childhtml += '<td class="table_cell notes">'+notes+'</td>';
+				childhtml += '<td class="table_cell status">'+status+'</td>';
+				childhtml += '<td class="table_cell signupCount">'+signupCount+'</td>';
+				childhtml += '<td class="table_cell signupCount"><a id="toTop">置顶</a>&nbsp<a id="refresh">刷新</a>&nbsp<a id="hide">隐藏</a>/<a id="show">显示</a></td>';
+				childhtml += '</tr>';
+			});
+			$('#js_detail').html(childhtml);
+		});
+}
+
+//1.2 置顶，刷新，隐藏，显示
+function totop(top,id){
+	$.post("task/toTop.do",
+			{
+			totop:top,
+			id:id
+			},
+			function(data){
+				if(data.codes == -3){
+					$("#errorInput").children().text("该奖金档位已经存在");
+					$("#errorInput").show();
+					setTimeout('$("#errorInput").hide()',3000);
+					return  false;
+				}
+				setTaskReward();
+			});
+}
+
+

@@ -1,7 +1,9 @@
 package com.naicha.app.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
@@ -17,7 +19,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
 	 		+ "task t  left join user u on t.userId=u.id  			"
 	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
-	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now() 	 "
+	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now() and  and toTop > 0 	 "
 	 		+ "order by servicesTime asc;")
 	public List<Object[]>findByTime(Integer userId);
 	
@@ -98,4 +100,20 @@ public interface TaskDao extends Repository<Task, Integer> {
 			+ "FROM task t LEFT JOIN ( SELECT taskId, count(userId) counts FROM apply GROUP BY taskId ) tu ON tu.taskId = t.id "
 			+ "WHERE userId = ?1 ORDER BY servicesTime ASC ")
 	public List<Object[]> findTaskByUserId(String userIdStr);
+	
+	@Query(nativeQuery=true,value="select t.publicTime, t.id, u.name, t.servicesTime , t.timeLength , t.notes,t.status , case when tu.counts is null then 0 ELSE tu.counts end as signupCount ,t.reward " 
+			+ "from 	task t  left join user u on t.userId=u.id  left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id " 
+			+ "where  DATE_SUB(CURDATE(), INTERVAL ?1 DAY) < date(publicTime)	 and toTop > 0 "
+			+ "order by toTop desc, servicesTime asc limit ?2,?3  ")
+	public List<Object[]> findByTimeType(String timeType, Integer start, Integer size);
+	
+	//计算总条数
+	@Query(nativeQuery=true,value="select count(1) " 
+			+ "from 	task t  left join user u on t.userId=u.id  left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id " 
+			+ "where  DATE_SUB(CURDATE(), INTERVAL ?1 DAY) < date(publicTime)	 and toTop > 0  ")
+	public BigInteger findByTimeTypeCount(String timeType);
+	
+	@Modifying
+	@Query(nativeQuery=true,value="update task set toTop = ?1 where id=?2 " )
+	public Integer toTop(String toTop,String id);
 }
