@@ -1,5 +1,5 @@
 .selectItem{
-	width:135px
+	min-width: 130px
 }
 
 html {
