@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+   <script type="text/javascript" src="htmlres/main.js"></script>
+</head>
+<body>
+
+<div class="main_hd">
+    <h2>任务统计</h2>
+    <div class="title_tab" id="js_topTab"><ul class="tab_navs title_tab" data-index="0">
+        <li id="today" data-index="0" class="tab_nav first js_top selected" data-id="user_stat"><a href="javascript:void(0)">当天</a></li>
+        <li id="thisWeek" data-index="1" class="tab_nav  js_top" data-id="user_attr"><a href="javascript:void(0)">本周</a></li>
+        <li id="thisMonth" data-index="1" class="tab_nav  js_top" data-id="user_attr"><a href="javascript:void(0)">本月</a></li>
+    </ul>
+    </div>
+</div>
+
+<div class="index_show_area">
+    <div class="index_tap total">
+        <ul class="inner">
+            <li class="index_tap_item total_fans extra">
+                <a href="javascript:void(0)">
+                <span class="tap_inner">
+                    <i class="icon_index_tap"></i>
+                    <em class="number" id="total">0</em>
+                    <strong class="title">评价数</strong>
+                </span>
+                </a>
+            </li>
+        </ul        >
+    </div>
+    <div class="index_tap added">
+        <ul class="inner">
+            <li class="grid_item size1of3 index_tap_item ">
+                <a href="javascript:void(0)">
+                <span class="tap_inner">
+                    <i class="icon_index_tap"></i>
+                    <em class="number" id="good">0</em>
+                    <strong class="title">好评</strong>
+                </span>
+                </a>
+            </li>
+            <li class="grid_item size1of3  index_tap_item ">
+                <a href="javascript:void(0)">
+                            <span class="tap_inner no_extra">
+                    <i class="icon_index_tap"></i>
+                    <em class="number" id="middle">0</em>
+                    <strong class="title">一般</strong>
+                                    </span>
+                </a>
+            </li>
+            <li class="grid_item size1of3 no_extra index_tap_item ">
+                <a href="javascript:void(0)">
+                            <span class="tap_inner no_extra">
+                    <i class="icon_index_tap"></i>
+                    <em class="number" id="bad">0</em>
+                    <strong class="title">差评</strong>
+                                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>&nbsp;
+</div>
+
+
+<div class="table_wrp">
+<canvas id="myChart" width="400" height="400"></canvas>
+
+    <table class="table" id="js_single_table" cellspacing="0">
+        <thead class="thead">
+        <tr>
+            <th class="table_cell rank_area tl" data-type="date">
+                评价时间                                        <span class="icon_rank rank_area">
+                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
+                                        </span>
+            </th>
+            <th class="table_cell rank_area" data-type="new_user">
+                总体评价                                        <span class="icon_rank">
+                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
+                                        </span>
+            </th>
+            <th class="table_cell rank_area " data-type="cancel_user">
+                评价内容                                        <span class="icon_rank">
+                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
+                                        </span>
+            </th>
+            <th class="table_cell rank_area " data-type="netgain_user">
+                奶茶名称                                        <span class="icon_rank">
+                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
+                                        </span>
+            </th>
+            <th class="table_cell rank_area last_child no_extra" data-type="cumulate_user">
+                雇主名称                                        <span class="icon_rank">
+                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
+                                        </span>
+            </th>
+        </tr>
+        </thead>
+        <tbody class="tbody" id="js_detail">
+
+
+        </tbody>
+    </table>
+
+    <table class="table" id="js_compare_table" style="display: none;" cellspacing="0">
+        <thead class="thead">
+        <tr>
+            <th class="table_cell rank_area tl">
+                序号                                    </th>
+            <th class="table_cell rank_area tl">
+                时间                                    </th>
+            <th class="table_cell rank_area tr">
+                新关注人数                                    </th>
+            <th class="table_cell rank_area tr">
+                取消关注人数                                    </th>
+            <th class="table_cell rank_area tr">
+                净增关注人数                                    </th>
+            <th class="table_cell tr rank_area last_child no_extra">
+                累积关注人数                                    </th>
+
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div>
+
+<div class="turn_page tr" id="js_pagebar"><div id="wxPagebar_1443772284986" class="pagination">
+    <span class="page_nav_area">
+        <a style="display: none;" href="javascript:void(0);" class="btn page_first"></a>
+        <a style="display: none;" href="javascript:void(0);" class="btn page_prev"><i class="arrow"></i></a>
+
+            <span class="page_num">
+                <label id="currentPage">1</label>
+                <span class="num_gap">/</span>
+                <label id="totalPage">3</label>
+            </span>
+
+        <a href="javascript:void(0);" class="btn page_next"><i class="arrow"></i></a>
+        <a style="display: none;" href="javascript:void(0);" class="btn page_last"></a>
+    </span>
+
+    <span class="goto_area">
+        <input type="text">
+        <a href="javascript:void(0);" class="btn page_go">跳转</a>
+    </span>
+
+</div>
+</div>
+
+
+</body>
+</html>

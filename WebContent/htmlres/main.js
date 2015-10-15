@@ -17,7 +17,14 @@ $(function(){
 		$(this).addClass('selected');
 	});
 
-	//任务列表
+	//1.1任务统计
+	$('#taskTongji').click(function(){
+		getHtmlData("commentList");
+		timeType = "1";
+		currentPage = "1";
+		queryForPages();
+	});
+	//1.2任务列表
 	$('#taskList').click(function(){
 		getHtmlData("taskList");
 		timeType = "1";
@@ -25,7 +32,7 @@ $(function(){
 		getTaskList(1);
 	});
 	
-	//发布任务金额设置
+	//1.3发布任务金额设置
 	$('#setTaskReward').click(function(){
 		getHtmlData("setTaskReward");
 	});
@@ -642,4 +649,8 @@ function getTaskListbyName(name){
 			return false;
 		}
 	});
+}
+
+function taskTongji(){
+	
 }
