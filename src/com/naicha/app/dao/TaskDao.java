@@ -101,19 +101,38 @@ public interface TaskDao extends Repository<Task, Integer> {
 			+ "WHERE userId = ?1 ORDER BY servicesTime ASC ")
 	public List<Object[]> findTaskByUserId(String userIdStr);
 	
-	@Query(nativeQuery=true,value="select t.publicTime, t.id, u.name, t.servicesTime , t.timeLength , t.notes,t.status , case when tu.counts is null then 0 ELSE tu.counts end as signupCount ,t.reward " 
+	//管理后台
+	@Query(nativeQuery=true,value="select t.publicTime, t.id, u.name, t.servicesTime , t.timeLength , t.notes,t.status , case when tu.counts is null then 0 ELSE tu.counts end as signupCount ,t.reward ,t.toTop " 
 			+ "from 	task t  left join user u on t.userId=u.id  left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id " 
-			+ "where  DATE_SUB(CURDATE(), INTERVAL ?1 DAY) < date(publicTime)	 and toTop > 0 "
+			+ "where  DATE_SUB(CURDATE(), INTERVAL ?1 DAY) < date(publicTime)	  "
 			+ "order by toTop desc, servicesTime asc limit ?2,?3  ")
 	public List<Object[]> findByTimeType(String timeType, Integer start, Integer size);
 	
 	//计算总条数
 	@Query(nativeQuery=true,value="select count(1) " 
 			+ "from 	task t  left join user u on t.userId=u.id  left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id " 
-			+ "where  DATE_SUB(CURDATE(), INTERVAL ?1 DAY) < date(publicTime)	 and toTop > 0  ")
+			+ "where  DATE_SUB(CURDATE(), INTERVAL ?1 DAY) < date(publicTime) ")
 	public BigInteger findByTimeTypeCount(String timeType);
 	
 	@Modifying
 	@Query(nativeQuery=true,value="update task set toTop = ?1 where id=?2 " )
 	public Integer toTop(String toTop,String id);
+	
+	/**
+	 * 根据id查找单条数据
+	 * @author yangxujia
+	 * @date 2015年10月15日上午11:12:37
+	 */
+	@Query(nativeQuery=true,value="select t.publicTime, t.id, u.name, t.servicesTime , t.timeLength , t.notes,t.status , case when tu.counts is null then 0 ELSE tu.counts end as signupCount ,t.reward ,t.toTop "
+			+ "from 	task t  left join user u on t.userId=u.id  left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id  WHERE t.id = ?1 " )
+	public List<Object[]> findByTaskId(String taskId);
+	
+	/**
+	 * 根据名字查找
+	 * @author yangxujia
+	 * @date 2015年10月15日上午11:12:37
+	 */
+	@Query(nativeQuery=true,value="select t.publicTime, t.id, u.name, t.servicesTime , t.timeLength , t.notes,t.status , case when tu.counts is null then 0 ELSE tu.counts end as signupCount ,t.reward ,t.toTop "
+			+ "from task t  left join user u on t.userId=u.id  left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id  WHERE u.name like ?1 " )
+	public List<Object[]> findByName(String name);
 }

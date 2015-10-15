@@ -336,6 +336,7 @@ public class TaskServiceImpl implements TaskService {
 		task.setStatus((Integer) obj[6]);//状态
 		task.setSignupCount((BigInteger) obj[7]);//报名人数
 		task.setReward((Integer) obj[8]);//赏金
+		task.setTotop((Integer) obj[9]);
 		return task;
 	}
 
@@ -347,5 +348,27 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Integer toTop(String totop,String id) {
 		return taskDao.toTop(totop,id);
+	}
+
+	@Override
+	public List<Task> findByTaskId(String taskId) {
+		List<Object[]> objList = taskDao.findByTaskId(taskId);
+		List<Task> taskList = new ArrayList<Task>();
+		for (Object[] objects : objList) {
+			Task task =  convert3(objects);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+
+	@Override
+	public List<Task> findByName(String name) {
+		List<Object[]> objList = taskDao.findByName("%"+name+"%");
+		List<Task> taskList = new ArrayList<Task>();
+		for (Object[] objects : objList) {
+			Task task =  convert3(objects);
+			taskList.add(task);
+		}
+		return taskList;
 	}
 }

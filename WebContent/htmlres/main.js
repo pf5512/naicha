@@ -11,6 +11,7 @@ $(function(){
 		$(this).addClass('selected');
 	});
 
+	//当天本周，本月切换方法
 	$('.js_top').click(function () {
 		$('.js_top').removeClass('selected');
 		$(this).addClass('selected');
@@ -122,6 +123,9 @@ function queryForPages(){
 			pageSize: pagesi
 		},
 		function(data){
+			if(data.codes!=1){
+				return false;
+			}
 			//console.log(JSON.stringify(data));
 			var good = data.countList[0].count;
 			var middle = data.countList[1].count;
@@ -181,6 +185,9 @@ function getHtmlData(action) {
 function setTaskReward(){
 	$.post("reward/getRewardList.do",
 		function(data){
+			if(data.codes!=1){
+				return false;
+			}
 			var childhtml = '';
 			$.each(data.rewardList, function(idx, obj) {
 				var reward = obj.reward;
@@ -238,53 +245,45 @@ function addReward(rew){
 }
 
 
-//任务列表
+//1.2任务列表
 function taskList(){
 	console.log("in taskList()");
-	//1.2任务统计_当天
-	$('#toTop').click(function(){
-		alert();
-		top = "3";
-		var id = $(this).parent().find('.id').text();
-		alert(id);
-		totop(top,id);
-	});
-	//1.2刷新
-	$('#refresh').click(function(){
-		timeType = "1";
-		currentPage = "1";
-		getTaskList(timeType);
-	});
-	//1.2隐藏
-	$('#hide').click(function(){
-		timeType = "1";
-		currentPage = "1";
-		getTaskList(timeType);
-	});
-	//1.2展示
-	$('#show').click(function(){
-		timeType = "1";
-		currentPage = "1";
-		getTaskList(timeType);
-	});
 	//1.2任务统计_当天
 	$('#today').click(function(){
 		timeType = "1";
 		currentPage = "1";
 		getTaskList(timeType);
+		$('#js_pagebar').show();
 	});
 	//1.2任务统计_本周
 	$('#thisWeek').click(function(){
 		timeType = "7";
 		currentPage = "1";
 		getTaskList(timeType);
+		$('#js_pagebar').show();
 	});
-	//1.4.1评价统计和列表_本月
+	//1.2评价统计和列表_本月
 	$('#thisMonth').click(function(){
 		timeType = "30";
 		currentPage = "1";
 		getTaskList(timeType);
+		$('#js_pagebar').show();
 	});
+	//1.2按任务id进行查询
+	$('#searchByTaskId').click(function(){
+		var taskId = $('#searchByTaskId').next().val();
+		console.log("taskId : "+taskId);
+		getTaskListbyTaskId(taskId);
+		$('#js_pagebar').hide();
+	});
+	//1.4.1按雇主名称进行查询
+	$('#searchByName').click(function(){
+		var name = $('#searchByName').next().val();
+		console.log("name : "+name);
+		getTaskListbyName(name);
+		$('#js_pagebar').hide();
+	});
+	
 	//上一页
 	$(".page_prev").click(function(){
 		if(currentPage>1){
@@ -340,7 +339,7 @@ function taskList(){
 	});
 }
 
-//1.2获取任务列表
+//1.2 通过时间获取任务列表
 function getTaskList(timeType){
 
 	$.post("task/findByTimeType.do",
@@ -350,7 +349,10 @@ function getTaskList(timeType){
 			pageSize: pagesi
 		},
 		function(data){
-			//console.log(JSON.stringify(data));
+			console.log(JSON.stringify(data));
+			if(data.codes!=1){
+				return false;
+			}
 			var total = data.total;
 			
 			totalPage = Math.ceil(total/pagesi);//总也数
@@ -367,39 +369,277 @@ function getTaskList(timeType){
 				var status =  obj.status;//状态
 				var signupCount = obj.signupCount;//报名人数
 				var reward = obj.reward;//报名人数
-				childhtml += '<tr>';
-				childhtml += '<td class="table_cell publicTime">'+publicTime+'</td>';
-				childhtml += '<td class="table_cell id">'+id+'</td>';
-				childhtml += '<td class="table_cell name">'+name+'</td>';
-				childhtml += '<td class="table_cell reward">'+reward+'</td>';
-				childhtml += '<td class="table_cell servicesTime">'+servicesTime+'</td>';
-				childhtml += '<td class="table_cell timeLength">'+timeLength+'</td>';
-				childhtml += '<td class="table_cell notes">'+notes+'</td>';
-				childhtml += '<td class="table_cell status">'+status+'</td>';
-				childhtml += '<td class="table_cell signupCount">'+signupCount+'</td>';
-				childhtml += '<td class="table_cell signupCount"><a id="toTop">置顶</a>&nbsp<a id="refresh">刷新</a>&nbsp<a id="hide">隐藏</a>/<a id="show">显示</a></td>';
-				childhtml += '</tr>';
+				var totop =  '';//置顶情况
+				switch(obj.totop){
+				case 3:
+					totop = '已置顶';
+					break;
+				case 2:
+					totop = '已刷新';
+					break;
+				case 0:
+					totop = '已隐藏';
+					break;
+				default:
+					break;
+				}
+				childhtml += '<tr>'
+				+ '<td class="table_cell publicTime">'+publicTime+'</td>'
+				+ '<td class="table_cell id">'+id+'</td>'
+				+ '<td class="table_cell name">'+name+'</td>'
+				+ '<td class="table_cell reward">'+reward+'</td>'
+				+ '<td class="table_cell servicesTime">'+servicesTime+'</td>'
+				+ '<td class="table_cell timeLength">'+timeLength+'</td>'
+				+ '<td class="table_cell notes">'+notes+'</td>'
+				+ '<td class="table_cell status">'+status+'</td>'
+				+ '<td class="table_cell signupCount">'+signupCount+'</td>'
+				+ '<td class="table_cell totop">' +totop+'</td>'//置顶结果
+				+ '<td class="table_cell opera">'
+					+ '<a href="javascript:void(0)" class="js_toTop">置顶</a>&nbsp'
+					+ '<a href="javascript:void(0)" class="js_refresh">刷新</a>&nbsp'
+					+ '<a href="javascript:void(0)" class="js_hide">隐藏</a>/'
+					+ '<a href="javascript:void(0)" class="js_show">显示</a>'
+				+ '</td>'
+				+ '</tr>';
 			});
 			$('#js_detail').html(childhtml);
+			//1.2任务统计_置顶
+			$('.js_toTop').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				console.log("id input : "+id);
+				totop(3,id);
+				getTaskList(timeType);
+			});
+			//1.2刷新
+			$('.js_refresh').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				console.log("id input : "+id);
+				totop(2,id);
+				getTaskList(timeType);
+			});
+			//1.2显示
+			$('.js_show').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				console.log("id input : "+id);
+				totop(1,id);
+				getTaskList(timeType);
+			});
+			//1.2隐藏
+			$('.js_hide').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				console.log("id input : "+id);
+				totop(0,id);
+				getTaskList(timeType);
+			});
 		});
 }
 
 //1.2 置顶，刷新，隐藏，显示
 function totop(top,id){
-	$.post("task/toTop.do",
-			{
-			totop:top,
-			id:id
-			},
-			function(data){
-				if(data.codes == -3){
-					$("#errorInput").children().text("该奖金档位已经存在");
-					$("#errorInput").show();
-					setTimeout('$("#errorInput").hide()',3000);
-					return  false;
-				}
-				setTaskReward();
-			});
+	console.log("top_id"+top+"_"+id);
+	$.ajax({
+		type:'post',
+		url:'task/toTop.do',
+		data:{totop:top, id:id},
+		dataType:'json',
+		async:false,
+		success: function(data){
+			console.log(JSON.stringify(data));
+			if(data.codes!=1){
+				return false;
+			}
+			if(data.codes == -3){
+				$("#errorInput").children().text("该奖金档位已经存在");
+				$("#errorInput").show();
+				setTimeout('$("#errorInput").hide()',3000);
+				return  false;
+			}
+			return false;
+		}
+	});
 }
 
+function getTaskListbyTaskId(taskId){
+	$.ajax({
+		type: 'POST',
+		url: 'task/findByTaskId.do',
+		data: {taskId:taskId},
+		dataType: 'json',
+		success: function(data){
+			console.log(JSON.stringify(data));
+			if(data.codes!=1){
+				return false;
+			}
+			var total = data.total;
+			
+			totalPage = 1;//总也数
+			$('#currentPage').text(currentPage);
+			$('#totalPage').text(totalPage);
+			var childhtml = '';
+			$.each(data.taskList, function(idx, obj) {
+				var publicTime = obj.publicTime;//发布时间
+				var id =  obj.id;//任务编号
+				var name = obj.name;//雇主名称
+				var servicesTime = obj.servicesTime//服务时间
+				var timeLength = obj.timeLength;//时长
+				var notes =  obj.notes;//备注
+				var status =  obj.status;//状态
+				var signupCount = obj.signupCount;//报名人数
+				var reward = obj.reward;//报名人数
+				var totop =  '';//置顶情况
+				switch(obj.totop){
+				case 3:
+					totop = '已置顶';
+					break;
+				case 2:
+					totop = '已刷新';
+					break;
+				case 0:
+					totop = '已隐藏';
+					break;
+				default:
+					break;
+				}
+				childhtml += '<tr>'
+				+ '<td class="table_cell publicTime">'+publicTime+'</td>'
+				+ '<td class="table_cell id">'+id+'</td>'
+				+ '<td class="table_cell name">'+name+'</td>'
+				+ '<td class="table_cell reward">'+reward+'</td>'
+				+ '<td class="table_cell servicesTime">'+servicesTime+'</td>'
+				+ '<td class="table_cell timeLength">'+timeLength+'</td>'
+				+ '<td class="table_cell notes">'+notes+'</td>'
+				+ '<td class="table_cell status">'+status+'</td>'
+				+ '<td class="table_cell signupCount">'+signupCount+'</td>'
+				+ '<td class="table_cell totop">' +totop+'</td>'//置顶结果
+				+ '<td class="table_cell opera">'
+					+ '<a href="javascript:void(0)" class="js_toTop">置顶</a>&nbsp'
+					+ '<a href="javascript:void(0)" class="js_refresh">刷新</a>&nbsp'
+					+ '<a href="javascript:void(0)" class="js_hide">隐藏</a>/'
+					+ '<a href="javascript:void(0)" class="js_show">显示</a>'
+				+ '</td>'
+				+ '</tr>';
+			});
+			$('#js_detail').html(childhtml);
+			//1.2任务统计_置顶
+			$('.js_toTop').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				totop(3,id);
+				getTaskListbyTaskId(taskId);
+				console.log("id: "+id);
+				console.log("taskId: "+taskId);
+			});
+			//1.2刷新
+			$('.js_refresh').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				console.log("id input : "+id);
+				totop(2,id);
+				getTaskListbyTaskId(taskId);
+			});
+			//1.2显示
+			$('.js_show').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				console.log("id input : "+id);
+				totop(1,id);
+				getTaskListbyTaskId(taskId);
+			});
+			//1.2隐藏
+			$('.js_hide').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				console.log("id input : "+id);
+				totop(0,id);
+				getTaskListbyTaskId(taskId);
+			});
+			return false;
+		}
+	});
+}
 
+function getTaskListbyName(name){
+	$.ajax({
+		type: 'POST',
+		url: 'task/findByName.do',
+		data: {name:name},
+		dataType: 'json',
+		success: function(data){
+			console.log(JSON.stringify(data));
+			if(data.codes!=1){
+				return false;
+			}
+			var total = data.total;
+			
+			totalPage = 1;//总也数
+			$('#currentPage').text(currentPage);
+			$('#totalPage').text(totalPage);
+			var childhtml = '';
+			$.each(data.taskList, function(idx, obj) {
+				var publicTime = obj.publicTime;//发布时间
+				var id =  obj.id;//任务编号
+				var name = obj.name;//雇主名称
+				var servicesTime = obj.servicesTime//服务时间
+				var timeLength = obj.timeLength;//时长
+				var notes =  obj.notes;//备注
+				var status =  obj.status;//状态
+				var signupCount = obj.signupCount;//报名人数
+				var reward = obj.reward;//报名人数
+				var totop =  '';//置顶情况
+				switch(obj.totop){
+				case 3:
+					totop = '已置顶';
+					break;
+				case 2:
+					totop = '已刷新';
+					break;
+				case 0:
+					totop = '已隐藏';
+					break;
+				default:
+					break;
+				}
+				childhtml += '<tr>'
+				+ '<td class="table_cell publicTime">'+publicTime+'</td>'
+				+ '<td class="table_cell id">'+id+'</td>'
+				+ '<td class="table_cell name">'+name+'</td>'
+				+ '<td class="table_cell reward">'+reward+'</td>'
+				+ '<td class="table_cell servicesTime">'+servicesTime+'</td>'
+				+ '<td class="table_cell timeLength">'+timeLength+'</td>'
+				+ '<td class="table_cell notes">'+notes+'</td>'
+				+ '<td class="table_cell status">'+status+'</td>'
+				+ '<td class="table_cell signupCount">'+signupCount+'</td>'
+				+ '<td class="table_cell totop">' +totop+'</td>'//置顶结果
+				+ '<td class="table_cell opera">'
+					+ '<a href="javascript:void(0)" class="js_toTop">置顶</a>&nbsp'
+					+ '<a href="javascript:void(0)" class="js_refresh">刷新</a>&nbsp'
+					+ '<a href="javascript:void(0)" class="js_hide">隐藏</a>/'
+					+ '<a href="javascript:void(0)" class="js_show">显示</a>'
+				+ '</td>'
+				+ '</tr>';
+			});
+			$('#js_detail').html(childhtml);
+			//1.2任务统计_置顶
+			$('.js_toTop').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				totop(3,id);
+				getTaskListbyName(name);
+			});
+			//1.2刷新
+			$('.js_refresh').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				totop(2,id);
+				getTaskListbyName(name);
+			});
+			//1.2显示
+			$('.js_show').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				totop(1,id);
+				getTaskListbyName(name);
+			});
+			//1.2隐藏
+			$('.js_hide').click(function(){
+				var id = $(this).parent().parent().find('.id').text();
+				totop(0,id);
+				getTaskListbyName(name);
+			});
+			return false;
+		}
+	});
+}

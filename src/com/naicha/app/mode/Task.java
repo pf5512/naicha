@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.lucene.search.TopDocs;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.naicha.app.utils.JsonDateSerializer;
 import com.naicha.app.utils.JsonDateSerializerMMDDHHmm;
@@ -42,6 +44,7 @@ public class Task implements Serializable {
 	private String name;
 	private Integer sex;
 	private Integer age;
+	private Integer totop;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -207,5 +210,14 @@ public class Task implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	@Transient
+	public Integer getTotop() {
+		return totop==null?0:totop;
+	}
+
+	public void setTotop(Integer totop) {
+		this.totop = totop;
 	}
 }

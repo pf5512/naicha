@@ -446,4 +446,54 @@ public class TaskController {
 			map.put("codes", rtnCode);
 			return map;
 	}
+	
+	/**
+	 * 管理后台
+	 * 按任务编号查询
+	 * @author yangxujia
+	 * @date 2015年10月14日上午11:13:13
+	 */
+	@RequestMapping("/findByTaskId.do")
+	@ResponseBody
+	public Map<String, Object> findByTaskId(String taskId,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(taskId)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//由于前端显示需要，这里采用List存一条数据
+		List<Task> taskList = taskservice.findByTaskId(taskId);
+		if (taskList==null||taskList.isEmpty()) {
+			map.put("codes", Codes.ERROR);
+			return map;	
+		}else{
+			map.put("taskList", taskList);
+			map.put("codes", Codes.SUCCESS);
+			return map;
+		}
+	}
+	/**
+	 * 管理后台
+	 * 按雇主名称进行搜索
+	 * @author yangxujia
+	 * @date 2015年10月14日上午11:13:13
+	 */
+	@RequestMapping("/findByName.do")
+	@ResponseBody
+	public Map<String, Object> findByName(String name,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(name)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		List<Task> taskList = taskservice.findByName(name);
+		if (taskList==null||taskList.isEmpty()) {
+			map.put("codes", Codes.ERROR);
+			return map;	
+		}else{
+			map.put("taskList", taskList);
+			map.put("codes", Codes.SUCCESS);
+			return map;
+		}
+	}
 }

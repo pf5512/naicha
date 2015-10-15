@@ -24,4 +24,6 @@ public interface TaskService {
 			String pageSize);
 	public BigInteger findByTimeTypeCount(String timeType);
 	public Integer toTop(String totop, String id);
+	public List<Task> findByTaskId(String taskId);
+	public List<Task> findByName(String name);
 }
