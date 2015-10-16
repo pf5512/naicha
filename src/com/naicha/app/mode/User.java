@@ -53,7 +53,7 @@ public class User implements Serializable {
 
 	@Column(name = "headPicture", nullable = false)
 	public String getHeadPicture() {
-		return headPicture;
+		return headPicture==null?"":headPicture;
 	}
 
 	public void setHeadPicture(String headPicture) {
@@ -63,7 +63,7 @@ public class User implements Serializable {
 
 	@Column(name = "name", nullable = false)
 	public String getName() {
-		return name;
+		return name==null?"":name;
 	}
 
 	public void setName(String name) {
@@ -72,7 +72,7 @@ public class User implements Serializable {
 
 	@Column(name = "age", nullable = false)
 	public Integer getAge() {
-		return age;
+		return age==null?0:age;
 	}
 
 	public void setAge(Integer age) {
@@ -81,7 +81,7 @@ public class User implements Serializable {
 
 	@Column(name = "profession", nullable = false)
 	public String getProfession() {
-		return profession;
+		return profession==null?"":profession;
 	}
 
 	public void setProfession(String profession) {
@@ -90,7 +90,7 @@ public class User implements Serializable {
 
 	@Column(name = "address", nullable = false)
 	public String getAddress() {
-		return address;
+		return address==null?"":address;
 	}
 
 	public void setAddress(String address) {
@@ -100,7 +100,7 @@ public class User implements Serializable {
 
 	@Column(name = "phone", nullable = false)
 	public String getPhone() {
-		return phone;
+		return phone==null?"":phone;
 	}
 
 	public void setPhone(String phone) {
@@ -109,7 +109,7 @@ public class User implements Serializable {
 
 	@Column(name = "userType", nullable = false)
 	public Integer getUserType() {
-		return userType;
+		return userType==null?-1:userType;
 	}
 
 	public void setUserType(Integer userType) {
@@ -136,7 +136,7 @@ public class User implements Serializable {
 
 	@Column(name = "rank", nullable = false)
 	public String getRank() {
-		return rank;
+		return rank==null?"":rank;
 	}
 
 	public void setRank(String rank) {
@@ -145,7 +145,7 @@ public class User implements Serializable {
 
 	@Column(name = "naichaNo", nullable = false)
 	public String getNaichaNo() {
-		return naichaNo;
+		return naichaNo==null?"":naichaNo;
 	}
 
 	public void setNaichaNo(String naichaNo) {
@@ -154,7 +154,7 @@ public class User implements Serializable {
 
 	@Column(name = "perSignature", nullable = false)
 	public String getPerSignature() {
-		return perSignature;
+		return perSignature==null?"":perSignature;
 	}
 
 	public void setPerSignature(String perSignature) {
@@ -163,7 +163,7 @@ public class User implements Serializable {
 
 	@Column(name = "password", nullable = false)
 	public String getPassword() {
-		return password;
+		return password==null?"":password;
 	}
 
 	public void setPassword(String password) {
@@ -172,7 +172,7 @@ public class User implements Serializable {
 
 	@Column(name = "sex", nullable = false)
 	public Integer getSex() {
-		return sex;
+		return sex==null?-1:sex;
 	}
 
 	public void setSex(Integer sex) {
@@ -190,7 +190,7 @@ public class User implements Serializable {
 
 	@Column(name = "weiXinNo", nullable = false)
 	public String getWeiXinNo() {
-		return weiXinNo;
+		return weiXinNo==null?"":weiXinNo;
 	}
 
 	public void setWeiXinNo(String weiXinNo) {
@@ -199,7 +199,7 @@ public class User implements Serializable {
 
 	@Column(name = "jinwei", nullable = false)
 	public String getJinwei() {
-		return jinwei;
+		return jinwei==null?"22.523893,113.909704":jinwei;
 	}
 
 	public void setJinwei(String jinwei) {
@@ -208,7 +208,7 @@ public class User implements Serializable {
 	
 	@Column(name = "geohashCode", nullable = false)
 	public String getGeohashCode() {
-		return geohashCode;
+		return geohashCode==null?"":geohashCode;
 	}
 
 	public void setGeohashCode(String geohashCode) {
@@ -217,7 +217,7 @@ public class User implements Serializable {
 
 	@Column(name = "serviceType", nullable = false)
 	public Integer getServiceType() {
-		return serviceType;
+		return serviceType==null?0:serviceType;
 	}
 
 	public void setServiceType(Integer serviceType) {

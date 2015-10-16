@@ -52,7 +52,7 @@ public class Send {
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
 //    	String phoneString = "18060481475";
-    	String phoneString = "13538140693";
+    	String phoneString = "15059106845";
     	String PostData = "sname=DL-wangjf&spwd=wangjf12&scorpid=&sprdid=1012818&sdst="+phoneString+"&smsg="+java.net.URLEncoder.encode("您的验证码是：5756。请不要把验证码泄露给其他人。【微网通联】","utf-8");
         String ret =Send.SMS(PostData, "http://cf.lmobile.cn/submitdata/Service.asmx/g_Submit");
         System.out.println(ret);

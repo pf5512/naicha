@@ -77,7 +77,7 @@ public class Task implements Serializable {
 
 	@Column(name = "reward", nullable = false)
 	public Integer getReward() {
-		return reward;
+		return reward==null?0:reward;
 	}
 
 	public void setReward(Integer reward) {
@@ -96,7 +96,7 @@ public class Task implements Serializable {
 
 	@Column(name = "timeLength", nullable = false)
 	public Integer getTimeLength() {
-		return timeLength;
+		return timeLength==null?0:timeLength;
 	}
 
 	public void setTimeLength(Integer timeLength) {

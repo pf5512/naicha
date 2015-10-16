@@ -14,7 +14,6 @@ import javax.persistence.Table;
 @Table(name = "pictures")
 public class Pictures implements Serializable {
 
-
 	/**
 	 * @author yangxujia
 	 * @date 2015年9月12日下午4:57:37
@@ -40,7 +39,7 @@ public class Pictures implements Serializable {
 
 	@Column(name = "path", nullable = false)
 	public String getPath() {
-		return path;
+		return path==null?"":path;
 	}
 
 	public void setPath(String path) {

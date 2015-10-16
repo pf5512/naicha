@@ -30,7 +30,7 @@ public class Praise {
 
 	@Column(name = "friendCircleId",  nullable = false)
 	public Integer getFriendCircleId() {
-		return friendCircleId;
+		return friendCircleId==null?-1:friendCircleId;
 	}
 
 	public void setFriendCircleId(Integer friendCircleId) {
@@ -39,7 +39,7 @@ public class Praise {
 
 	@Column(name = "toPraiseUserId")
 	public Integer getToPraiseUserId() {
-		return toPraiseUserId;
+		return toPraiseUserId==null?-1:toPraiseUserId;
 	}
 
 	public void setToPraiseUserId(Integer toPraiseUserId) {
@@ -47,7 +47,7 @@ public class Praise {
 	}
 
 	public Integer getIsPraise() {
-		return isPraise;
+		return isPraise==null?0:isPraise;
 	}
 
 	public void setIsPraise(Integer isPraise) {

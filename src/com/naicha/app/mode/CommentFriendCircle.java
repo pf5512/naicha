@@ -31,7 +31,7 @@ public class CommentFriendCircle {
 
 	@Column(name = "content", nullable = false)
 	public String getContent() {
-		return content;
+		return content==null?"":content;
 	}
 
 	public void setContent(String content) {

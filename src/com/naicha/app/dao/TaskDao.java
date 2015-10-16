@@ -19,7 +19,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
 	 		+ "task t  left join user u on t.userId=u.id  			"
 	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
-	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now() and  and toTop > 0 	 "
+	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now() and  t.toTop > 0 	 "
 	 		+ "order by servicesTime asc;")
 	public List<Object[]>findByTime(Integer userId);
 	

@@ -32,7 +32,7 @@ public class CommentNaicha {
 
 	@Column(name = "rank", nullable = false)
 	public Integer getRank() {
-		return rank;
+		return rank==null?0:rank;
 	}
 
 	public void setRank(Integer rank) {
@@ -41,7 +41,7 @@ public class CommentNaicha {
 
 	@Column(name = "content", nullable = false)
 	public String getContent() {
-		return content;
+		return content==null?"":content;
 	}
 
 	public void setContent(String content) {

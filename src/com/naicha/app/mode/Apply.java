@@ -38,7 +38,7 @@ public class Apply implements Serializable{
 	
 	@Column(name = "taskId", nullable = false)
 	public Integer getTaskId() {
-		return taskId;
+		return taskId==null?0:taskId;
 	}
 	public void setTaskId(Integer taskId) {
 		this.taskId = taskId;
@@ -54,7 +54,7 @@ public class Apply implements Serializable{
 	
 	@Column(name = "state", nullable = false)
 	public Integer getState() {
-		return state;
+		return state==null?0:state;
 	}
 	public void setState(Integer state) {
 		this.state = state;

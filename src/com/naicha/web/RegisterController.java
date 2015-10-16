@@ -1,5 +1,6 @@
 package com.naicha.web;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.ConvertMD5;
 import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.SMSAPI;
+import com.naicha.app.utils.Send;
 import com.naicha.app.utils.StringTool;
 import com.naicha.web.vo.RespUser;
 import com.test.MonDB;
@@ -108,14 +110,13 @@ public class RegisterController {
 			return map;
 		}
 //			Start 2015-09-09 
-//			String validateCode = getValidateCode();//生成验证码
-//			//发送验证码
-//			System.out.println("validateCode:  "+validateCode);
-//			boolean retcode =  send(phone,validateCode);
+			String validateCode = getValidateCode();//生成验证码
+			//发送验证码
+			System.out.println("validateCode:  "+validateCode);
+			boolean retcode =  send(phone,validateCode);
 //			end 2015-09-09
-//		         鉴于目前未开通短信功能,先写死
-			String validateCode ="0755";
-			boolean retcode = true;
+//			String validateCode ="0755";
+//			boolean retcode = true;
 //			鉴于目前未开通短信功能,先写死
 			if(retcode){
 				HttpSession session = request.getSession();
@@ -128,26 +129,41 @@ public class RegisterController {
 			}
 	}
 	//发送验证码
-	private boolean send(String phone, String validateCode) {
-		SMSAPI api = new SMSAPI();
-        String httpResponse =  api.testSend(phone,validateCode);
-         try {
-            JSONObject jsonObj = new JSONObject( httpResponse );
-            int error_code = jsonObj.getInt("error");
-            String error_msg = jsonObj.getString("msg");
-            if(error_code==0){
-                System.out.println("Send message success.");
-                return true;
-            }else{
-                System.out.println("Send message failed,code is "+error_code+",msg is "+error_msg);
-                return false;
-            }
-        } catch (JSONException ex) {
-            Logger.getLogger(TestSMSAPI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		return false;
-	}
+//	private boolean send2(String phone, String validateCode) {
+//		SMSAPI api = new SMSAPI();
+//        String httpResponse =  api.testSend(phone,validateCode);
+//         try {
+//            JSONObject jsonObj = new JSONObject( httpResponse );
+//            int error_code = jsonObj.getInt("error");
+//            String error_msg = jsonObj.getString("msg");
+//            if(error_code==0){
+//                System.out.println("Send message success.");
+//                return true;
+//            }else{
+//                System.out.println("Send message failed,code is "+error_code+",msg is "+error_msg);
+//                return false;
+//            }
+//        } catch (JSONException ex) {
+//            Logger.getLogger(TestSMSAPI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//		return false;
+//	}
 
+	private boolean send(String phoneString, String validateCode){
+//		String phoneString = "15059106845";
+    	String PostData = null;
+		try {
+			PostData = "sname=DL-wangjf&spwd=wangjf12&scorpid=&sprdid=1012818&sdst="+phoneString+"&smsg="+java.net.URLEncoder.encode("您的验证码是："+validateCode+"。请不要把验证码泄露给其他人。【微网通联】","utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        String ret =Send.SMS(PostData, "http://cf.lmobile.cn/submitdata/Service.asmx/g_Submit");
+        System.out.println(ret);
+        System.out.println(phoneString);
+        return true;
+	}
+	
 	//随机生成四位验证码算法
 	private String getValidateCode() {
 		// 等确定后再调用

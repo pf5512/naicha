@@ -29,7 +29,7 @@ public class Reward {
 
 	@Column(name = "reward", nullable = false)
 	public Integer getReward() {
-		return reward;
+		return reward==null?0:reward;
 	}
 
 	public void setReward(Integer reward) {

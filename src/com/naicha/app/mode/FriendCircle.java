@@ -48,7 +48,7 @@ public class FriendCircle implements Serializable {
 
 	@Column(name = "location", nullable = false)
 	public String getLocation() {
-		return location;
+		return location==null?"":location;
 	}
 
 	public void setLocation(String location) {
@@ -57,7 +57,7 @@ public class FriendCircle implements Serializable {
 	
 	@Column(name = "jinwei", nullable = false)
 	public String getJinwei() {
-		return jinwei;
+		return jinwei==null?"":jinwei;
 	}
 
 	public void setJinwei(String jinwei) {
@@ -66,7 +66,7 @@ public class FriendCircle implements Serializable {
 	
 	@Column(name = "content", nullable = false)
 	public String getContent() {
-		return content;
+		return content==null?"":content;
 	}
 
 	public void setContent(String content) {
