@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.hibernate.dialect.Ingres10Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -390,8 +388,8 @@ public class TaskController {
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
-		List<Task> userList = taskservice.findTaskByUserId(userIdStr);
-			map.put("userList", userList);
+		List<Task> taskList = taskservice.findTaskByUserId(userIdStr);
+			map.put("taskList", taskList);
 			map.put("codes", Codes.SUCCESS);
 			return map;
 	}
@@ -495,5 +493,33 @@ public class TaskController {
 			map.put("codes", Codes.SUCCESS);
 			return map;
 		}
+	}
+	
+	/**
+	 * 奶茶，我参与的任务:已中标
+	 * @author yangxujia
+	 * @date 2015年10月17日下午4:02:11
+	 */
+	@RequestMapping("/alreadyZhongbiao.do")
+	@ResponseBody
+	public Map<String, Object> alreadyZhongbiao(String userIdStr,String token,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
+			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//2.校验token
+		MemCached cached =  MemCached.getInstance();
+		String tokenOld = (String)cached.get(userIdStr);
+		if(!token.equals(tokenOld)){
+			map.put("msg", "token 过期！");
+			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		//我参与的任务
+		List<Task> taskList = taskservice.alreadyZhongbiao(userIdStr);
+			map.put("taskList", taskList);
+			map.put("codes", Codes.SUCCESS);
+			return map;
 	}
 }

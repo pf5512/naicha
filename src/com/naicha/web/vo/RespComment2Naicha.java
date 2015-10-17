@@ -13,7 +13,7 @@ public class RespComment2Naicha {
 	private Date time;
 
 	public Integer getRank() {
-		return rank;
+		return rank==null?0:rank;
 	}
 
 	public void setRank(Integer rank) {
@@ -21,7 +21,7 @@ public class RespComment2Naicha {
 	}
 
 	public String getContent() {
-		return content;
+		return content==null?"":content;
 	}
 
 	public void setContent(String content) {
@@ -38,7 +38,7 @@ public class RespComment2Naicha {
 	}
 
 	public String getBeCommentName() {
-		return beCommentName;
+		return beCommentName==null?"":beCommentName;
 	}
 
 	public void setBeCommentName(String beCommentName) {
@@ -46,7 +46,7 @@ public class RespComment2Naicha {
 	}
 
 	public String getToCommentName() {
-		return toCommentName;
+		return toCommentName==null?"":toCommentName;
 	}
 
 	public void setToCommentName(String toCommentName) {

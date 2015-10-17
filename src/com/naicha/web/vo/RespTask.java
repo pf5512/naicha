@@ -22,7 +22,7 @@ public class RespTask {
 	private Date birthday;
 	
 	public String getHeadPicture() {
-		return headPicture;
+		return headPicture==null?"":headPicture;
 	}
 	
 	public void setHeadPicture(String headPicture) {
@@ -30,7 +30,7 @@ public class RespTask {
 	}
 	
 	public String getName() {
-		return name;
+		return name==null?"":name;
 	}
 
 	public void setName(String name) {
@@ -38,7 +38,7 @@ public class RespTask {
 	}
 
 	public String getAge() {
-		return age;
+		return age==null?"18":age;
 	}
 
 	public void setAge(String age) {
@@ -46,7 +46,7 @@ public class RespTask {
 	}
 
 	public String getProfession() {
-		return profession;
+		return profession==null?"":profession;
 	}
 
 	public void setProfession(String profession) {
@@ -54,7 +54,7 @@ public class RespTask {
 	}
 
 	public String getAddress() {
-		return address;
+		return address==null?"":address;
 	}
 
 	public void setAddress(String address) {
@@ -62,7 +62,7 @@ public class RespTask {
 	}
 
 	public String getPhone() {
-		return phone;
+		return phone==null?"":phone;
 	}
 
 	public void setPhone(String phone) {
@@ -70,7 +70,7 @@ public class RespTask {
 	}
 
 	public String getUserType() {
-		return userType;
+		return userType==null?"-1":userType;
 	}
 
 	public void setUserType(String userType) {
@@ -78,7 +78,7 @@ public class RespTask {
 	}
 
 	public String getNaichaNo() {
-		return naichaNo;
+		return naichaNo==null?"":naichaNo;
 	}
 
 	public void setNaichaNo(String naichaNo) {
@@ -86,7 +86,7 @@ public class RespTask {
 	}
 
 	public String getPerSignature() {
-		return perSignature;
+		return perSignature==null?"":perSignature;
 	}
 
 	public void setPerSignature(String perSignature) {
@@ -94,7 +94,7 @@ public class RespTask {
 	}
 
 	public Integer getSex() {
-		return sex;
+		return sex==null?-1:sex;
 	}
 
 	public void setSex(Integer sex) {
@@ -119,7 +119,7 @@ public class RespTask {
 	}
 
 	public String getWeixinNo() {
-		return weixinNo;
+		return weixinNo==null?"":getWeixinNo();
 	}
 
 	public void setWeixinNo(String weixinNo) {

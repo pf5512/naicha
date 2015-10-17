@@ -133,4 +133,8 @@ public interface UserDao extends Repository<User, Integer> {
 
 	@Query(nativeQuery=true,value="SELECT headPicture, name,age,profession,address,phone,userType,regitsterTime,naichaNo,perSignature,password FROM user where id=?1 limit 1")
 	public Object[] findById(int userId);
+
+	@Modifying
+	@Query(nativeQuery=true,value="update user set password=?2 where phone=?1")
+	public Integer updatePasswordByPhone(String phone, String password);
 }

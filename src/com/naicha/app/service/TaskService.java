@@ -26,4 +26,5 @@ public interface TaskService {
 	public Integer toTop(String totop, String id);
 	public List<Task> findByTaskId(String taskId);
 	public List<Task> findByName(String name);
+	public List<Task> alreadyZhongbiao(String userIdStr);
 }

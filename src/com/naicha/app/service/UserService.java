@@ -94,4 +94,6 @@ public interface UserService {
 	public Integer updatePhone(Integer userId, String phone);
 
 	public User findById(int userId);
+
+	public Integer updatePasswordByPhone(String phone, String password);
 }

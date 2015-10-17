@@ -22,37 +22,37 @@ public class RespFriendCircle {
 	private List<Praise> praiseList;
 	private List<CommentFriendCircle> commentFriendCircleList;
 	public String getHeadPicture() {
-		return headPicture;
+		return headPicture==null?"":headPicture;
 	}
 	public void setHeadPicture(String headPicture) {
 		this.headPicture = headPicture;
 	}
 	public String getName() {
-		return name;
+		return name==null?"":name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
 	public Integer getSex() {
-		return sex;
+		return sex==null?-1:sex;
 	}
 	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 	public String getAddress() {
-		return address;
+		return address==null?"":address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
 	public String getContent() {
-		return content;
+		return content==null?"":content;
 	}
 	public void setContent(String content) {
 		this.content = content;
 	}
 	public String getTime() {
-		return time;
+		return time==null?"":time;
 	}
 	public void setTime(String time) {
 		this.time = time;
@@ -83,7 +83,7 @@ public class RespFriendCircle {
 		this.commentFriendCircleList = commentFriendCircleList;
 	}
 	public Double getDistance() {
-		return distance;
+		return distance==null?0:distance;
 	}
 	public void setDistance(Double distance) {
 		this.distance = distance;

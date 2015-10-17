@@ -30,7 +30,7 @@ public class RespUser {
 	private String	distance;
 	
 	public String getHeadPicture() {
-		return headPicture;
+		return headPicture==null?"":headPicture;
 	}
 	
 	public void setHeadPicture(String headPicture) {
@@ -38,7 +38,7 @@ public class RespUser {
 	}
 	
 	public String getName() {
-		return name;
+		return name==null?"":name;
 	}
 
 	public void setName(String name) {
@@ -46,7 +46,7 @@ public class RespUser {
 	}
 
 	public String getAge() {
-		return age;
+		return age==null?"18":age;
 	}
 
 	public void setAge(String age) {
@@ -54,7 +54,7 @@ public class RespUser {
 	}
 
 	public String getProfession() {
-		return profession;
+		return profession==null?"":profession;
 	}
 
 	public void setProfession(String profession) {
@@ -62,7 +62,7 @@ public class RespUser {
 	}
 
 	public String getAddress() {
-		return address;
+		return address==null?"":address;
 	}
 
 	public void setAddress(String address) {
@@ -70,7 +70,7 @@ public class RespUser {
 	}
 
 	public String getPhone() {
-		return phone;
+		return phone==null?"":phone;
 	}
 
 	public void setPhone(String phone) {
@@ -78,7 +78,7 @@ public class RespUser {
 	}
 
 	public String getUserType() {
-		return userType;
+		return userType==null?"-1":userType;
 	}
 
 	public void setUserType(String userType) {
@@ -86,7 +86,7 @@ public class RespUser {
 	}
 
 	public String getNaichaNo() {
-		return naichaNo;
+		return naichaNo==null?"":naichaNo;
 	}
 
 	public void setNaichaNo(String naichaNo) {
@@ -94,7 +94,7 @@ public class RespUser {
 	}
 
 	public String getPerSignature() {
-		return perSignature;
+		return perSignature==null?"":perSignature;
 	}
 
 	public void setPerSignature(String perSignature) {
@@ -102,7 +102,7 @@ public class RespUser {
 	}
 
 	public Integer getSex() {
-		return sex;
+		return sex==null?-1:sex;
 	}
 
 	public void setSex(Integer sex) {
@@ -143,7 +143,7 @@ public class RespUser {
 	}
 
 	public String getRank() {
-		return rank;
+		return rank==null?"":rank;
 	}
 
 	public void setRank(String rank) {
@@ -151,7 +151,7 @@ public class RespUser {
 	}
 
 	public Integer getServiceType() {
-		return serviceType;
+		return serviceType==null?-1:serviceType;
 	}
 
 	public void setServiceType(Integer serviceType) {
@@ -183,7 +183,7 @@ public class RespUser {
 	}
 
 	public String getDistance() {
-		return distance;
+		return distance==null?"":distance;
 	}
 
 	public void setDistance(String distance) {

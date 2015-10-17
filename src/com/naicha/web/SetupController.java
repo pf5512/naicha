@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.naicha.app.mode.User;
 import com.naicha.app.service.UserService;
 import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.ConvertMD5;
@@ -380,7 +379,7 @@ public class SetupController {
 				}
 				/* 保存文件 */
 				FileUtils.copyInputStreamToFile(file.getInputStream(),	new File(picPath, pictureName));
-				BufferedImage image = ImageIO.read(file.getInputStream());
+				ImageIO.read(file.getInputStream());
 				pictureName = "identify/"+pictureName;
 				if(pics==""){
 					pics=pictureName;

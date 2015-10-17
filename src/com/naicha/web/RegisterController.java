@@ -7,15 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +22,10 @@ import com.naicha.app.service.UserService;
 import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.ConvertMD5;
 import com.naicha.app.utils.MemCached;
-import com.naicha.app.utils.SMSAPI;
 import com.naicha.app.utils.Send;
 import com.naicha.app.utils.StringTool;
 import com.naicha.web.vo.RespUser;
 import com.test.MonDB;
-import com.test.TestSMSAPI;
 
 @Controller
 @RequestMapping("/register")
@@ -298,15 +292,14 @@ public class RegisterController {
 	 */
 	@RequestMapping("reSetPassword.do")
 	@ResponseBody
-	public Map<String, Object> reSetPassword(String userIdStr,String phone,String validateCode,String password,
+	public Map<String, Object> reSetPassword(String phone,String validateCode,String password,
 			HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(phone)||StringTool.isEmpty(validateCode)||StringTool.isEmpty(password)) {
+		if (StringTool.isEmpty(phone)||StringTool.isEmpty(validateCode)||StringTool.isEmpty(password)) {
 			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			map.put("msg", "参数不能为空");
 			return map;
 		}
-		Integer userId = Integer.parseInt(userIdStr);
 		//检查手机号码是否存在
 		Boolean isExist = userService.isExistFindByPhone(phone);
 		if (!isExist) {
@@ -328,7 +321,7 @@ public class RegisterController {
 			//重置密码
 			ConvertMD5 md5 = new ConvertMD5();
 			password = md5.getMD5ofStr(password);
-			Integer retCode = userService.updatePassword(userId,password);
+			Integer retCode = userService.updatePasswordByPhone(phone,password);
 			if (retCode==1) {
 				map.put("code", Codes.SUCCESS);
 				return map;

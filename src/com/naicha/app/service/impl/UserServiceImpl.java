@@ -286,6 +286,12 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Override
+	public Integer updatePasswordByPhone(String phone, String password) {
+		Integer retCode = userDao.updatePasswordByPhone(phone,password);
+		return retCode;
+	}
+
 
 
 }

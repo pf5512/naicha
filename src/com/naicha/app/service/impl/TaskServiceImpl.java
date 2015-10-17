@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.naicha.app.dao.ApplyDao;
 import com.naicha.app.dao.TaskDao;
 import com.naicha.app.dao.UserDao;
 import com.naicha.app.mode.Task;
@@ -27,6 +28,8 @@ public class TaskServiceImpl implements TaskService {
 	private TaskDao taskDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private ApplyDao applyDao;
 	
 	@Override
 	public Task save(Task task) {
@@ -367,6 +370,29 @@ public class TaskServiceImpl implements TaskService {
 		List<Task> taskList = new ArrayList<Task>();
 		for (Object[] objects : objList) {
 			Task task =  convert3(objects);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+
+	/**
+	 * 查找已中标的任务
+	 */
+	@Override
+	public List<Task> alreadyZhongbiao(String userIdStr) {
+		List<Object[]> objList = applyDao.alreadyZhongbiao(userIdStr);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] objects : objList) {
+			Task task =  new Task();
+			//u.headPicture, t.userId,t.id,t.taskType,t.reward,t.timeLength,t.servicesTime
+			//0                   1      2     3         4        5            6
+			task.setHeadPicture((String) objects[0]);
+			task.setUserId((Integer) objects[1]);
+			task.setId((Integer) objects[2]);
+			task.setTaskType((Integer) objects[3]);
+			task.setReward((Integer) objects[4]);
+			task.setTimeLength((Integer) objects[5]);
+			task.setRelativeToCurrentTime(CalcDate.getDayString((Date) objects[6]));
 			taskList.add(task);
 		}
 		return taskList;

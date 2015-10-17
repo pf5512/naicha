@@ -1,6 +1,6 @@
 package com.naicha.app.dao;
 
-import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +21,7 @@ public interface ApplyDao extends Repository<Apply, Integer>{
 	@Query(nativeQuery=true,value=""
 			+ "update apply set state=1, updateTime=now() where taskId=?1 and userId=?2 ")
 	public Integer updateState( int taskId,int userId);
+	
+	@Query(nativeQuery=true,value="select u.headPicture, t.userId,t.id,t.taskType,t.reward,t.timeLength,t.servicesTime from apply a left join   task t on t.id = a.taskId LEFT JOIN user u  on  u.id=t.userId  where a.userId = ?1 and  a.state= 2 and t.servicesTime > NOW() ")
+	public List<Object[]> alreadyZhongbiao(String userId);
 }

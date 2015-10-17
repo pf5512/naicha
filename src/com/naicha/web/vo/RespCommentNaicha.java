@@ -11,7 +11,7 @@ public class RespCommentNaicha {
 	private String name;
 
 	public Integer getRank() {
-		return rank;
+		return rank==null?-1:rank;
 	}
 
 	public void setRank(Integer rank) {
@@ -19,7 +19,7 @@ public class RespCommentNaicha {
 	}
 
 	public String getContent() {
-		return content;
+		return content==null?"":content;
 	}
 
 	public void setContent(String content) {
@@ -51,7 +51,7 @@ public class RespCommentNaicha {
 	}
 
 	public String getName() {
-		return name;
+		return name==null?"":name;
 	}
 
 	public void setName(String name) {
