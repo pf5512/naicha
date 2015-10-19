@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.naicha.app.mode.User;
 import com.naicha.app.service.UserService;
 import com.naicha.app.utils.Codes;
 import com.naicha.app.utils.ConvertMD5;
@@ -152,6 +153,20 @@ public class SetupController {
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		//查看是否已设置奶茶号
+		User user1 = userService.findById(userId);
+		if (!"".equals(user1.getNaichaNo())) {
+			map.put("msg", "奶茶号只能设置一次");
+			map.put("code", Codes.ERROR);
+			return map;
+		}
+		//检查奶茶号是否存在
+		User user =  userService.findByNaichaNo(naichaNo);
+		if(user!=null){
+			map.put("msg", "奶茶号已存在");
+			map.put("code", Codes.ERROR);
 			return map;
 		}
 		Integer updateOrNot = userService.updateNaichaNo(naichaNo, userId);

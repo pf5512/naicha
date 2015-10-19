@@ -16,7 +16,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月22日上午10:01:55
 	 */
-	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,(case when tu.counts is null then 0 else tu.counts end) signupCount ,  (case when c.counts is null then 0 else c.counts end) isCollected from "
 	 		+ "task t  left join user u on t.userId=u.id  			"
 	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
 	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now() and  t.toTop > 0 	 "
@@ -29,7 +29,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月17日下午3:07:15
 	 */
-	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,(case when tu.counts is null then 0 else tu.counts end) signupCount ,  (case when c.counts is null then 0 else c.counts end) isCollected from "
 	 		+ "task t  left join user u on t.userId=u.id  			"
 	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
 	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?2  GROUP BY taskId) c on c.taskId=t.id where servicesTime > ?1 	 "
@@ -52,7 +52,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月22日上午10:04:55
 	 */
-	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	 @Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,(case when tu.counts is null then 0 else tu.counts end) signupCount ,  (case when c.counts is null then 0 else c.counts end) isCollected from "
 		 		+ "task t  left join user u on t.userId=u.id  			"
 		 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
 		 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now()  and u.sex=1	 "
@@ -65,7 +65,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月22日上午10:04:55
 	 */
-	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,(case when tu.counts is null then 0 else tu.counts end) signupCount ,  (case when c.counts is null then 0 else c.counts end) isCollected from "
 	 		+ "task t  left join user u on t.userId=u.id  			"
 	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
 	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?2  GROUP BY taskId) c on c.taskId=t.id where servicesTime > ?1 and sex=1	 "
@@ -76,7 +76,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月22日上午10:05:33
 	 */
-	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,(case when tu.counts is null then 0 else tu.counts end) signupCount ,  (case when c.counts is null then 0 else c.counts end) isCollected from "
 	 		+ "task t  left join user u on t.userId=u.id  			"
 	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
 	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id where servicesTime >= now()  and u.sex=0	 "
@@ -89,7 +89,7 @@ public interface TaskDao extends Repository<Task, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月22日上午10:04:55
 	 */
-	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,tu.counts as signupCount , c.counts as isCollected from "
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture,(case when tu.counts is null then 0 else tu.counts end) signupCount ,  (case when c.counts is null then 0 else c.counts end) isCollected from "
 	 		+ "task t  left join user u on t.userId=u.id  			"
 	 		+ "left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id 		 "
 	 		+ "LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?2  GROUP BY taskId) c on c.taskId=t.id where servicesTime > ?1 and u.sex=0 "

@@ -397,4 +397,69 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return taskList;
 	}
+	
+	//已完成
+	@Override
+	public List<Task> alreadyFinish(String userIdStr) {
+		List<Object[]> objList = applyDao.alreadyFinish(userIdStr);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] objects : objList) {
+			Task task =  new Task();
+			//u.headPicture, t.userId,t.id,t.taskType,t.reward,t.timeLength,t.servicesTime
+			//0                   1      2     3         4        5            6
+			task.setHeadPicture((String) objects[0]);
+			task.setUserId((Integer) objects[1]);
+			task.setId((Integer) objects[2]);
+			task.setTaskType((Integer) objects[3]);
+			task.setReward((Integer) objects[4]);
+			task.setTimeLength((Integer) objects[5]);
+			task.setRelativeToCurrentTime(CalcDate.getDayString((Date) objects[6]));
+			taskList.add(task);
+		}
+		return taskList;
+	}
+
+	//已报名
+	@Override
+	public List<Task> alreadySignUp(String userIdStr) {
+		List<Object[]> objList = applyDao.alreadySignUp(userIdStr);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] objects : objList) {
+			Task task =  new Task();
+			//u.headPicture, t.userId,t.id,t.taskType,t.reward,t.timeLength,t.servicesTime
+			//0                   1      2     3         4        5            6
+			task.setHeadPicture((String) objects[0]);
+			task.setUserId((Integer) objects[1]);
+			task.setId((Integer) objects[2]);
+			task.setTaskType((Integer) objects[3]);
+			task.setReward((Integer) objects[4]);
+			task.setTimeLength((Integer) objects[5]);
+			task.setRelativeToCurrentTime(CalcDate.getDayString((Date) objects[6]));
+			task.setSignupCount((BigInteger) objects[7]);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+	
+	//已收藏
+	@Override
+	public List<Task> alreadyCollected(String userIdStr) {
+		List<Object[]> objList = applyDao.alreadyCollected(userIdStr);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] objects : objList) {
+			Task task =  new Task();
+			//u.headPicture, t.userId,t.id,t.taskType,t.reward,t.timeLength,t.servicesTime
+			//0                   1      2     3         4        5            6
+			task.setHeadPicture((String) objects[0]);
+			task.setUserId((Integer) objects[1]);
+			task.setId((Integer) objects[2]);
+			task.setTaskType((Integer) objects[3]);
+			task.setReward((Integer) objects[4]);
+			task.setTimeLength((Integer) objects[5]);
+			task.setRelativeToCurrentTime(CalcDate.getDayString((Date) objects[6]));
+			task.setSignupCount((BigInteger) objects[7]);
+			taskList.add(task);
+		}
+		return taskList;
+	}
 }

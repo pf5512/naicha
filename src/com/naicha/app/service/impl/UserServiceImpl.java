@@ -113,6 +113,9 @@ public class UserServiceImpl implements UserService {
 		user.setPerSignature((String) objects[9]);
 		user.setPassword((String) objects[10]);
 		user.setId((Integer)objects[11]);
+		user.setSex((Integer) objects[12]);
+		user.setBirthday((Date) objects[13]);
+		user.setWeiXinNo((String) objects[14]);
 		return user;
 	}
 	
@@ -137,6 +140,10 @@ public class UserServiceImpl implements UserService {
 		user.setNaichaNo((String) objects[8]);
 		user.setPerSignature((String) objects[9]);
 		user.setPassword((String) objects[10]);
+		user.setId((Integer)objects[11]);
+		user.setSex((Integer) objects[12]);
+		user.setBirthday((Date) objects[13]);
+		user.setWeiXinNo((String) objects[14]);
 		return user;
 	}
 

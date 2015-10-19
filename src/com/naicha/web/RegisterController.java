@@ -66,7 +66,7 @@ public class RegisterController {
 				+ validateCode);
 		// session.removeAttribute("code");//取完后去掉session
 		if (!code2.equals(validateCode)) {
-			map.put("message", "验证码不正确");
+			map.put("msg", "验证码不正确");
 			return map;
 		} else {
 			//2、保存数据
@@ -221,7 +221,7 @@ public class RegisterController {
 		System.out.println("------------------validateCode------"+ validateCode);
 		// session.removeAttribute("code");//取完后去掉session
 		if (code2==null||!code2.equals(validateCode)) {
-			map.put("message", "验证码不正确");
+			map.put("msg", "验证码不正确");
 			map.put("code", Codes.ERROR);
 			return map;
 		} else {
@@ -314,7 +314,7 @@ public class RegisterController {
 		System.out.println("------------------validateCode------"+ validateCode);
 		// session.removeAttribute("code");//取完后去掉session
 		if (code2==null||!code2.equals(validateCode)) {
-			map.put("message", "验证码不正确");
+			map.put("msg", "验证码不正确");
 			map.put("code", Codes.ERROR);
 			return map;
 		} else {
@@ -326,7 +326,7 @@ public class RegisterController {
 				map.put("code", Codes.SUCCESS);
 				return map;
 			}else {
-				map.put("code", "重置失败");
+				map.put("msg", "重置失败");
 				map.put("code", Codes.ERROR);
 				return map;
 			}

@@ -23,15 +23,15 @@ public interface UserDao extends Repository<User, Integer> {
 	 * @author yangxujia
 	 * @date 2015年9月9日上午9:55:02
 	 */
-	@Query(nativeQuery=true,value="SELECT headPicture, name,age,profession,address,phone,userType,regitsterTime,naichaNo,perSignature,password,id FROM user where phone=?1 limit 1")
+	@Query(nativeQuery=true,value="SELECT headPicture, name,age,profession,address,phone,userType,regitsterTime,naichaNo,perSignature,password,id,sex,birthday,weixinNo FROM user where phone=?1 limit 1")
 	public Object[] findByPhone(String phone);
 
 	/**
 	 * 通过奶茶号查找用户
-	 * @author yangxujia
+	 * @author yangxujias
 	 * @date 2015年9月9日上午9:55:02
 	 */
-	@Query(nativeQuery=true,value="SELECT headPicture, name,age,profession,address,phone,userType,regitsterTime,naichaNo,perSignature,password FROM user where naichaNo=?1 limit 1")
+	@Query(nativeQuery=true,value="SELECT headPicture, name,age,profession,address,phone,userType,regitsterTime,naichaNo,perSignature,password,id,sex,birthday,weixinNo FROM user where naichaNo=?1 limit 1")
 	public Object[] findByNaichaNo(String naicha);
 	
 	/**

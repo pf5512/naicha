@@ -31,6 +31,11 @@ public class TaskController {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * 发布任务
+	 * @author yangxujia
+	 * @date 2015年10月19日上午11:19:56
+	 */
 	@RequestMapping("/save.do")
 	@ResponseBody
 	public Map<String, Object> save(String taskType,String reward,String servicesTime,String timeLength,String notes,
@@ -41,7 +46,7 @@ public class TaskController {
 				||StringTool.isEmpty(taskType)||StringTool.isEmpty(reward)||StringTool.isEmpty(servicesTime)
 				||StringTool.isEmpty(timeLength)) {
 			map.put("msg", "参数不能为空！");
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//2.校验token
@@ -49,7 +54,7 @@ public class TaskController {
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("msg", "token 过期！");
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		//3.插入数据
@@ -65,10 +70,10 @@ public class TaskController {
 		rtnTask=taskservice.save(task);
 		if (rtnTask!=null) {
 			map.put("rtnTask", rtnTask);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;	
 		}else{
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}
 	}
@@ -87,11 +92,11 @@ public class TaskController {
 		}
 		List<Task> taskList = taskservice.findByTime(Integer.parseInt(userIdStr));
 		if (taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -107,7 +112,7 @@ public class TaskController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if (StringTool.isEmpty(servicesTime)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		if (userIdStr==null) {
@@ -115,11 +120,11 @@ public class TaskController {
 		}
 		List<Task> taskList = taskservice.findByTimeSlipeUp(servicesTime,Integer.parseInt(userIdStr));
 		if (taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -133,16 +138,16 @@ public class TaskController {
 	public Map<String, Object> findDetail(String id,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(id)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;	
 		}
 		Task taskDetail = taskservice.findDetail(Integer.parseInt(id));
 		if (taskDetail==null) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskDetail);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -157,16 +162,16 @@ public class TaskController {
 	public Map<String, Object> findTA(String jinwei,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(jinwei)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		List<User> userList = taskservice.findTA(jinwei);
 		if (userList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("userList", userList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -181,16 +186,16 @@ public class TaskController {
 	public Map<String, Object> findTABySex(String jinwei,String sex,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(jinwei)||StringTool.isEmpty(sex)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		List<User> userList = taskservice.findTABySex(jinwei,sex);
 		if (userList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("userList", userList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -205,16 +210,16 @@ public class TaskController {
 	public Map<String, Object> findTAByRank(String jinwei,String pageStr,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(jinwei)||StringTool.isEmpty(pageStr)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		List<User> userList = taskservice.findTAByRank(jinwei,Integer.parseInt(pageStr));
 		if (userList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("userList", userList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -233,11 +238,11 @@ public class TaskController {
 		}
 		List<Task> taskList = taskservice.findByTimeByBoy(Integer.parseInt(userIdStr));
 		if (taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -254,7 +259,7 @@ public class TaskController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if (StringTool.isEmpty(servicesTime)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		if (userIdStr==null) {
@@ -262,11 +267,11 @@ public class TaskController {
 		}
 		List<Task> taskList = taskservice.findByTimeByBoySlipeUp(servicesTime,Integer.parseInt(userIdStr));
 		if (taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -285,11 +290,11 @@ public class TaskController {
 		}
 		List<Task> taskList = taskservice.findByTimeByGirl(Integer.parseInt(userIdStr));
 		if (taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -306,7 +311,7 @@ public class TaskController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if (StringTool.isEmpty(servicesTime)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		if (userIdStr==null) {
@@ -314,11 +319,11 @@ public class TaskController {
 		}
 		List<Task> taskList = taskservice.findByTimeByGirlSlipeUp(servicesTime,Integer.parseInt(userIdStr));
 		if (taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -331,16 +336,16 @@ public class TaskController {
 	public Map<String, Object> findTADetail(String userIdStr,String jinwei,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(jinwei)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		RespUser user = userService.findTADetail(userIdStr,jinwei);
 		if (user==null) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("user", user);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -353,16 +358,16 @@ public class TaskController {
 	public Map<String, Object> findGuzhuDetail(String userIdStr,String jinwei,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(jinwei)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		RespUser user = userService.findGuzhuDetail(userIdStr,jinwei);
 		if (user==null) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("user", user);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -377,7 +382,7 @@ public class TaskController {
 	public Map<String, Object> findTaskByUserId(String userIdStr,String token,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//2.校验token
@@ -385,12 +390,12 @@ public class TaskController {
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("msg", "token 过期！");
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		List<Task> taskList = taskservice.findTaskByUserId(userIdStr);
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 	}
 	
@@ -406,19 +411,19 @@ public class TaskController {
 	public Map<String, Object> findByTimeType(String timeType, String currentPage, String pageSize,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(timeType)||StringTool.isEmpty(currentPage)||StringTool.isEmpty(pageSize)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//获取总条数
 		BigInteger total = taskservice.findByTimeTypeCount(timeType);
 		List<Task> taskList = taskservice.findByTimeType(timeType,currentPage,pageSize);
 		if (taskList==null||taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("total", total);
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -436,12 +441,12 @@ public class TaskController {
 	public Map<String, Object> toTop(String id,String totop, HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(id)||StringTool.isEmpty(totop)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//获取总条数
 		Integer rtnCode = taskservice.toTop(totop,id);
-			map.put("codes", rtnCode);
+			map.put("code", rtnCode);
 			return map;
 	}
 	
@@ -456,17 +461,17 @@ public class TaskController {
 	public Map<String, Object> findByTaskId(String taskId,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(taskId)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//由于前端显示需要，这里采用List存一条数据
 		List<Task> taskList = taskservice.findByTaskId(taskId);
 		if (taskList==null||taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -481,16 +486,16 @@ public class TaskController {
 	public Map<String, Object> findByName(String name,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(name)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		List<Task> taskList = taskservice.findByName(name);
 		if (taskList==null||taskList.isEmpty()) {
-			map.put("codes", Codes.ERROR);
+			map.put("code", Codes.ERROR);
 			return map;	
 		}else{
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
 		}
 	}
@@ -505,7 +510,7 @@ public class TaskController {
 	public Map<String, Object> alreadyZhongbiao(String userIdStr,String token,HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//2.校验token
@@ -513,13 +518,96 @@ public class TaskController {
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("msg", "token 过期！");
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		//我参与的任务
 		List<Task> taskList = taskservice.alreadyZhongbiao(userIdStr);
 			map.put("taskList", taskList);
-			map.put("codes", Codes.SUCCESS);
+			map.put("code", Codes.SUCCESS);
 			return map;
+	}
+	
+	/**
+	 * 已完成
+	 * @author yangxujia
+	 * @date 2015年10月19日上午9:30:44
+	 */
+	@RequestMapping("/alreadyFinish.do")
+	@ResponseBody
+	public Map<String, Object> alreadyFinish(String userIdStr,String token,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//2.校验token
+		MemCached cached =  MemCached.getInstance();
+		String tokenOld = (String)cached.get(userIdStr);
+		if(!token.equals(tokenOld)){
+			map.put("msg", "token 过期！");
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		//我参与的任务
+		List<Task> taskList = taskservice.alreadyFinish(userIdStr);
+		map.put("taskList", taskList);
+		map.put("code", Codes.SUCCESS);
+		return map;
+	}
+	/**
+	 * 已报名
+	 * @author yangxujia
+	 * @date 2015年10月19日上午9:30:44
+	 */
+	@RequestMapping("/alreadySignUp.do")
+	@ResponseBody
+	public Map<String, Object> alreadySignUp(String userIdStr,String token,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//2.校验token
+		MemCached cached =  MemCached.getInstance();
+		String tokenOld = (String)cached.get(userIdStr);
+		if(!token.equals(tokenOld)){
+			map.put("msg", "token 过期！");
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		//已报名的任务
+		List<Task> taskList = taskservice.alreadySignUp(userIdStr);
+		map.put("taskList", taskList);
+		map.put("code", Codes.SUCCESS);
+		return map;
+	}
+	
+	/**
+	 * 已收藏
+	 * @author yangxujia
+	 * @date 2015年10月19日上午9:30:44
+	 */
+	@RequestMapping("/alreadyCollected.do")
+	@ResponseBody
+	public Map<String, Object> alreadyCollected(String userIdStr,String token,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//2.校验token
+		MemCached cached =  MemCached.getInstance();
+		String tokenOld = (String)cached.get(userIdStr);
+		if(!token.equals(tokenOld)){
+			map.put("msg", "token 过期！");
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
+			return map;
+		}
+		//已收藏的任务
+		List<Task> taskList = taskservice.alreadyCollected(userIdStr);
+		map.put("taskList", taskList);
+		map.put("code", Codes.SUCCESS);
+		return map;
 	}
 }

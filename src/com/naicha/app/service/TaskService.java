@@ -27,4 +27,7 @@ public interface TaskService {
 	public List<Task> findByTaskId(String taskId);
 	public List<Task> findByName(String name);
 	public List<Task> alreadyZhongbiao(String userIdStr);
+	public List<Task> alreadyFinish(String userIdStr);
+	public List<Task> alreadySignUp(String userIdStr);
+	public List<Task> alreadyCollected(String userIdStr);
 }

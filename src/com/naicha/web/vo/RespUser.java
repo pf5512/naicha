@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.naicha.app.mode.Pictures;
 import com.naicha.app.utils.JsonDateSerializer;
+import com.naicha.app.utils.JsonDateSerializerYYYYMM;
 
 public class RespUser {
 	private Integer id;
@@ -19,7 +20,7 @@ public class RespUser {
 	private Date regitsterTime;
 	private String naichaNo;
 	private String perSignature;
-	private String weixinNo;
+	private String weiXinNo;
 	private Integer sex;
 	private Date birthday;
 	private String rank;
@@ -109,6 +110,7 @@ public class RespUser {
 		this.sex = sex;
 	}
 
+	@JsonSerialize(using=JsonDateSerializerYYYYMM.class) 
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -126,13 +128,6 @@ public class RespUser {
 		this.regitsterTime = regitsterTime;
 	}
 
-	public String getWeixinNo() {
-		return weixinNo;
-	}
-
-	public void setWeixinNo(String weixinNo) {
-		this.weixinNo = weixinNo;
-	}
 
 	public Integer getId() {
 		return id;
@@ -175,7 +170,7 @@ public class RespUser {
 	}
 
 	public Integer getIsActive() {
-		return isActive;
+		return isActive==null?-1:isActive;
 	}
 
 	public void setIsActive(Integer isActive) {
@@ -188,5 +183,13 @@ public class RespUser {
 
 	public void setDistance(String distance) {
 		this.distance = distance;
+	}
+
+	public String getWeiXinNo() {
+		return weiXinNo==null?"":weiXinNo;
+	}
+
+	public void setWeiXinNo(String weiXinNo) {
+		this.weiXinNo = weiXinNo;
 	}
 }
