@@ -59,7 +59,7 @@ public class PaymentController {
 </xml>
 		 
 		 */
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 	

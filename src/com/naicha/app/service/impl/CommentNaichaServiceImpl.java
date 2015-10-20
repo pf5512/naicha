@@ -110,4 +110,23 @@ public class CommentNaichaServiceImpl implements CommentNaichaService {
 		}
 		return respComment2NaichaList;
 	}
+
+	@Override
+	public List<RespCommentNaicha> getCommentByIdByRank(Integer userId,Integer rank) {
+		List<Object[]> objList = commentNaichaDao.getCommentByIdByRank(userId,rank);
+		List<RespCommentNaicha> respCommentNaichaList = new ArrayList<RespCommentNaicha>();
+		for (Object[] obj : objList) {
+			RespCommentNaicha respCommentNaicha =  new RespCommentNaicha();
+			//c.rank,c.content,c.beCommentId,c.toCommentId,c.time,u.name
+			// 0        1         2              3            4     5
+			respCommentNaicha.setRank((Integer) obj[0]);
+			respCommentNaicha.setContent((String) obj[1]);
+			respCommentNaicha.setBeCommentId((Integer) obj[2]);
+			respCommentNaicha.setToCommentId((Integer) obj[3]);
+			respCommentNaicha.setTime((Date) obj[4]);
+			respCommentNaicha.setName((String) obj[5]);
+			respCommentNaichaList.add(respCommentNaicha);
+		}
+		return respCommentNaichaList;
+	}
 }

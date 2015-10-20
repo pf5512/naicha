@@ -1,7 +1,6 @@
 package com.naicha.app.service.impl;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.naicha.app.dao.CommentNaichaDao;
 import com.naicha.app.dao.UserDao;
-import com.naicha.app.mode.CommentNaicha;
 import com.naicha.app.mode.Pictures;
-import com.naicha.app.mode.Task;
 import com.naicha.app.mode.User;
 import com.naicha.app.service.PicturesService;
 import com.naicha.app.service.UserService;
@@ -97,6 +94,33 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByPhone(String phone) {
 		Object[] objects = userDao.findByPhone(phone);
+		if(objects==null){
+			return null;
+		}
+		User user = new User();
+		user.setHeadPicture((String) objects[0]);
+		user.setName((String) objects[1]);
+		user.setAge((Integer) objects[2]);
+		user.setProfession((String) objects[3]);
+		user.setAddress((String) objects[4]);
+		user.setPhone((String) objects[5]);
+		user.setUserType((Integer) objects[6]);
+		user.setRegisterTime((Date) objects[7]);
+		user.setNaichaNo((String) objects[8]);
+		user.setPerSignature((String) objects[9]);
+		user.setPassword((String) objects[10]);
+		user.setId((Integer)objects[11]);
+		user.setSex((Integer) objects[12]);
+		user.setBirthday((Date) objects[13]);
+		user.setWeiXinNo((String) objects[14]);
+		return user;
+	}
+	/**
+	 * 通过手机号查找
+	 */
+	@Override
+	public User findByUserId(Integer userId) {
+		Object[] objects = userDao.findByUserId(userId);
 		if(objects==null){
 			return null;
 		}
@@ -299,6 +323,27 @@ public class UserServiceImpl implements UserService {
 		return retCode;
 	}
 
+	@Override
+	public Integer updateMyServiceTime(Integer userId, String myServiceTime) {
+		Integer retCode = userDao.updatePasswordByPhone(userId,myServiceTime);
+		return retCode;
+	}
 
+	@Override
+	public String getMyServiceTime(Integer userId) {
+		String myServiceTimeString = userDao.getMyServiceTime(userId);
+		return myServiceTimeString;
+	}
 
+	@Override
+	public Integer updateServiceType(Integer userId, String serviceType) {
+		Integer retCode = userDao.updateServiceType(userId,serviceType);
+		return retCode;
+	}
+	
+	@Override
+	public String getServiceType(Integer userId) {
+		String serviceType = userDao.getServiceType(userId);
+		return serviceType;
+	}
 }

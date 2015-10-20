@@ -137,4 +137,29 @@ public interface UserDao extends Repository<User, Integer> {
 	@Modifying
 	@Query(nativeQuery=true,value="update user set password=?2 where phone=?1")
 	public Integer updatePasswordByPhone(String phone, String password);
+
+	//更新个人可服务时间段
+	@Modifying
+	@Query(nativeQuery=true,value="update user set myServiceTime=?2 where id=?1")
+	public Integer updatePasswordByPhone(Integer userId, String myServiceTime);
+
+	//获取个人服务时间
+	@Query(nativeQuery=true,value="select myServiceTime from user where id=?1")
+	public String getMyServiceTime(Integer userId);
+
+	//更新我的技能
+	@Modifying
+	@Query(nativeQuery=true,value="update user set serviceType=?2 where id=?1")
+	public Integer updateServiceType(Integer userId, String serviceType);
+	
+	//获取我的技能
+	@Query(nativeQuery=true,value="select serviceType from user where id=?1")
+	public String getServiceType(Integer userId);
+	
+	/**
+	 * 根据id查找用户信息
+	 */
+	@Query(nativeQuery=true,value="SELECT headPicture, name,age,profession,address,phone,userType,regitsterTime,naichaNo,perSignature,password,id,sex,birthday,weixinNo FROM user where id=?1 limit 1")
+	public Object[] findByUserId(int userId);
+
 }

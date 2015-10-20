@@ -55,4 +55,12 @@ public interface CommentNaichaDao extends Repository<CommentNaicha, Integer> {
 	 */
 	@Query(nativeQuery=true,value=" select c.rank,c.content,uu.name beCommentName,u.`name` toCommentName,c.time from comment_naicha c LEFT JOIN user u on toCommentId=u.id LEFT JOIN user uu on beCommentId = uu.id where DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(time) ORDER BY c.time desc limit ?1 ,?2   ")
 	public List<Object[]> getCommentNaichaThisMonth(int start, int size);
+
+	/**
+	 * 跟id 和等级获取评论 rank 3为好评， 2为中评，1为差评
+	 * @author yangxujia
+	 * @date 2015年10月20日下午3:10:11
+	 */
+	@Query(nativeQuery=true,value="select c.rank,c.content,c.beCommentId,c.toCommentId,c.time,u.name from comment_naicha c LEFT JOIN user u on toCommentId=u.id where  beCommentId=?1 and c.rank=?2  ")
+	public List<Object[]> getCommentByIdByRank(int userId,int rank);
 }

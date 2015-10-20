@@ -37,7 +37,7 @@ public class ApplyController {
 	public Map<String, Object> find(String taskIdStr,String userIdStr ,String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(taskIdStr)||StringTool.isEmpty(userIdStr)||StringTool.isEmpty(token)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//2.校验token
@@ -45,11 +45,11 @@ public class ApplyController {
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("msg", "token 过期！");
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		applyService.updateState(Integer.parseInt(taskIdStr), Integer.parseInt(userIdStr));
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 }

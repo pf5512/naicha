@@ -37,7 +37,7 @@ public class ContactsController {
 	public Map<String, Object> save(String friendId,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(token)||StringTool.isEmpty(friendId)	||StringTool.isEmpty(userIdStr)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		Integer userAId = Integer.parseInt(userIdStr);
@@ -46,7 +46,7 @@ public class ContactsController {
 		MemCached cached =  MemCached.getInstance();
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		//查看是否已经存在
@@ -60,7 +60,7 @@ public class ContactsController {
 		contacts.setIsFriend(Codes.FRIEND_YES);
 		contacts.setTime(new Date());
 		contactsService.save(contacts);
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 	
@@ -74,7 +74,7 @@ public class ContactsController {
 	public Map<String, Object> addToBlockedList(String friendId,String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(token)||StringTool.isEmpty(friendId)	||StringTool.isEmpty(userIdStr)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		Integer userAId = Integer.parseInt(userIdStr);
@@ -83,7 +83,7 @@ public class ContactsController {
 		MemCached cached =  MemCached.getInstance();
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		//查看是否已经存在
@@ -98,7 +98,7 @@ public class ContactsController {
 			contacts.setTime(new Date());
 			contactsService.save(contacts);
 		}
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 	
@@ -112,7 +112,7 @@ public class ContactsController {
 	public Map<String, Object> getBlockedList(String userIdStr, String token,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(token)||StringTool.isEmpty(userIdStr)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		Integer userAId = Integer.parseInt(userIdStr);
@@ -120,12 +120,12 @@ public class ContactsController {
 		MemCached cached =  MemCached.getInstance();
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		//获取黑名单列表，名字，头像，userId
 		List<Blocked> blockeds = contactsService.getBlockedList(userAId);
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 	

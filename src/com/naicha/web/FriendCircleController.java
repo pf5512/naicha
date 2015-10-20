@@ -47,7 +47,7 @@ public class FriendCircleController {
 		//非空判断
 		if(StringTool.isEmpty(userIdStr)||StringTool.isEmpty(content)||StringTool.isEmpty(token)){
 			map.put("msg", "参数不能为空");
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//校验token
@@ -55,7 +55,7 @@ public class FriendCircleController {
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
 			map.put("msg", "token 过期！");
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		//数据保存
@@ -76,7 +76,7 @@ public class FriendCircleController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 	
@@ -138,13 +138,13 @@ public class FriendCircleController {
  	public Map<String, Object> find(HttpServletRequest request,String jinwei){
  		Map<String, Object> map = new HashMap<String, Object>();
  		if (StringTool.isEmpty(jinwei)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
  		List<RespFriendCircle> friendCircleList =  new ArrayList<RespFriendCircle>();
  		friendCircleList = friendCircleService.findNearbyOrderByDistance(jinwei);
  		map.put("list", friendCircleList);
- 		map.put("codes", Codes.SUCCESS);
+ 		map.put("code", Codes.SUCCESS);
  		return map;
  	}
  	@RequestMapping("/findPicture.do")
@@ -157,7 +157,7 @@ public class FriendCircleController {
  		idList.add(6);
  		List<Pictures> picList = picturesService.findByFriendCircleId(idList);
  		map.put("picList", picList);
- 		map.put("codes", Codes.SUCCESS);
+ 		map.put("code", Codes.SUCCESS);
  		return map;
  	}
  	
@@ -171,13 +171,13 @@ public class FriendCircleController {
  	public Map<String, Object> findByUserId(HttpServletRequest request,String userIdStr){
  		Map<String, Object> map = new HashMap<String, Object>();
  		if(StringTool.isEmpty(userIdStr)){
- 			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+ 			map.put("code", Codes.PARAMETER_IS_EMPTY);
  			return map;
  		}
 		List<RespFriendCircle> friendCircleList =  new ArrayList<RespFriendCircle>();
  		friendCircleList = friendCircleService.findByUserId(userIdStr);
  		map.put("friendCircleList", friendCircleList);
- 		map.put("codes", Codes.SUCCESS);
+ 		map.put("code", Codes.SUCCESS);
  		return map;
  	}
 }

@@ -1,6 +1,5 @@
 package com.naicha.web;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +22,6 @@ import com.naicha.app.utils.StringTool;
 import com.naicha.web.vo.RespComment2Naicha;
 import com.naicha.web.vo.RespCommentNaicha;
 import com.naicha.web.vo.RespRankCount;
-import com.test.PushExample;
 
 
 @Controller
@@ -44,7 +42,7 @@ public class CommentController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(token)||StringTool.isEmpty(beCommentIdStr)
 				||StringTool.isEmpty(userIdStr)||StringTool.isEmpty(content)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		Integer userId = Integer.parseInt(userIdStr);
@@ -52,7 +50,7 @@ public class CommentController {
 		MemCached cached =  MemCached.getInstance();
 		String tokenOld = (String)cached.get(userIdStr);
 		if(!token.equals(tokenOld)){
-			map.put("codes", Codes.TOKEN_IS_OVER_DUE);
+			map.put("code", Codes.TOKEN_IS_OVER_DUE);
 			return map;
 		}
 		CommentNaicha commentNaicha = new CommentNaicha();
@@ -63,7 +61,7 @@ public class CommentController {
 		commentNaicha.setTime(new Date());
 		CommentNaicha updateOrNot = commentNaichaService.save(commentNaicha);
 		map.put("updateOrNot", updateOrNot);
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 	
@@ -77,7 +75,7 @@ public class CommentController {
 	public Map<String, Object> getCommentNaicha(String userIdStr,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(userIdStr)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		Integer userId =  Integer.parseInt(userIdStr);
@@ -85,7 +83,7 @@ public class CommentController {
 		List<RespRankCount> countList =  commentNaichaService.findRankCount(userId);
 		map.put("commentNaichaList", commentNaichaList);
 		map.put("countList", countList);
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 	/**
@@ -99,7 +97,7 @@ public class CommentController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		LOG.info("timeType: "+timeType);
 		if (StringTool.isEmpty(timeType)) {
-			map.put("codes", Codes.PARAMETER_IS_EMPTY);
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
 			return map;
 		}
 		//获取评价列表
@@ -108,7 +106,31 @@ public class CommentController {
 		List<RespRankCount> countList =  commentNaichaService.findRankCountByTimeType(timeType);
 		map.put("commentNaichaList", commentNaichaList);
 		map.put("countList", countList);
-		map.put("codes", Codes.SUCCESS);
+		map.put("code", Codes.SUCCESS);
+		return map;
+	}
+	
+	
+	/**
+	 * 好评
+	 * 根据id获取
+	 * @author yangxujia
+	 * @date 2015年10月20日下午2:57:28
+	 */
+	@RequestMapping("/getCommentByIdByRank.do")
+	@ResponseBody
+	public Map<String, Object> getCommentByIdByRank(String userIdStr,String rank,HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(userIdStr)||StringTool.isEmpty(rank)) {
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		Integer userId =  Integer.parseInt(userIdStr);
+		List<RespCommentNaicha> commentNaichaList = commentNaichaService.getCommentByIdByRank(userId,Integer.parseInt(rank));
+		List<RespRankCount> countList =  commentNaichaService.findRankCount(userId);
+		map.put("commentNaichaList", commentNaichaList);
+		map.put("countList", countList);
+		map.put("code", Codes.SUCCESS);
 		return map;
 	}
 }

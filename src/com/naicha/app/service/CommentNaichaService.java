@@ -20,6 +20,8 @@ public interface CommentNaichaService {
 	public List<RespComment2Naicha> getCommentNaichaByTimeType(String timeType, String currentPage, String pageSize);
 
 	public List<RespRankCount> findRankCountByTimeType(String timeType);
+
+	public List<RespCommentNaicha> getCommentByIdByRank(Integer userId, Integer rank);
 	
 //	public List<CommentNaicha> findByFriendCircleId(List<Integer> condition);
 }

@@ -96,4 +96,14 @@ public interface UserService {
 	public User findById(int userId);
 
 	public Integer updatePasswordByPhone(String phone, String password);
+
+	public Integer updateMyServiceTime(Integer userId, String myServiceTime);
+
+	public String getMyServiceTime(Integer userId);
+
+	public Integer updateServiceType(Integer userId, String serviceType);
+
+	public String getServiceType(Integer userId);
+
+	public User findByUserId(Integer userId);
 }

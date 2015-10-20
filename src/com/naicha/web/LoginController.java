@@ -104,6 +104,7 @@ public class LoginController {
 					RespUser respUser =new RespUser();
 					try {
 						BeanUtils.copyProperties(respUser, user);
+						respUser.setRegitsterTime(user.getRegisterTime());
 						map.put("user", respUser);
 					} catch (IllegalAccessException e) {
 						e.printStackTrace();
