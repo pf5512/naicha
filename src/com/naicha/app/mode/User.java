@@ -38,7 +38,7 @@ public class User implements Serializable {
 	private String weiXinNo;
 	private Integer sex;
 	private Date birthday;
-	private Integer serviceType;
+	private String serviceType;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -216,11 +216,11 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "serviceType", nullable = false)
-	public Integer getServiceType() {
-		return serviceType==null?0:serviceType;
+	public String getServiceType() {
+		return serviceType==null?"1111":serviceType;
 	}
 
-	public void setServiceType(Integer serviceType) {
+	public void setServiceType(String serviceType) {
 		this.serviceType = serviceType;
 	}
 

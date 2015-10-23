@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.StringTool;
 import com.naicha.app.utils.StringTools;
 import com.naicha.web.vo.RespUser;
+import com.test.MonDB;
 
 @Controller
 @RequestMapping("/task")
@@ -66,8 +68,11 @@ public class TaskController {
 		task.setServicesTime(StringTools.StringToDatetime(servicesTime));
 		task.setTimeLength(Integer.parseInt(timeLength));
 		task.setNotes(notes);
+		task.setLocation(jinwei);
+		task.setTotop(1);
 		Task rtnTask = new Task();
 		rtnTask=taskservice.save(task);
+		MonDB.insertTask(rtnTask);
 		if (rtnTask!=null) {
 			map.put("rtnTask", rtnTask);
 			map.put("code", Codes.SUCCESS);
@@ -224,7 +229,41 @@ public class TaskController {
 		}
 	}
 	
+	
 	/**
+	 * 找任务
+	 * 查找附近的任务
+	 * @author yangxujia
+	 * @date 2015年10月22日上午11:00:06
+	 */
+	@RequestMapping("/findTaskNearBy.do")
+	@ResponseBody
+	public Map<String, Object> findTaskNearBy(Integer pageNo,String userIdStr,String jinwei,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if (StringTool.isEmpty(jinwei)) {
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		if (userIdStr==null) {
+			userIdStr ="-1";
+		}
+		//分页处理
+		int start = (pageNo-1)*Codes.PAGE_SIZE;
+		int end = pageNo*Codes.PAGE_SIZE;
+		List<Task> taskList = taskservice.findTaskNearBy(jinwei,Integer.parseInt(userIdStr), start, end);
+		if (taskList.isEmpty()) {
+			map.put("code", Codes.ERROR);
+			return map;	
+		}else{
+			map.put("taskList", taskList);
+			map.put("code", Codes.SUCCESS);
+			return map;
+		}
+	}
+	
+	/**
+	 * 找任务
 	 * 查找男生发布的任务
 	 * @author yangxujia
 	 * @date 2015年9月22日上午9:56:40
@@ -247,7 +286,10 @@ public class TaskController {
 		}
 	}
 	
+	
+	
 	/**
+	 * 找任务
 	 * 按截止时间查找男生
 	 * 上拉查找更多
 	 * @author yangxujia
@@ -277,6 +319,7 @@ public class TaskController {
 	}
 	
 	/**
+	 * 找任务
 	 * 查找女生发布的任务
 	 * @author yangxujia
 	 * @date 2015年9月22日上午9:57:08
@@ -300,6 +343,7 @@ public class TaskController {
 	}
 	
 	/**
+	 * 找任务
 	 * 按截止时间查找女生
 	 * 上拉查找更多
 	 * @author yangxujia

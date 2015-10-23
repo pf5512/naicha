@@ -30,4 +30,5 @@ public interface TaskService {
 	public List<Task> alreadyFinish(String userIdStr);
 	public List<Task> alreadySignUp(String userIdStr);
 	public List<Task> alreadyCollected(String userIdStr);
+	public List<Task> findTaskNearBy(String jinwei, int userId,int start,int end);
 }

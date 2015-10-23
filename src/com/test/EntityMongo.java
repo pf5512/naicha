@@ -7,12 +7,13 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
+import com.naicha.app.utils.Codes;
 
 public class EntityMongo {
 	public static void main(String[] args) {
 	   	 MongoClient mongoClient = null;
 		try {
-			mongoClient = new MongoClient("127.0.0.1",27017);
+			mongoClient = new MongoClient(Codes.IP,27017);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

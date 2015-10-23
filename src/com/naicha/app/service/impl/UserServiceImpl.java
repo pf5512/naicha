@@ -16,6 +16,7 @@ import com.naicha.app.service.PicturesService;
 import com.naicha.app.service.UserService;
 import com.naicha.app.utils.Geohash;
 import com.naicha.web.vo.RespUser;
+import com.test.MonDB;
 
 @Service
 @Transactional
@@ -194,7 +195,7 @@ public class UserServiceImpl implements UserService {
 		String geohashCode = new Geohash().getGeohashCode(jinwei);
 		Integer retCode = userDao.updateAddress(userId,address,jinwei,geohashCode);
 		//更新到mongodb中
-//		String 
+		MonDB.setUserLocation(jinwei, userId);
 		return retCode;
 	}
 

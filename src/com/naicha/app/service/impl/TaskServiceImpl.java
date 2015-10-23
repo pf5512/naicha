@@ -36,6 +36,25 @@ public class TaskServiceImpl implements TaskService {
 		return taskDao.save(task);
 	}
 
+	/**
+	 * 查找附近的任务
+	 */
+	@Override
+	public List<Task> findTaskNearBy(String jinwei, int userId,int start,int end) {
+		List<Task> taskList1 = MonDB.getTaskList(jinwei, start, end);
+		List<Integer> taskIdlist = new ArrayList<Integer>();
+		for (Task task : taskList1) {
+			taskIdlist.add(task.getId());
+		}
+		List<Object[]> objList =  taskDao.findTaskNearBy(userId,taskIdlist);
+		List<Task> taskList =  new ArrayList<Task>();
+		for (Object[] obj : objList) {
+			Task task  = convert(obj);
+			taskList.add(task);
+		}
+		return taskList;
+	}
+	
 	@Override
 	public List<Task> findByTime(Integer userId) {
 		
@@ -223,7 +242,7 @@ public class TaskServiceImpl implements TaskService {
 			user.setRank((String) obj[5]);
 			user.setAddress((String) obj[6]);
 			user.setProfession((String) obj[7]);
-			user.setServiceType((Integer) obj[8]);
+			user.setServiceType((String) obj[8]);
 			userList.add(user);
 		}
 		return userList;
@@ -288,7 +307,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	/**
-	 * 根据用户id获得
+	 * 根据用户id获得任务
 	 * @author yangxujia
 	 * @date 2015年9月25日下午4:53:14
 	 */
@@ -462,4 +481,6 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return taskList;
 	}
+
+
 }

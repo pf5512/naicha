@@ -20,6 +20,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
+import com.naicha.app.utils.Codes;
 
 /**
  * 类名： MongoDBDaoImpl
@@ -57,7 +58,7 @@ public class MongoDBDaoImpl implements MongoDBDao{
 			MongoClientOptions myOptions = build.build();		
 			try {
 				//数据库连接实例
-				mongoClient = new MongoClient("127.0.0.1", myOptions);			
+				mongoClient = new MongoClient(Codes.IP, myOptions);			
 			} catch (UnknownHostException e) {
 				// TODO 这里写异常处理的代码
 				e.printStackTrace();

@@ -13,7 +13,7 @@ public class MemCached {
     // 设置与缓存服务器的连接池
     static {
         // 服务器列表和其权重
-        String[] servers = {"127.0.0.1:11211"};
+        String[] servers = {Codes.IP+":11211"};
         Integer[] weights = {3};
 
         // 获取socket连接池的实例对象
@@ -101,6 +101,7 @@ public class MemCached {
     public static void main(String[] args)
     {
         MemCached cache = MemCached.getInstance();
+        System.out.println(cache.get("35"));
 //       AppPraise appPraise = new AppPraise();
 //       appPraise.setContentId(0);
 //       appPraise.setIsPraise(1);

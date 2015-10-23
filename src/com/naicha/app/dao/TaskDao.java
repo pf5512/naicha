@@ -1,6 +1,7 @@
 package com.naicha.app.dao;
 
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -135,4 +136,19 @@ public interface TaskDao extends Repository<Task, Integer> {
 	@Query(nativeQuery=true,value="select t.publicTime, t.id, u.name, t.servicesTime , t.timeLength , t.notes,t.status , case when tu.counts is null then 0 ELSE tu.counts end as signupCount ,t.reward ,t.toTop "
 			+ "from task t  left join user u on t.userId=u.id  left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id  WHERE u.name like ?1 " )
 	public List<Object[]> findByName(String name);
+	
+	/**
+	 * 查找附近的任务
+	 * @author yangxujia
+	 * @date 2015年10月22日下午5:32:36
+	 */
+	@Query(nativeQuery=true,value="select t.id,t.userId,taskType,reward,servicesTime,timeLength, publicTime,notes,location,headPicture, "
+		+"(case when tu.counts is null then 0 else tu.counts end) signupCount ,  "
+		+"(case when c.counts is null then 0 else c.counts end) isCollected from  "
+		+"task t  left join user u on t.userId=u.id  			"
+		+"left join (select taskId , count(userId) counts from apply GROUP BY taskId) tu on tu.taskId=t.id " 		 
+		+"LEFT JOIN (select taskId,  count(userId) counts from collection WHERE userId=?1 GROUP BY taskId) c on c.taskId=t.id "
+		+"where t.id in (?2) and  t.toTop > 0 	 "
+		+"order by servicesTime asc;")
+	public List<Object[]> findTaskNearBy(int userId,Collection<Integer> userIdlist);
 }

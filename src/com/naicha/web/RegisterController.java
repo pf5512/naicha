@@ -237,7 +237,7 @@ public class RegisterController {
 	 */
 	@RequestMapping("chooseTypeAndLogin.do")
 	@ResponseBody
-	public Map<String, Object> chooseRoleAndLogin(String phone,String password,String userType,
+	public Map<String, Object> chooseRoleAndLogin(String phone,String password,String userType,String jinwei,
 			HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (StringTool.isEmpty(phone)||StringTool.isEmpty(password)||StringTool.isEmpty(userType)) {
@@ -265,6 +265,9 @@ public class RegisterController {
 		//将用户类别存到mongodb中
 		Integer _id = userReturn.getId();
 		MonDB.setUsertype(_id,Integer.parseInt(userType)); 
+		if(!StringTool.isEmpty(jinwei)){//如果经纬度不为空
+			MonDB.updateLocation(_id, jinwei);//保存坐标
+		}
 		//将token放进缓存中
 		String token = UUID.randomUUID().toString().replaceAll("-","").toLowerCase();
 		MemCached cache = MemCached.getInstance();

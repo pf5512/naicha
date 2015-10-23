@@ -20,6 +20,7 @@ import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.StringTool;
 import com.naicha.app.utils.Codes;
 import com.naicha.web.vo.RespUser;
+import com.test.MonDB;
 /**
  * 登录功能
  * @author yangxujia
@@ -39,7 +40,7 @@ public class LoginController {
 	 */
 	@RequestMapping("validate.do")
 	@ResponseBody
-	public Map<String, Object> find(String phoneOrNaicha ,String password,HttpServletRequest request) {
+	public Map<String, Object> find(String phoneOrNaicha ,String password,String jinwei,HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 1、验证参数是否为空
 		if (StringTool.isEmpty(phoneOrNaicha) || StringTool.isEmpty(password)) {
@@ -59,6 +60,9 @@ public class LoginController {
 				ConvertMD5 md5 = new ConvertMD5();
 				password = md5.getMD5ofStr(password);
 				if (password.equals(passwordOld)) {//如果密码正确成功生成token
+					if(!StringTool.isEmpty(jinwei)){//如果经纬度不为空
+						MonDB.updateLocation(user.getId(), jinwei);//保存坐标
+					}
 					String tokenString = UUID.randomUUID().toString().replaceAll("-", "");
 					MemCached cached =  MemCached.getInstance();
 					String id = user.getId().toString();
@@ -94,6 +98,9 @@ public class LoginController {
 				ConvertMD5 md5 = new ConvertMD5();
 				password = md5.getMD5ofStr(password);
 				if (password.equals(passwordOld)) {//如果密码正确成功生成token
+					if(!StringTool.isEmpty(jinwei)){//如果经纬度不为空
+						MonDB.updateLocation(user.getId(), jinwei);//保存坐标
+					}
 					String tokenString = UUID.randomUUID().toString().replaceAll("-", "");
 					MemCached cached =  MemCached.getInstance();
 					String phone = user.getPhone();

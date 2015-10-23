@@ -45,6 +45,7 @@ public class Task implements Serializable {
 	private Integer sex;
 	private Integer age;
 	private Integer totop;
+	private Double distance;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -219,5 +220,14 @@ public class Task implements Serializable {
 
 	public void setTotop(Integer totop) {
 		this.totop = totop;
+	}
+
+	@Transient
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
 	}
 }
