@@ -101,7 +101,7 @@ public class MemCached {
     public static void main(String[] args)
     {
         MemCached cache = MemCached.getInstance();
-        System.out.println(cache.get("35"));
+        System.out.println(cache.get("30"));
 //       AppPraise appPraise = new AppPraise();
 //       appPraise.setContentId(0);
 //       appPraise.setIsPraise(1);

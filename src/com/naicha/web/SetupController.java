@@ -30,6 +30,7 @@ import com.naicha.app.utils.MemCached;
 import com.naicha.app.utils.Resize;
 import com.naicha.app.utils.StringTool;
 import com.naicha.web.vo.RespUser;
+import com.test.MonDB;
 
 
 @Controller
@@ -415,7 +416,31 @@ public class SetupController {
 		return map;
 	}
 	
+	/**
+	 * 管理员完成口语水平认证
+	 */
+	@RequestMapping("/confirmOralLevel.do")
+	@ResponseBody
+	public Map<String, Object> confirmOralLevel(String userIdStr,HttpServletRequest request){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringTool.isEmpty(userIdStr)) {
+			map.put("code", Codes.PARAMETER_IS_EMPTY);
+			return map;
+		}
+		//更新mysql
+		Integer userId =  Integer.parseInt(userIdStr);
+		Integer  updateOrNot = userService.confirmOralLevel(userId);
+		MonDB.updateActive(userId, 1);
+		map.put("updateOrNot", updateOrNot);
+		map.put("code", Codes.SUCCESS);
+		return map;
+	}
 	
+	/**
+	 * 更新手机号码
+	 * @author yangxujia
+	 * @date 2015年10月23日上午11:04:55
+	 */
 	@RequestMapping("/updatePhone.do")
 	@ResponseBody
 	public Map<String, Object> updatePhone(String phone,String userIdStr, String token,HttpServletRequest request) {

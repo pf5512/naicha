@@ -291,6 +291,11 @@ public class UserServiceImpl implements UserService {
 			String pics,String weixinNo,String phone) {
 		return userDao.udateOralIdentify(profession,Integer.parseInt(rank),userId,pics,weixinNo,phone);
 	}
+	
+	@Override
+	public Integer confirmOralLevel(Integer userId) {
+		return userDao.confirmOralLevel(userId);
+	}
 
 	@Override
 	public Integer updatePhone(Integer userId, String phone) {

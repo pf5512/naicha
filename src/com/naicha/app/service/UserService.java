@@ -106,4 +106,6 @@ public interface UserService {
 	public String getServiceType(Integer userId);
 
 	public User findByUserId(Integer userId);
+
+	public Integer confirmOralLevel(Integer userId);
 }

@@ -46,11 +46,13 @@ public class TaskServiceImpl implements TaskService {
 		for (Task task : taskList1) {
 			taskIdlist.add(task.getId());
 		}
-		List<Object[]> objList =  taskDao.findTaskNearBy(userId,taskIdlist);
 		List<Task> taskList =  new ArrayList<Task>();
-		for (Object[] obj : objList) {
-			Task task  = convert(obj);
-			taskList.add(task);
+		if (taskList1.size()>0) {
+			List<Object[]> objList =  taskDao.findTaskNearBy(userId,taskIdlist);
+			for (Object[] obj : objList) {
+				Task task  = convert(obj);
+				taskList.add(task);
+			}
 		}
 		return taskList;
 	}

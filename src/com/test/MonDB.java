@@ -374,9 +374,10 @@ public class MonDB {
 //		String rank = "L1";
 //		updateRank(_id, rank);
 
-//		Integer _id = 5;
-//		Integer isActivate = 1;
-//		updateActive(_id, isActivate);
+		//奶茶认证，只有认证的才会在findTA中显示
+		Integer _id = 37;
+		Integer isActivate = 1;
+		updateActive(_id, isActivate);
 //		
 //		String jinweiString="22.5438700000,113.9503390000";
 //		List<UserMongo> userList;
@@ -406,7 +407,7 @@ public class MonDB {
 //				task.setLocation("22.623423,112.6234");
 //				insertTask(task);
 		//4.获取任务数据
-		getTaskList("22.623423,112.6234",0,2);
+//		getTaskList("22.623423,112.6234",0,2);
 				
 	}//main
 }//MonDB

@@ -123,6 +123,11 @@ public interface UserDao extends Repository<User, Integer> {
 	@Query(nativeQuery=true,value="select id,headPicture,name,sex,birthday,rank,address,profession,serviceType,jinwei,isActivate from user where id = ?1 ")
 	public Object[] findTADetail(int a);
 
+	/**
+	 * 用户提交认证
+	 * @author yangxujia
+	 * @date 2015年10月23日上午11:01:18
+	 */
 	@Modifying
 	@Query(nativeQuery=true,value="update user set profession=?1,rank=?2,certificatePicture=?4,weixinNo=?5,phoneForCertificate=?6 where id=?3")
 	public Integer udateOralIdentify(String profession, int rank,Integer userId, String pics,String weixinNo,String phoneForCertificate);
@@ -162,4 +167,10 @@ public interface UserDao extends Repository<User, Integer> {
 	@Query(nativeQuery=true,value="SELECT headPicture, name,age,profession,address,phone,userType,regitsterTime,naichaNo,perSignature,password,id,sex,birthday,weixinNo FROM user where id=?1 limit 1")
 	public Object[] findByUserId(int userId);
 
+	/**
+	 * 管理员完成认证
+	 */
+	@Modifying
+	@Query(nativeQuery=true,value="update user set isActivate=1 where id=?1")
+	public Integer confirmOralLevel(int userId);
 }
